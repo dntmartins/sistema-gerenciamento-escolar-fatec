@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog ../dbchangelog-3.4.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+        
+  <changeSet id="" author="">
+  		<createTable tableName="USER"> 
+  			<column name="USER_ID_INT" type="java.sql.Types.BIGINT" />
+  			<column name="login" type="java.sql.Types.VARCHAR(30)" /> 
+  			<column name="password" type="java.sql.Types.VARCHAR(30)" /> 	
+  			<column name="name" type="java.sql.Types.VARCHAR(255)" /> 		
+  		</createTable>
+  		<insert tableName="USER" >
+  			<column name="USER_ID_INT">1</column>
+  			<column name="login">Dante</column>
+  			<column name="password">dante123</column>
+  			<column name="name">Dante Martins</column>
+  		</insert>  		 		
+  </changeSet>
+
+</databaseChangeLog>
