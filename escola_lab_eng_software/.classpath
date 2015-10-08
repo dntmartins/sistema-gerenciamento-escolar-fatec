@@ -8,12 +8,12 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="/home/dante/git/escola/escola_lab_eng_software/dependencies/commons-dbutils-1.6.jar"/>
-	<classpathentry kind="lib" path="/home/dante/git/escola/escola_lab_eng_software/dependencies/guava-18.0.jar"/>
-	<classpathentry kind="lib" path="/home/dante/git/escola/escola_lab_eng_software/dependencies/hsqldb.jar"/>
-	<classpathentry kind="lib" path="/home/dante/git/escola/escola_lab_eng_software/dependencies/javassist-3.19.0-GA.jar"/>
-	<classpathentry kind="lib" path="/home/dante/git/escola/escola_lab_eng_software/dependencies/liquibase_3_4_1.jar"/>
-	<classpathentry kind="lib" path="/home/dante/git/escola/escola_lab_eng_software/dependencies/mini-spring-1.0.0.jar"/>
-	<classpathentry kind="lib" path="/home/dante/git/escola/escola_lab_eng_software/dependencies/reflections-0.9.11-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="dependencies/commons-dbutils-1.6.jar"/>
+	<classpathentry kind="lib" path="dependencies/guava-18.0.jar"/>
+	<classpathentry kind="lib" path="dependencies/hsqldb.jar"/>
+	<classpathentry kind="lib" path="dependencies/javassist-3.19.0-GA.jar"/>
+	<classpathentry kind="lib" path="dependencies/liquibase_3_4_1.jar"/>
+	<classpathentry kind="lib" path="dependencies/mini-spring-1.0.0.jar"/>
+	<classpathentry kind="lib" path="dependencies/reflections-0.9.11-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
