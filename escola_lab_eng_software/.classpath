@@ -15,5 +15,6 @@
 	<classpathentry kind="lib" path="dependencies/liquibase_3_4_1.jar"/>
 	<classpathentry kind="lib" path="dependencies/mini-spring-1.0.0.jar"/>
 	<classpathentry kind="lib" path="dependencies/reflections-0.9.11-SNAPSHOT.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
