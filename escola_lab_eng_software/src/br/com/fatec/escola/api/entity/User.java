@@ -8,6 +8,7 @@ public class User extends IdentificadorPK {
 	public static final String COL_LOGIN = "login";
 	public static final String COL_PASSWORD = "password";
 	public static final String COL_NAME = "name";
+	public static final String TABLE_NAME = "USER";
 	public String getLogin() {
 		return login;
 	}

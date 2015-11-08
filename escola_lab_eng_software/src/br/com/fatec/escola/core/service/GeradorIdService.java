@@ -62,7 +62,7 @@ public class GeradorIdService {
 		try {
 			// Iremos considerar essa tabela no SQL que ir� retornar o NEXT_ID
 			PreparedStatement query = connection
-					.prepareStatement("SELECT NEXT_ID FROM LOC_GERADOR_IDS WHERE TABLE_NAME = ?;");
+					.prepareStatement("SELECT NEXT_ID FROM GERADOR_IDS WHERE TABLE_NAME = ?;");
 			query.setString(1, tableName); // N�o se esque�a de fazer o set da
 											// 'tableName'
 			ResultSet resultNextId = query.executeQuery();
@@ -71,7 +71,7 @@ public class GeradorIdService {
 			// Agora iremos atualizar o valor do NEXT_ID na Tabela, tamb�m
 			// utilizando o tableName
 			PreparedStatement updateID = connection
-					.prepareStatement("UPDATE LOC_GERADOR_IDS SET NEXT_ID = ? WHERE TABLE_NAME = ?;");
+					.prepareStatement("UPDATE GERADOR_IDS SET NEXT_ID = ? WHERE TABLE_NAME = ?;");
 			updateID.setLong(1, idSequence + 1); // o '+ 1' � para incrementar o
 													// nextId
 			updateID.setString(2, tableName); // N�o se esque�a de fazer o set

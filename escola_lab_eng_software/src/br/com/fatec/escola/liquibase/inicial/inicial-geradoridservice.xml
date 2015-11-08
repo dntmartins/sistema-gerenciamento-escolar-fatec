@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog ../dbchangelog-3.4.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+<!-- Padrão para nome das tabelas: <INICIAL_DO_PROJETO>_<ENTIDADE> -->
+<!-- Classes principalmente utilizadas: BIGINT, BOOLEAN, VARCHAR(<quantidade_caracteres>) -->
+
+  <changeSet id="" author="Dante">
+  		<createTable tableName="GERADOR_IDS"> 
+  			<column name="NEXT_ID" type="java.sql.Types.BIGINT" />
+  			<column name="TABLE_NAME" type="java.sql.Types.VARCHAR(30)" /> 			
+  		</createTable>
+  		<insert tableName="GERADOR_IDS" >
+  			<column name="NEXT_ID">4</column>
+  			<column name="TABLE_NAME">USER</column>
+  		</insert>  		 		
+  </changeSet>
+
+</databaseChangeLog>

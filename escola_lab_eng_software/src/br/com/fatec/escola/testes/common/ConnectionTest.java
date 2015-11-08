@@ -1,4 +1,4 @@
-package br.com.fatec.escola.testes;
+package br.com.fatec.escola.testes.common;
 
 import org.junit.Test;
 
