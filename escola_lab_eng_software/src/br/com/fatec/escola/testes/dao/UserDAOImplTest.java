@@ -2,7 +2,7 @@ package br.com.fatec.escola.testes.dao;
 
 import static org.junit.Assert.*;
 //import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,5 +36,12 @@ public class UserDAOImplTest extends EscolaBaseTest {
 		User user = this.dao.findById(1l);
 		assertEquals(1L, user.getId(),1);		
 	}
-
+	
+	@Test
+	public void testDelete() {
+		User user = this.dao.findById(2l);
+		Boolean result = this.dao.delete(user);
+		user = this.dao.findById(2l);
+		Assert.assertNull(user);	
+	}
 }

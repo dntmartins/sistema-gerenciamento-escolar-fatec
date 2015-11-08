@@ -46,7 +46,9 @@ public class UserDAOImpl implements UserDAO {
 			selectStatement.setLong(1, id);
 			//selectStatement.execute();
 			ResultSet resultSet = selectStatement.executeQuery();
-			resultSet.next();
+			if(!resultSet.next()){
+				return null;
+			}
 			User user = new User();
 			user.setId(resultSet.getLong(1));
 			user.setLogin(resultSet.getString(2));
@@ -94,8 +96,18 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public Boolean delete(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = null;
+		PreparedStatement selectStatement = null;
+		try {
+			
+			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			selectStatement = conn
+					.prepareStatement("DELETE FROM "
+							+ User.TABLE_NAME + " WHERE " + User.COL_PK + " = ?;");
+			selectStatement.setLong(1, user.getId());
+			return selectStatement.execute();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}		
 	}
-
 }
