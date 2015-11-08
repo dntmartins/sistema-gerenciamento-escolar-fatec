@@ -3,6 +3,7 @@ package br.com.fatec.escola.core.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,26 +39,24 @@ public class UserDAOImpl implements UserDAO {
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {
-			
+
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
-			selectStatement = conn
-					.prepareStatement("SELECT * FROM USER WHERE "
-							+ User.COL_PK + " = ?");
+			selectStatement = conn.prepareStatement("SELECT * FROM USER WHERE " + User.COL_PK + " = ?");
 			selectStatement.setLong(1, id);
-			//selectStatement.execute();
+			// selectStatement.execute();
 			ResultSet resultSet = selectStatement.executeQuery();
-			if(!resultSet.next()){
+			if (!resultSet.next()) {
 				return null;
 			}
 			User user = new User();
 			user.setId(resultSet.getLong(1));
 			user.setLogin(resultSet.getString(2));
-			user.setName(resultSet.getString(3));
-			user.setPassword(resultSet.getString(4));
+			user.setPassword(resultSet.getString(3));
+			user.setName(resultSet.getString(4));
 			return user;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
-		}		
+		}
 	}
 
 	@Override
@@ -67,9 +66,7 @@ public class UserDAOImpl implements UserDAO {
 		List<User> usersFound = null;
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
-			selectStatement = conn
-					.prepareStatement("SELECT * FROM "
-							+ User.TABLE_NAME+";");
+			selectStatement = conn.prepareStatement("SELECT * FROM " + User.TABLE_NAME + ";");
 			ResultSet resultado = selectStatement.executeQuery();
 			usersFound = new ArrayList<User>();
 			while (resultado.next()) {
@@ -88,10 +85,25 @@ public class UserDAOImpl implements UserDAO {
 		return usersFound;
 	}
 
+	@SuppressWarnings("null")
 	@Override
 	public User update(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = null;
+		PreparedStatement update = null;
+		try {
+			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			update = conn.prepareStatement("UPDATE " + User.TABLE_NAME + " SET " + User.COL_LOGIN + " = ?,"
+					+ User.COL_NAME + " = ?," + User.COL_PASSWORD + " = ? " + " WHERE " + User.COL_PK + " = ?;");
+			update.setString(1, user.getLogin());
+			update.setString(2, user.getName());
+			update.setString(3, user.getPassword());
+			update.setLong(4, user.getId());
+			update.execute();
+			conn.close();
+			return this.findById(user.getId());
+		} catch (SQLException e) {
+			throw new RuntimeException("erro ao atualizar usuário:" + user.getId());
+		}
 	}
 
 	@Override
@@ -99,15 +111,14 @@ public class UserDAOImpl implements UserDAO {
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {
-			
+
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			selectStatement = conn
-					.prepareStatement("DELETE FROM "
-							+ User.TABLE_NAME + " WHERE " + User.COL_PK + " = ?;");
+					.prepareStatement("DELETE FROM " + User.TABLE_NAME + " WHERE " + User.COL_PK + " = ?;");
 			selectStatement.setLong(1, user.getId());
 			return selectStatement.execute();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
-		}		
+		}
 	}
 }

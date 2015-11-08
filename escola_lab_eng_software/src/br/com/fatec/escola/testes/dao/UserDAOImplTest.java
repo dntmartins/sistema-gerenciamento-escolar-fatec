@@ -38,10 +38,18 @@ public class UserDAOImplTest extends EscolaBaseTest {
 	}
 	
 	@Test
-	public void testDelete() {
+	public void testUpdate() {
 		User user = this.dao.findById(2l);
-		Boolean result = this.dao.delete(user);
-		user = this.dao.findById(2l);
+		user.setName("testeNome");
+		user = this.dao.update(user);;
+		assertEquals("testeNome", user.getName());
+	}
+	
+	@Test
+	public void testDelete() {
+		User user = this.dao.findById(3l);
+		this.dao.delete(user);
+		user = this.dao.findById(3l);
 		Assert.assertNull(user);	
 	}
 }
