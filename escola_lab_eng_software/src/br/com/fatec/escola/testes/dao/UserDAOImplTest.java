@@ -50,8 +50,10 @@ public class UserDAOImplTest extends EscolaBaseTest {
 		user2.setLogin("hugo.richard");
 		user2.setName("Hugo Richard");
 		user2.setPassword("hugo123");
+		this.dao.save(user1);
+		this.dao.save(user2);
 		List<User> userList = this.dao.findAll();
-		assertEquals(userList.size(), 4);
+		assertEquals(userList.size(), 6);
 	}
 	
 	@Test
