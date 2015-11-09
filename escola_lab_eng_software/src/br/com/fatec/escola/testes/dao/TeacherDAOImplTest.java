@@ -47,7 +47,7 @@ public class TeacherDAOImplTest extends EscolaBaseTest {
 		this.dao.save(teacher1);
 		this.dao.save(teacher2);
 		List<Teacher> userList = this.dao.findAll();
-		assertEquals(userList.size(), 3);
+		assertEquals(userList.size(), 4);
 	}
 	
 	@Test

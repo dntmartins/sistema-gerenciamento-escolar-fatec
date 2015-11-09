@@ -7,6 +7,7 @@
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-user.xml"/>  
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-teacher.xml"/>
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-student.xml"/>
+<include file="br/com/fatec/escola/liquibase/inicial/inicial-schedule.xml"/>
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-geradoridservice.xml"/>  
 
 </databaseChangeLog>
