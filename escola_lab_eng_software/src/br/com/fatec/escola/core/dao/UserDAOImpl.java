@@ -86,7 +86,6 @@ public class UserDAOImpl implements UserDAO {
 		return usersFound;
 	}
 
-	@SuppressWarnings("null")
 	@Override
 	public User update(User user) {
 		Connection conn = null;

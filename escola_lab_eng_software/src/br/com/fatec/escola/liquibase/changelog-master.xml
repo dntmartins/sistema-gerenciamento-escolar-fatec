@@ -5,6 +5,14 @@
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-user.xml"/>  
+
+<include file="br/com/fatec/escola/liquibase/inicial/inicial-classroom.xml"/> 
+<include file="br/com/fatec/escola/liquibase/inicial/inicial-discipline.xml"/> 
+<include file="br/com/fatec/escola/liquibase/inicial/inicial-course.xml"/> 
+<include file="br/com/fatec/escola/liquibase/inicial/inicial-module.xml"/> 
+
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-geradoridservice.xml"/>  
+
+
 
 </databaseChangeLog>
