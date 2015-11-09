@@ -1,6 +1,9 @@
 package br.com.fatec.escola.testes.dao;
 
 import static org.junit.Assert.*;
+
+import java.util.List;
+
 //import junit.framework.Assert;
 import org.junit.Assert;
 import org.junit.Before;
@@ -35,6 +38,20 @@ public class UserDAOImplTest extends EscolaBaseTest {
 	public void testFindBy() {
 		User user = this.dao.findById(1l);
 		assertEquals(1L, user.getId(),1);		
+	}
+	
+	@Test
+	public void testFindAllTest() {
+		User user1 = new User();
+		user1.setLogin("dante.alemao");
+		user1.setName("Dante Martins");
+		user1.setPassword("dante123");
+		User user2 = new User();
+		user2.setLogin("hugo.richard");
+		user2.setName("Hugo Richard");
+		user2.setPassword("hugo123");
+		List<User> userList = this.dao.findAll();
+		assertEquals(userList.size(), 4);
 	}
 	
 	@Test

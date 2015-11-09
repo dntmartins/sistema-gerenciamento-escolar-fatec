@@ -75,6 +75,7 @@ public class UserDAOImpl implements UserDAO {
 				user.setLogin(resultado.getString(User.COL_LOGIN));
 				user.setName(resultado.getString(User.COL_NAME));
 				user.setPassword(resultado.getString(User.COL_PASSWORD));
+				usersFound.add(user);
 			}
 			selectStatement.close();
 			conn.close();
