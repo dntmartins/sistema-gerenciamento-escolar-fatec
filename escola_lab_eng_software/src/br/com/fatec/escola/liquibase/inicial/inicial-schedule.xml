@@ -13,15 +13,15 @@
   		</createTable>
   		<insert tableName="USER" >
   			<column name="USER_ID">1</column>
-  			<column name="login">prof.dante</column>
+  			<column name="login">dante</column>
   			<column name="password">dante123</column>
-  			<column name="name">Professor Dante Martins</column>
+  			<column name="name">Dante Martins</column>
   		</insert>  
   		<insert tableName="USER" >
   			<column name="USER_ID">2</column>
-  			<column name="login">aluno.hugo</column>
+  			<column name="login">hugo</column>
   			<column name="password">hugo123</column>
-  			<column name="name">Aluno Hugo Richard</column>
+  			<column name="name">Hugo Richard</column>
   		</insert>
   		<insert tableName="USER" >
   			<column name="USER_ID">3</column>

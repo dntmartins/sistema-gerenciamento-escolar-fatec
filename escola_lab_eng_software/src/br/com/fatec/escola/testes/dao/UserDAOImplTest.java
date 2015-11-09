@@ -27,7 +27,7 @@ public class UserDAOImplTest extends EscolaBaseTest {
 	@Test
 	public void testSave() {
 		User user = new User();
-		user.setLogin("dante.alemao");
+		user.setLogin("dantee.alemao");
 		user.setName("Dante Martins");
 		user.setPassword("dante123");
 		User userSaved = this.dao.save(user);
