@@ -10,4 +10,6 @@
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-schedule.xml"/>
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-geradoridservice.xml"/>  
 
+
+
 </databaseChangeLog>
