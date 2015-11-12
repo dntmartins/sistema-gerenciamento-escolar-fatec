@@ -19,7 +19,7 @@ public class ClassRoomDAOImpl implements ClassRoomDAO {
 		PreparedStatement insert = null;
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
-			insert = conn.prepareStatement("INSERT INTO CLASS_ROOM VALUES(?,?,?)");
+			insert = conn.prepareStatement("INSERT INTO CLASS_ROOM VALUES(?,?,?,?)");
 			//
 			Long id = GeradorIdService.getInstance().getNextId(ClassRoom.TABLE_NAME);
 			insert.setLong(1, id);

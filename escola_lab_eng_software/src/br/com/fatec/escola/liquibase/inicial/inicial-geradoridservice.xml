@@ -15,7 +15,34 @@
   		<insert tableName="GERADOR_IDS" >
   			<column name="NEXT_ID">4</column>
   			<column name="TABLE_NAME">USER</column>
-  		</insert>  		 		
+  		</insert>  	
+  		<insert tableName="GERADOR_IDS" >
+  			<column name="NEXT_ID">1</column>
+  			<column name="TABLE_NAME">TEACHER</column>
+  		</insert> 
+  		<insert tableName="GERADOR_IDS" >
+  			<column name="NEXT_ID">1</column>
+  			<column name="TABLE_NAME">STUDENT</column>
+  		</insert> 
+  		<insert tableName="GERADOR_IDS" >
+  			<column name="NEXT_ID">1</column>
+  			<column name="TABLE_NAME">SCHEDULE</column>
+  		</insert> 
+  		<insert tableName="GERADOR_IDS" >
+  			<column name="NEXT_ID">1</column>
+  			<column name="TABLE_NAME">MODULE</column>
+  		</insert>
+  		<insert tableName="GERADOR_IDS" >
+  			<column name="NEXT_ID">1</column>
+  			<column name="TABLE_NAME">DISCIPLINE</column>
+  		</insert> 	
+  		<insert tableName="GERADOR_IDS" >
+  			<column name="NEXT_ID">1</column>
+  			<column name="TABLE_NAME">COURSE</column>
+  		</insert>
+  		<insert tableName="GERADOR_IDS" >
+  			<column name="NEXT_ID">1</column>
+  			<column name="TABLE_NAME">CLASS_ROOM</column>
+  		</insert> 	 				 		
   </changeSet>
-
 </databaseChangeLog>

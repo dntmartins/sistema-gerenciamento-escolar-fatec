@@ -5,6 +5,7 @@ public class Student extends IdentificadorPK {
 	private Long userId;
 	public static final String COL_PK = "STUDENT_ID";
 	public static final String COL_USER = "USER_ID";
+	public static final String TABLE_NAME = "STUDENT";
 	public Long getUserId() {
 		return userId;
 	}
