@@ -7,12 +7,16 @@
 	<changeSet id="" author="">
 		<createTable tableName="USER">
 			<column name="USER_ID" type="java.sql.Types.BIGINT" />
+			<column name="ROLE_ID" type="java.sql.Types.BIGINT" />
 			<column name="login" type="java.sql.Types.VARCHAR(30)" />
 			<column name="password" type="java.sql.Types.VARCHAR(30)" />
 			<column name="name" type="java.sql.Types.VARCHAR(255)" />
 		</createTable>
 		<addPrimaryKey constraintName="PK_USER" tableName="USER"
 			columnNames="USER_ID" />
+		<addForeignKeyConstraint constraintName="FK_USER_ID"
+			referencedTableName="ROLE" baseColumnNames="ROLE_ID"
+			baseTableName="USER" referencedColumnNames="ROLE_ID" />
 		<insert tableName="USER">
 			<column name="USER_ID">1</column>
 			<column name="login">admin</column>

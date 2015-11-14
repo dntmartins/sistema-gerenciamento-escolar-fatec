@@ -4,6 +4,7 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog dbchangelog-3.4.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
         
+<include file="br/com/fatec/escola/liquibase/inicial/inicial-role.xml"/>
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-user.xml"/>  
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-teacher.xml"/>
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-student.xml"/>

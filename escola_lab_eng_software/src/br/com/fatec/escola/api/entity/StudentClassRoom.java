@@ -1,6 +1,6 @@
 package br.com.fatec.escola.api.entity;
 
-public class StudentClassRoom {
+public class StudentClassRoom extends IdentificadorPK{
 	private Long studentId;
 	private Long classRoomId;
 	private Long testNote;
