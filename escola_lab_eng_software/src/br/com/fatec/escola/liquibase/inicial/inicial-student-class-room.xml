@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog ../dbchangelog-3.4.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet id="" author="">
+		<createTable tableName="STUDENT_CLASS_ROOM">
+			<column name="STUDENT_CLASS_ROOM_ID" type="java.sql.Types.BIGINT" />
+			<column name="STUDENT_ID" type="java.sql.Types.BIGINT" />
+			<column name="CLASS_ROOM_ID" type="java.sql.Types.BIGINT" />
+			<column name="test_note" type="java.sql.Types.FLOAT" />
+		</createTable>
+		<addPrimaryKey constraintName="PK_STUDENT_CLASS_ROOM" tableName="STUDENT_CLASS_ROOM"
+			columnNames="STUDENT_CLASS_ROOM_ID" />
+		<addForeignKeyConstraint constraintName="FK_STUDENT_CLASS_ROOM_ID"
+			referencedTableName="STUDENT" baseColumnNames="STUDENT_ID"
+			baseTableName="STUDENT_CLASS_ROOM" referencedColumnNames="STUDENT_ID" />
+		<addForeignKeyConstraint constraintName="FK_STUDENT_CLASS_ROOM_ID2"
+			referencedTableName="CLASS_ROOM" baseColumnNames="CLASS_ROOM_ID"
+			baseTableName="STUDENT_CLASS_ROOM" referencedColumnNames="CLASS_ROOM_ID" />
+	</changeSet>
+</databaseChangeLog>

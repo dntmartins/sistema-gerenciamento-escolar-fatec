@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog ../dbchangelog-3.4.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-        
-  <changeSet id="" author="">
-  		<createTable tableName="SCHEDULE"> 
-  			<column name="SCHEDULE_ID" type="java.sql.Types.BIGINT" />
-  			<column name="DISCIPLINE_ID" type="java.sql.Types.BIGINT" /> 
-  			<column name="week_day" type="java.sql.Types.VARCHAR(45)" /> 	
-  			<column name="begin_hour" type="java.sql.Types.VARCHAR(5)" /> 		
-  		</createTable>
-  		<insert tableName="SCHEDULE" >
-  			<column name="SCHEDULE_ID">1</column>
-  			<column name="DISCIPLINE_ID">1</column>
-  			<column name="week_day">Terça-Feira</column>
-  			<column name="begin_hour">09:00</column>
-  		</insert>    		
-  </changeSet>
+
+	<changeSet id="" author="">
+		<createTable tableName="SCHEDULE">
+			<column name="SCHEDULE_ID" type="java.sql.Types.BIGINT" />
+			<column name="DISCIPLINE_ID" type="java.sql.Types.BIGINT" />
+			<column name="week_day" type="java.sql.Types.VARCHAR(45)" />
+			<column name="begin_hour" type="java.sql.Types.VARCHAR(5)" />
+			<column name="end_hour" type="java.sql.Types.VARCHAR(5)" />
+		</createTable>
+		<addPrimaryKey constraintName="PK_SCHEDULE" tableName="SCHEDULE"
+			columnNames="SCHEDULE_ID" />
+	</changeSet>
 </databaseChangeLog>

@@ -29,7 +29,7 @@ public class TeacherDAOImplTest extends EscolaBaseTest {
 		Teacher teacher = new Teacher();
 		teacher.setUserId(2l);
 		Teacher teacherSaved = this.dao.save(teacher);
-		assertEquals(1l, teacherSaved.getUserId(),1);		
+		assertEquals(2l, teacherSaved.getUserId(),1);		
 	}
 	
 	@Test
@@ -53,7 +53,7 @@ public class TeacherDAOImplTest extends EscolaBaseTest {
 	@Test
 	public void testUpdate() {
 		Teacher teacher = this.dao.findById(2l);
-		teacher.setUserId(4l);
+		teacher.setUserId(2l);
 		teacher = this.dao.update(teacher);;
 		assertEquals(4l, teacher.getUserId(),1);
 	}

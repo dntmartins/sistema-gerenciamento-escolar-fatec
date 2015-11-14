@@ -4,10 +4,13 @@ public class Schedule extends IdentificadorPK {
 
 	private String weekDay;
 	private String beginHour;	
+	private String endHour;
+	
 	private Long discipline;
 	public static final String COL_PK = "SCHEDULE_ID";
 	public static final String COL_WEEK = "week_day";
 	public static final String COL_BEGIN_HOUR = "begin_hour";
+	public static final String COL_END_HOUR = "end_hour";
 	public static final String COL_DISCIPLINE = "DISCIPLINE_ID";
 	public static final String TABLE_NAME = "SCHEDULE";
 	public String getWeekDay() {
@@ -27,6 +30,12 @@ public class Schedule extends IdentificadorPK {
 	}
 	public void setDiscipline(Long discipline) {
 		this.discipline = discipline;
+	}
+	public String getEndHour() {
+		return endHour;
+	}
+	public void setEndHour(String endHour) {
+		this.endHour = endHour;
 	}
 	
 }

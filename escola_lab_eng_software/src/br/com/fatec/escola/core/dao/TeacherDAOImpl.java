@@ -22,7 +22,6 @@ public class TeacherDAOImpl implements TeacherDAO{
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			insert = conn.prepareStatement("INSERT INTO TEACHER VALUES(?,?)");
-			//
 			Long id = GeradorIdService.getInstance().getNextId(Teacher.TABLE_NAME);
 			insert.setLong(1, id);
 			insert.setLong(2, teacher.getUserId());

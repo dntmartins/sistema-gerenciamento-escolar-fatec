@@ -2,6 +2,7 @@
     <wb-module deploy-name="escola_lab_eng_software">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/database"/>
         <property name="context-root" value="escola_lab_eng_software"/>
         <property name="java-output-path" value="/escola_lab_eng_software/build/classes"/>
     </wb-module>

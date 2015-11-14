@@ -53,7 +53,7 @@ public class UserDAOImplTest extends EscolaBaseTest {
 		this.dao.save(user1);
 		this.dao.save(user2);
 		List<User> userList = this.dao.findAll();
-		assertEquals(userList.size(), 6);
+		assertEquals(userList.size(), 4);
 	}
 	
 	@Test

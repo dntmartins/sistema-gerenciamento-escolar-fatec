@@ -1,34 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog ../dbchangelog-3.4.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-        
-  <changeSet id="" author="">
-  		<createTable tableName="USER"> 
-  			<column name="USER_ID" type="java.sql.Types.BIGINT" />
-  			<column name="login" type="java.sql.Types.VARCHAR(30)" /> 
-  			<column name="password" type="java.sql.Types.VARCHAR(30)" /> 	
-  			<column name="name" type="java.sql.Types.VARCHAR(255)" /> 		
-  		</createTable>
-  		<insert tableName="USER" >
-  			<column name="USER_ID">1</column>
-  			<column name="login">dante</column>
-  			<column name="password">dante123</column>
-  			<column name="name">Dante Martins</column>
-  		</insert>  
-  		<insert tableName="USER" >
-  			<column name="USER_ID">2</column>
-  			<column name="login">hugo</column>
-  			<column name="password">hugo123</column>
-  			<column name="name">Hugo Richard</column>
-  		</insert>
-  		<insert tableName="USER" >
-  			<column name="USER_ID">3</column>
-  			<column name="login">ewerton</column>
-  			<column name="password">ewerton123</column>
-  			<column name="name">Ewerton</column>
-  		</insert>  		 		
-  </changeSet>
 
+	<changeSet id="" author="">
+		<createTable tableName="MODULE">
+			<column name="MODULE_ID" type="java.sql.Types.BIGINT" />
+			<column name="module_name" type="java.sql.Types.VARCHAR(30)" />
+			<column name="DISCIPLINE_ID" type="java.sql.Types.BIGINT" />
+		</createTable>
+		<addPrimaryKey constraintName="PK_MODULE" tableName="MODULE"
+			columnNames="MODULE_ID" />
+		<addForeignKeyConstraint constraintName="FK_MODULE_ID"
+			referencedTableName="DISCIPLINE" baseColumnNames="DISCIPLINE_ID" baseTableName="MODULE"
+			referencedColumnNames="DISCIPLINE_ID" />
+	</changeSet>
 </databaseChangeLog>

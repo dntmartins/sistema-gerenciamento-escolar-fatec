@@ -20,13 +20,14 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 		PreparedStatement insert = null;
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
-			insert = conn.prepareStatement("INSERT INTO SCHEDULE VALUES(?,?,?,?)");
+			insert = conn.prepareStatement("INSERT INTO SCHEDULE VALUES(?,?,?,?,?)");
 			//
 			Long id = GeradorIdService.getInstance().getNextId(Schedule.TABLE_NAME);
 			insert.setLong(1, id);
 			insert.setLong(2, schedule.getDiscipline());
 			insert.setString(3, schedule.getWeekDay());
 			insert.setString(4, schedule.getBeginHour());
+			insert.setString(5, schedule.getEndHour());
 			insert.execute();
 			return this.findById(id);
 		} catch (Exception e) {
@@ -52,6 +53,7 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 			schedule.setDiscipline(resultSet.getLong(2));
 			schedule.setWeekDay(resultSet.getString(3));
 			schedule.setBeginHour(resultSet.getString(4));
+			schedule.setEndHour(resultSet.getString(5));
 			return schedule;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -74,6 +76,7 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 				schedule.setDiscipline(resultado.getLong(Schedule.COL_DISCIPLINE));
 				schedule.setWeekDay(resultado.getString(Schedule.COL_WEEK));
 				schedule.setBeginHour(resultado.getString(Schedule.COL_BEGIN_HOUR));
+				schedule.setEndHour(resultado.getString(Schedule.COL_END_HOUR));
 				schedulesFound.add(schedule);
 			}
 			selectStatement.close();
@@ -92,11 +95,12 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			update = conn.prepareStatement("UPDATE " + Schedule.TABLE_NAME + " SET " + Schedule.COL_DISCIPLINE + " = ?,"
-					+ Schedule.COL_WEEK + " = ?," + Schedule.COL_BEGIN_HOUR + " = ? " + " WHERE " + Schedule.COL_PK + " = ?;");
+					+ Schedule.COL_WEEK + " = ?," + Schedule.COL_BEGIN_HOUR + " = ? " + Schedule.COL_END_HOUR + " = ? " + " WHERE " + Schedule.COL_PK + " = ?;");
 			update.setLong(1, schedule.getDiscipline());
 			update.setString(2, schedule.getWeekDay());
 			update.setString(3, schedule.getBeginHour());
-			update.setLong(4, schedule.getId());
+			update.setString(4, schedule.getEndHour());
+			update.setLong(5, schedule.getId());
 			update.execute();
 			conn.close();
 			return this.findById(schedule.getId());

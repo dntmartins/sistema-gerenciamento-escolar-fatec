@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog ../dbchangelog-3.4.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-  <changeSet id="" author="">
-  		<createTable tableName="STUDENT"> 
-  			<column name="STUDENT_ID" type="java.sql.Types.BIGINT" />
-  			<column name="USER_ID" type="java.sql.Types.BIGINT" />
-  		</createTable>
-  		<insert tableName="STUDENT" >
-  			<column name="STUDENT_ID">1</column>
-  			<column name="USER_ID">2</column>
-  		</insert>  
-  </changeSet>
+	<changeSet id="" author="">
+		<createTable tableName="STUDENT">
+			<column name="STUDENT_ID" type="java.sql.Types.BIGINT" />
+			<column name="USER_ID" type="java.sql.Types.BIGINT" />
+		</createTable>
+		<addPrimaryKey constraintName="PK_STUDENT" tableName="STUDENT"
+			columnNames="STUDENT_ID" />
+		<addForeignKeyConstraint constraintName="FK_STUDENT_ID"
+			referencedTableName="USER" baseColumnNames="USER_ID" baseTableName="STUDENT"
+			referencedColumnNames="USER_ID" />
+	</changeSet>
 </databaseChangeLog>
