@@ -4,20 +4,16 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog ../dbchangelog-3.4.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-	<changeSet id="" author="">
+	<changeSet id="20" author="Dante">
 		<createTable tableName="COURSE">
 			<column name="COURSE_ID" type="java.sql.Types.BIGINT" />
 			<column name="course_name" type="java.sql.Types.VARCHAR(45)" />
 			<column name="begin_hour" type="java.sql.Types.VARCHAR(5))" />
 			<column name="end_hour" type="java.sql.Types.VARCHAR(5)" />
 			<column name="course_duration" type="java.sql.Types.BIGINT" />
-			<column name="MODULE_ID" type="java.sql.Types.BIGINT" />
 		</createTable>
 		<addPrimaryKey constraintName="PK_COURSE" tableName="COURSE"
 			columnNames="COURSE_ID" />
-		<addForeignKeyConstraint constraintName="FK_COURSE_ID"
-			referencedTableName="MODULE" baseColumnNames="MODULE_ID"
-			baseTableName="COURSE" referencedColumnNames="MODULE_ID" />
 	</changeSet>
 
 </databaseChangeLog>

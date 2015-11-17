@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog ../dbchangelog-3.4.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-	<changeSet id="" author="">
+	<changeSet id="110" author="Dante">
 		<createTable tableName="USER">
 			<column name="USER_ID" type="java.sql.Types.BIGINT" />
 			<column name="ROLE_ID" type="java.sql.Types.BIGINT" />
@@ -14,7 +14,7 @@
 		</createTable>
 		<addPrimaryKey constraintName="PK_USER" tableName="USER"
 			columnNames="USER_ID" />
-		<addForeignKeyConstraint constraintName="FK_USER_ID"
+		<addForeignKeyConstraint constraintName="FK_USER"
 			referencedTableName="ROLE" baseColumnNames="ROLE_ID"
 			baseTableName="USER" referencedColumnNames="ROLE_ID" />
 		<insert tableName="USER">

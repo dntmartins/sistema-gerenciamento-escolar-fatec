@@ -4,7 +4,6 @@ import java.util.List;
 
 import br.com.fatec.escola.api.entity.Course;
 
-
 public interface CourseDAO {
 	public Course save(Course course); // Create
 

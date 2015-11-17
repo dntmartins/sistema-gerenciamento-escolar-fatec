@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog ../dbchangelog-3.4.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-	<changeSet id="" author="">
+	<changeSet id="10" author="Dante">
 		<createTable tableName="CLASS_ROOM">
 			<column name="CLASS_ROOM_ID" type="java.sql.Types.BIGINT" />
 			<column name="class_room_name" type="java.sql.Types.VARCHAR(45)" />
@@ -13,10 +13,10 @@
 		</createTable>
 		<addPrimaryKey constraintName="PK_CLASS_ROOM" tableName="CLASS_ROOM"
 			columnNames="CLASS_ROOM_ID" />
-		<addForeignKeyConstraint constraintName="FK_CLASS_ROOM_ID"
+		<addForeignKeyConstraint constraintName="FK_CLASS_ROOM"
 			referencedTableName="MODULE" baseColumnNames="MODULE_ID"
 			baseTableName="CLASS_ROOM" referencedColumnNames="MODULE_ID" />
-		<addForeignKeyConstraint constraintName="FK_CLASS_ROOM_ID2"
+		<addForeignKeyConstraint constraintName="FK_CLASS_ROOM_2"
 			referencedTableName="DISCIPLINE" baseColumnNames="DISCIPLINE_ID"
 			baseTableName="CLASS_ROOM" referencedColumnNames="DISCIPLINE_ID" />
 	</changeSet>

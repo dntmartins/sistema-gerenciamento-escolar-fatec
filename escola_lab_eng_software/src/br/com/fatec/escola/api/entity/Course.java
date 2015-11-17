@@ -1,12 +1,9 @@
 package br.com.fatec.escola.api.entity;
 
+import java.util.List;
+
 public class Course extends IdentificadorPK {
 
-	private String name;
-	private String beginHour;
-	private String endHour;
-	private Integer courseDuration;
-	private Long module;
 	public static final String COL_PK = "COURSE_ID";
 	public static final String COL_NAME = "course_name";
 	public static final String COL_BEGIN_HOUR = "begin_hour";
@@ -14,6 +11,12 @@ public class Course extends IdentificadorPK {
 	public static final String COL_DURATION = "course_duration";
 	public static final String COL_MODULE = "MODULE_ID";
 	public static final String TABLE_NAME = "COURSE";
+	
+	private String name;
+	private String beginHour;
+	private String endHour;
+	private Integer courseDuration;
+	
 	public String getName() {
 		return name;
 	}
@@ -38,11 +41,8 @@ public class Course extends IdentificadorPK {
 	public void setCourseDuration(Integer courseDuration) {
 		this.courseDuration = courseDuration;
 	}
-	public Long getModule() {
-		return module;
-	}
-	public void setModule(Long module) {
-		this.module = module;
-	}
 	
+	public List<Module> getModules(){
+		return null;
+	}
 }

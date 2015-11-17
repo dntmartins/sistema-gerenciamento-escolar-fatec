@@ -7,7 +7,7 @@
 	<!-- Padrão para nome das tabelas: <INICIAL_DO_PROJETO>_<ENTIDADE> -->
 	<!-- Classes principalmente utilizadas: BIGINT, BOOLEAN, VARCHAR(<quantidade_caracteres>) -->
 
-	<changeSet id="" author="Dante">
+	<changeSet id="40" author="Dante">
 		<createTable tableName="GERADOR_IDS">
 			<column name="NEXT_ID" type="java.sql.Types.BIGINT">
 				<constraints nullable="false" />
