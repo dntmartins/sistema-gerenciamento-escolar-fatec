@@ -20,13 +20,14 @@ public class UserDAOImpl implements UserDAO {
 		PreparedStatement insert = null;
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
-			insert = conn.prepareStatement("INSERT INTO USER VALUES(?,?,?,?)");
+			insert = conn.prepareStatement("INSERT INTO USER VALUES(?,?,?,?,?)");
 			//
 			Long id = GeradorIdService.getInstance().getNextId(User.TABLE_NAME);
 			insert.setLong(1, id);
-			insert.setString(2, user.getLogin());
-			insert.setString(3, user.getName());
-			insert.setString(4, user.getPassword());
+			insert.setLong(2, user.getRoleId());
+			insert.setString(3, user.getLogin());
+			insert.setString(4, user.getName());
+			insert.setString(5, user.getPassword());
 			insert.execute();
 			return this.findById(id);
 		} catch (Exception e) {
@@ -50,9 +51,10 @@ public class UserDAOImpl implements UserDAO {
 			}
 			User user = new User();
 			user.setId(resultSet.getLong(1));
-			user.setLogin(resultSet.getString(2));
-			user.setPassword(resultSet.getString(3));
-			user.setName(resultSet.getString(4));
+			user.setRoleId(resultSet.getLong(2));
+			user.setLogin(resultSet.getString(3));
+			user.setPassword(resultSet.getString(4));
+			user.setName(resultSet.getString(5));
 			return user;
 		} catch (Exception e) {
 			throw new RuntimeException(e);

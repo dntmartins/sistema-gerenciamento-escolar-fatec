@@ -30,6 +30,7 @@ public class UserDAOImplTest extends EscolaBaseTest {
 		user.setLogin("dantee.alemao");
 		user.setName("Dante Martins");
 		user.setPassword("dante123");
+		user.setRoleId(1l);
 		User userSaved = this.dao.save(user);
 		assertEquals(user.getLogin(), userSaved.getLogin());		
 	}
@@ -58,17 +59,29 @@ public class UserDAOImplTest extends EscolaBaseTest {
 	
 	@Test
 	public void testUpdate() {
-		User user = this.dao.findById(2l);
+		User user = new User();
+		user.setLogin("dantee.alemao");
+		user.setName("Dante Martins");
+		user.setPassword("dante123");
+		user.setRoleId(1l);
+		User userSaved = this.dao.save(user);
+		user = this.dao.findById(userSaved.getId());
 		user.setName("testeNome");
 		user = this.dao.update(user);;
+		this.dao.delete(user);
 		assertEquals("testeNome", user.getName());
 	}
 	
 	@Test
 	public void testDelete() {
-		User user = this.dao.findById(3l);
-		this.dao.delete(user);
-		user = this.dao.findById(3l);
+		User user = new User();
+		user.setLogin("dantee.alemao");
+		user.setName("Dante Martins");
+		user.setPassword("dante123");
+		user.setRoleId(1l);
+		User userSaved = this.dao.save(user);
+		this.dao.delete(userSaved);
+		user = this.dao.findById(userSaved.getId());
 		Assert.assertNull(user);	
 	}
 }

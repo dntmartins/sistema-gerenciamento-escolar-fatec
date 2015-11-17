@@ -19,6 +19,7 @@
 			baseTableName="USER" referencedColumnNames="ROLE_ID" />
 		<insert tableName="USER">
 			<column name="USER_ID">1</column>
+			<column name="ROLE_ID">1</column>
 			<column name="login">admin</column>
 			<column name="password">admin</column>
 			<column name="name">Administrador</column>
