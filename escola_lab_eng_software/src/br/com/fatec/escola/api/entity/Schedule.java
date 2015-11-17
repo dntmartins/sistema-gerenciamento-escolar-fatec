@@ -12,7 +12,7 @@ public class Schedule extends IdentificadorPK {
 	private String weekDay;
 	private String beginHour;	
 	private String endHour;
-	private Long discipline;
+	private Discipline discipline;
 
 	public String getWeekDay() {
 		return weekDay;
@@ -26,10 +26,10 @@ public class Schedule extends IdentificadorPK {
 	public void setBeginHour(String beginHour) {
 		this.beginHour = beginHour;
 	}
-	public Long getDiscipline() {
+	public Discipline getDiscipline() {
 		return discipline;
 	}
-	public void setDiscipline(Long discipline) {
+	public void setDiscipline(Discipline discipline) {
 		this.discipline = discipline;
 	}
 	public String getEndHour() {

@@ -15,5 +15,4 @@
 		<addPrimaryKey constraintName="PK_COURSE" tableName="COURSE"
 			columnNames="COURSE_ID" />
 	</changeSet>
-
 </databaseChangeLog>

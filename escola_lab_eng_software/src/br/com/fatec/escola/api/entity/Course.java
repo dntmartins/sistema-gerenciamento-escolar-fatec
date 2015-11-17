@@ -16,6 +16,7 @@ public class Course extends IdentificadorPK {
 	private String beginHour;
 	private String endHour;
 	private Integer courseDuration;
+	private List<Module> modules;
 	
 	public String getName() {
 		return name;
@@ -41,8 +42,11 @@ public class Course extends IdentificadorPK {
 	public void setCourseDuration(Integer courseDuration) {
 		this.courseDuration = courseDuration;
 	}
-	
-	public List<Module> getModules(){
-		return null;
+	public List<Module> getModules() {
+		return modules;
 	}
+	public void setModules(List<Module> modules) {
+		this.modules = modules;
+	}
+	
 }
