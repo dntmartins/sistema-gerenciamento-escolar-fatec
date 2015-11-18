@@ -30,7 +30,9 @@ public class UserDAOImplTest extends EscolaBaseTest {
 		user.setLogin("dantee.alemao");
 		user.setName("Dante Martins");
 		user.setPassword("dante123");
+		user.setRoleId(1l);
 		User userSaved = this.dao.save(user);
+		this.dao.delete(userSaved);
 		assertEquals(user.getLogin(), userSaved.getLogin());		
 	}
 	
@@ -46,29 +48,45 @@ public class UserDAOImplTest extends EscolaBaseTest {
 		user1.setLogin("dante.alemao");
 		user1.setName("Dante Martins");
 		user1.setPassword("dante123");
+		user1.setRoleId(1l);
 		User user2 = new User();
 		user2.setLogin("hugo.richard");
 		user2.setName("Hugo Richard");
 		user2.setPassword("hugo123");
-		this.dao.save(user1);
-		this.dao.save(user2);
+		user2.setRoleId(1l);
+		User userSaved1 = this.dao.save(user1);
+		User userSaved2 = this.dao.save(user2);
 		List<User> userList = this.dao.findAll();
-		assertEquals(userList.size(), 4);
+		this.dao.delete(userSaved1);
+		this.dao.delete(userSaved2);
+		assertEquals(userList.size(), 11);
 	}
 	
 	@Test
 	public void testUpdate() {
-		User user = this.dao.findById(2l);
+		User user = new User();
+		user.setLogin("dantee.alemao");
+		user.setName("Dante Martins");
+		user.setPassword("dante123");
+		user.setRoleId(1l);
+		User userSaved = this.dao.save(user);
+		user = this.dao.findById(userSaved.getId());
 		user.setName("testeNome");
 		user = this.dao.update(user);;
+		this.dao.delete(user);
 		assertEquals("testeNome", user.getName());
 	}
 	
 	@Test
 	public void testDelete() {
-		User user = this.dao.findById(3l);
-		this.dao.delete(user);
-		user = this.dao.findById(3l);
+		User user = new User();
+		user.setLogin("dantee.alemao");
+		user.setName("Dante Martins");
+		user.setPassword("dante123");
+		user.setRoleId(1l);
+		User userSaved = this.dao.save(user);
+		this.dao.delete(userSaved);
+		user = this.dao.findById(userSaved.getId());
 		Assert.assertNull(user);	
 	}
 }

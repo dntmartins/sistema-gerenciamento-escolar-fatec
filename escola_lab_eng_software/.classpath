@@ -17,6 +17,6 @@
 	<classpathentry kind="lib" path="dependencies/mini-spring-1.0.0.jar"/>
 	<classpathentry kind="lib" path="dependencies/reflections-0.9.11-SNAPSHOT.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="/home/dante/git/escola_lab_eng_software/escola_lab_eng_software/dependencies/mysql-connector-java-5.1.37-bin.jar"/>
+	<classpathentry kind="lib" path="dependencies/mysql-connector-java-5.1.37-bin.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
