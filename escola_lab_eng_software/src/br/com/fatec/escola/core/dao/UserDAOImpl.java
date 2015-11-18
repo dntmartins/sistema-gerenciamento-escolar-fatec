@@ -102,7 +102,7 @@ public class UserDAOImpl implements UserDAO {
 			conn.close();
 			return this.findById(user.getId());
 		} catch (SQLException e) {
-			throw new RuntimeException("erro ao atualizar usuário:" + user.getId());
+			throw new RuntimeException("erro ao atualizar usuï¿½rio:" + user.getId());
 		}
 	}
 
@@ -111,7 +111,6 @@ public class UserDAOImpl implements UserDAO {
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {
-
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			selectStatement = conn
 					.prepareStatement("DELETE FROM " + User.TABLE_NAME + " WHERE " + User.COL_PK + " = ?;");
