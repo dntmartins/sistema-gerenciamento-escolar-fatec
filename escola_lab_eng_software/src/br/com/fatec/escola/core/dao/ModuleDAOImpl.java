@@ -26,7 +26,6 @@ public class ModuleDAOImpl implements ModuleDAO{
 			Long id = GeradorIdService.getInstance().getNextId(Module.TABLE_NAME);
 			insert.setLong(1, id);
 			insert.setString(2, module.getName());
-			insert.setLong(3, module.getDiscipline());
 			insert.execute();
 			return this.findById(id);
 		} catch (Exception e) {
@@ -50,7 +49,6 @@ public class ModuleDAOImpl implements ModuleDAO{
 			Module module = new Module();
 			module.setId(resultSet.getLong(1));
 			module.setName(resultSet.getString(2));
-			module.setDiscipline(resultSet.getLong(3));
 			return module;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -71,7 +69,6 @@ public class ModuleDAOImpl implements ModuleDAO{
 				Module module = new Module();
 				module.setId(resultado.getLong(Module.COL_PK));
 				module.setName(resultado.getString(Module.COL_NAME));
-				module.setDiscipline(resultado.getLong(Module.COL_DISCIPLINE));
 				moduleFound.add(module);
 			}
 			selectStatement.close();
@@ -92,7 +89,6 @@ public class ModuleDAOImpl implements ModuleDAO{
 			update = conn.prepareStatement("UPDATE " + Module.TABLE_NAME + " SET " + Module.COL_NAME + " = ?,"
 					+ Module.COL_DISCIPLINE + " = ?" + " WHERE " + Module.COL_PK + " = ?;");
 			update.setString(1, module.getName());
-			update.setLong(2, module.getDiscipline());
 			update.setLong(4, module.getId());
 			update.execute();
 			conn.close();

@@ -12,7 +12,7 @@ import br.com.fatec.escola.api.entity.Course;
 import br.com.fatec.escola.core.service.GeradorIdService;
 import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
 
-public class CourseDAOImpl implements CourseDAO{
+public class CourseDAOImpl implements CourseDAO {
 
 	@Override
 	public Course save(Course course) {
@@ -94,15 +94,14 @@ public class CourseDAOImpl implements CourseDAO{
 		PreparedStatement update = null;
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
-			update = conn.prepareStatement("UPDATE " + Course.TABLE_NAME + " SET " + Course.COL_MODULE + " = ?,"
-					+ Course.COL_NAME + " = ?," + Course.COL_BEGIN_HOUR + " = ?, " +  Course.COL_END_HOUR + " = ?, "
-					+ Course.COL_DURATION + " = ? " + " WHERE " + Course.COL_PK + " = ?;");
-			
+			update = conn.prepareStatement("UPDATE " + Course.TABLE_NAME + " SET " + Course.COL_NAME + " = ?,"
+					+ Course.COL_BEGIN_HOUR + " = ?, " + Course.COL_END_HOUR + " = ?, " + Course.COL_DURATION + " = ? "
+					+ " WHERE " + Course.COL_PK + " = ?;");
+
 			update.setString(1, course.getName());
-			update.setLong(2, course.getModule());
-			update.setString(3, course.getBeginHour());
-			update.setString(4, course.getEndHour());
-			update.setLong(5, course.getCourseDuration());
+			update.setString(2, course.getBeginHour());
+			update.setString(3, course.getEndHour());
+			update.setLong(4, course.getCourseDuration());
 			update.execute();
 			conn.close();
 			return this.findById(course.getId());

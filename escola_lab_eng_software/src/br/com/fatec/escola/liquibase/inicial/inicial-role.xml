@@ -12,5 +12,10 @@
 		</createTable>
 		<addPrimaryKey constraintName="PK_ROLE" tableName="ROLE"
 			columnNames="ROLE_ID" />
+		<insert tableName="ROLE">
+			<column name="ROLE_ID">1</column>
+			<column name="role_name">Admin</column>
+			<column name="is_admin">1</column>
+		</insert>
 	</changeSet>
 </databaseChangeLog>

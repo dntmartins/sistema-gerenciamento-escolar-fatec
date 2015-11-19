@@ -10,7 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.fatec.escola.api.dao.ScheduleDAO;
+import br.com.fatec.escola.api.entity.Discipline;
 import br.com.fatec.escola.api.entity.Schedule;
+import br.com.fatec.escola.core.dao.DisciplineDAOImpl;
 import br.com.fatec.escola.testes.common.EscolaBaseTest;
 import br.com.spektro.minispring.core.implfinder.ImplementationFinder;
 
@@ -25,47 +27,88 @@ public class ScheduleDAOImplTest extends EscolaBaseTest {
 	}
 	
 	@Test
-	public void testSave() {
-		Schedule schedule = null;
-		schedule = this.dao.findById(1l);
-		schedule.setBeginHour("09:00");
+	public void testSave() { //OK
+		Schedule schedule = new Schedule();
+		DisciplineDAOImpl dDAO = new DisciplineDAOImpl();
+		Discipline d = new Discipline();
+		d.setModule(null);
+		d.setName("Matematica");
+		d = dDAO.save(d);
+		schedule.setBeginHour("07:00");
+		schedule.setDiscipline(d);
+		schedule.setEndHour("09:00");
+		schedule.setWeekDay("sexta-feira");
 		Schedule scheduleSaved = this.dao.save(schedule);
+		this.dao.delete(scheduleSaved);
+		dDAO.delete(d);
 		assertEquals(schedule.getBeginHour(), scheduleSaved.getBeginHour());		
 	}
 	
 	@Test
-	public void testFindBy() {
-		Schedule schedule = this.dao.findById(1l);
-		assertEquals(1L, schedule.getId(),1);		
+	public void testFindBy() { //OK
+		Schedule schedule = new Schedule();
+		DisciplineDAOImpl dDAO = new DisciplineDAOImpl();
+		Discipline d = new Discipline();
+		d.setModule(null);
+		d.setName("Matematica");
+		d = dDAO.save(d);
+		schedule.setBeginHour("07:00");
+		schedule.setDiscipline(d);
+		schedule.setEndHour("09:00");
+		schedule.setWeekDay("sexta-feira");
+		Schedule scheduleSaved = this.dao.save(schedule);
+		schedule = this.dao.findById(scheduleSaved.getId());
+		this.dao.delete(scheduleSaved);
+		dDAO.delete(d);
+		assertEquals(scheduleSaved.getId(), schedule.getId(),1);		
 	}
 	
 	
 	@Test
-	public void testFindAllTest() {
-		Schedule s1 = new Schedule();
-		s1.setDiscipline(2l);
-		s1.setWeekDay("Quarta-Feira");
-		s1.setBeginHour("07:00");
-		this.dao.save(s1);
-		List<Schedule> userList = this.dao.findAll();
-		assertEquals(userList.size(), 3);
+	public void testFindAllTest() { //OK
+		Schedule schedule = new Schedule();
+		DisciplineDAOImpl dDAO = new DisciplineDAOImpl();
+		Discipline d = new Discipline();
+		d.setModule(null);
+		d.setName("Matematica");
+		d = dDAO.save(d);
+		schedule.setBeginHour("07:00");
+		schedule.setDiscipline(d);
+		schedule.setEndHour("09:00");
+		schedule.setWeekDay("sexta-feira");
+		Schedule scheduleSaved = this.dao.save(schedule);
+		List<Schedule> sList = this.dao.findAll();
+		this.dao.delete(scheduleSaved);
+		dDAO.delete(d);
+		assertEquals(sList.size(), 3);
 	}
 	
 	@Test
-	public void testUpdate() {
-		Schedule s1 = this.dao.findById(2l);
-		s1.setDiscipline(2l);
-		s1.setWeekDay("Sexta-Feira");
-		s1.setBeginHour("07:00");
-		s1 = this.dao.update(s1);
-		assertEquals("Sexta-Feira", s1.getWeekDay());
+	public void testUpdate() { //OK
+		Schedule schedule = new Schedule();
+		DisciplineDAOImpl dDAO = new DisciplineDAOImpl();
+		Discipline d = new Discipline();
+		d.setModule(null);
+		d.setName("Matematica");
+		d = dDAO.save(d);
+		schedule.setBeginHour("07:00");
+		schedule.setDiscipline(d);
+		schedule.setEndHour("09:00");
+		schedule.setWeekDay("Sexta-Feira");
+		Schedule scheduleSaved = this.dao.save(schedule);
+		schedule = this.dao.findById(scheduleSaved.getId());
+		schedule.setWeekDay("Quarta");
+		schedule = this.dao.update(schedule);
+		this.dao.delete(scheduleSaved);
+		dDAO.delete(d);
+		assertEquals("Quarta", schedule.getWeekDay());
 	}
 
 	@Test
-	public void testDelete() {
-		Schedule s1 = this.dao.findById(1l);
+	public void testDelete() { //OK
+		Schedule s1 = this.dao.findById(12l);
 		this.dao.delete(s1);
-		s1 = this.dao.findById(1l);
+		s1 = this.dao.findById(12l);
 		Assert.assertNull(s1);	
 	}
 }
