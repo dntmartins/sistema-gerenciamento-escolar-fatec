@@ -50,7 +50,7 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 			Discipline discipline = new Discipline();
 			discipline.setId(resultSet.getLong(1));
 			discipline.setName(resultSet.getString(2));
-			discipline.setModule(null);
+			discipline.setModule(moduleDAO.findById(resultSet.getLong(3)));
 			return discipline;
 		} catch (Exception e) {
 			throw new RuntimeException(e);

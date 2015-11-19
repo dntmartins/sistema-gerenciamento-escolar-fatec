@@ -14,6 +14,7 @@ import br.com.fatec.escola.api.entity.Discipline;
 import br.com.fatec.escola.api.entity.Module;
 import br.com.fatec.escola.api.entity.User;
 import br.com.fatec.escola.core.dao.DisciplineDAOImpl;
+import br.com.fatec.escola.core.dao.ModuleDAOImpl;
 import br.com.fatec.escola.testes.common.EscolaBaseTest;
 import br.com.spektro.minispring.core.implfinder.ImplementationFinder;
 
@@ -29,11 +30,11 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 	
 	@Test
 	public void testSave() {
+		ModuleDAOImpl mDAO = new ModuleDAOImpl();
 		Discipline d = new Discipline();
 		Module m = new Module();
 		m.setId(1l);
 		m.setCourse(null);
 		d.setModule(null);
-		assertEquals(user.getLogin(), userSaved.getLogin());		
 	}
 }
