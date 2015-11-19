@@ -1,16 +1,19 @@
 package br.com.fatec.escola.api.entity;
 
 public class User extends IdentificadorPK {
-	private String login;
-	private String password;
-	private String name;
-	private Long roleId;
+	
 	public static final String COL_PK = "USER_ID";
 	public static final String COL_LOGIN = "login";
 	public static final String COL_ROLE = "ROLE_ID";
 	public static final String COL_PASSWORD = "password";
 	public static final String COL_NAME = "name";
 	public static final String TABLE_NAME = "USER";
+
+	private String login;
+	private String password;
+	private String name;
+	private Long roleId;
+	
 	public String getLogin() {
 		return login;
 	}

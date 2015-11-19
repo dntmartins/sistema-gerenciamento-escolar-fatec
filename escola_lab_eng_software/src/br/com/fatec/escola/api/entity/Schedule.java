@@ -2,17 +2,18 @@ package br.com.fatec.escola.api.entity;
 
 public class Schedule extends IdentificadorPK {
 
-	private String weekDay;
-	private String beginHour;	
-	private String endHour;
-	
-	private Long discipline;
 	public static final String COL_PK = "SCHEDULE_ID";
 	public static final String COL_WEEK = "week_day";
 	public static final String COL_BEGIN_HOUR = "begin_hour";
 	public static final String COL_END_HOUR = "end_hour";
 	public static final String COL_DISCIPLINE = "DISCIPLINE_ID";
 	public static final String TABLE_NAME = "SCHEDULE";
+	
+	private String weekDay;
+	private String beginHour;	
+	private String endHour;
+	private Discipline discipline;
+
 	public String getWeekDay() {
 		return weekDay;
 	}
@@ -25,10 +26,10 @@ public class Schedule extends IdentificadorPK {
 	public void setBeginHour(String beginHour) {
 		this.beginHour = beginHour;
 	}
-	public Long getDiscipline() {
+	public Discipline getDiscipline() {
 		return discipline;
 	}
-	public void setDiscipline(Long discipline) {
+	public void setDiscipline(Discipline discipline) {
 		this.discipline = discipline;
 	}
 	public String getEndHour() {

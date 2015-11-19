@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog ../dbchangelog-3.4.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-        
-  <changeSet id="" author="">
-  		<createTable tableName="DISCIPLINE"> 
-  			<column name="DISCIPLINE_ID" type="java.sql.Types.BIGINT" />
-  			<column name="name_discipline" type="java.sql.Types.VARCHAR(45)" /> 
-  		</createTable>
-  		<addPrimaryKey constraintName="PK_DISCIPLINE" tableName="DISCIPLINE"
+
+	<changeSet id="30" author="Dante">
+		<createTable tableName="DISCIPLINE">
+			<column name="DISCIPLINE_ID" type="java.sql.Types.BIGINT" />
+			<column name="name_discipline" type="java.sql.Types.VARCHAR(45)" />
+			<column name="MODULE_ID" type="java.sql.Types.BIGINT" />
+		</createTable>
+		<addPrimaryKey constraintName="PK_DISCIPLINE" tableName="DISCIPLINE"
 			columnNames="DISCIPLINE_ID" />
-  </changeSet>
+		<addForeignKeyConstraint constraintName="FK_DISCIPLINE"
+			referencedTableName="MODULE" baseColumnNames="MODULE_ID"
+			baseTableName="DISCIPLINE" referencedColumnNames="MODULE_ID" />
+	</changeSet>
 </databaseChangeLog>

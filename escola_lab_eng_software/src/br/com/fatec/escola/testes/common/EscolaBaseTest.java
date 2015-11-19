@@ -10,9 +10,9 @@ public class EscolaBaseTest {
 
 	@BeforeClass //Executado antes do primeiro teste
 	public static void setUp() {
-		//A linha seguinte informa o caminho onde devem ser postas as implementações
+		//A linha seguinte informa o caminho onde devem ser postas as implementaï¿½ï¿½es
 		ContextSpecifier.getInstance().setContext("br.com.fatec.escola.core");
-		//O método seguinte recebe como parâmetro: database1.name=test
+		//O mï¿½todo seguinte recebe como parï¿½metro: database1.name=test
 		ConfigDBMapper.getInstance().setDefaultConnectionName("escola_bd");
 		//LiquibaseRunnerService.run();
 	}

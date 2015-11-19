@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog ../dbchangelog-3.4.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-	<changeSet id="" author="">
+	<changeSet id="70" author="Dante">
 		<createTable tableName="SCHEDULE">
 			<column name="SCHEDULE_ID" type="java.sql.Types.BIGINT" />
 			<column name="DISCIPLINE_ID" type="java.sql.Types.BIGINT" />
