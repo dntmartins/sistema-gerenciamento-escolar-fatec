@@ -14,6 +14,6 @@ public class EscolaBaseTest {
 		ContextSpecifier.getInstance().setContext("br.com.fatec.escola.core");
 		//O método seguinte recebe como parâmetro: database1.name=test
 		ConfigDBMapper.getInstance().setDefaultConnectionName("escola_bd");
-		LiquibaseRunnerService.run();
+		//LiquibaseRunnerService.run();
 	}
 }
