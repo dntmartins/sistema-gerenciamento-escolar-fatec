@@ -63,7 +63,6 @@ public class ScheduleDAOImplTest extends EscolaBaseTest {
 		assertEquals(scheduleSaved.getId(), schedule.getId(),1);		
 	}
 	
-	
 	@Test
 	public void testFindAllTest() { //OK
 		Schedule schedule = new Schedule();
