@@ -25,7 +25,7 @@ public class UserDAOImplTest extends EscolaBaseTest {
 	}
 	
 	@Test
-	public void testSave() {
+	public void testSave() { //OK
 		User user = new User();
 		user.setLogin("dantee.alemao");
 		user.setName("Dante Martins");
@@ -37,13 +37,13 @@ public class UserDAOImplTest extends EscolaBaseTest {
 	}
 	
 	@Test
-	public void testFindBy() {
+	public void testFindBy() { //OK
 		User user = this.dao.findById(1l);
 		assertEquals(1L, user.getId(),1);		
 	}
 	
 	@Test
-	public void testFindAllTest() {
+	public void testFindAllTest() { //OK
 		User user1 = new User();
 		user1.setLogin("dante.alemao");
 		user1.setName("Dante Martins");
@@ -63,7 +63,7 @@ public class UserDAOImplTest extends EscolaBaseTest {
 	}
 	
 	@Test
-	public void testUpdate() {
+	public void testUpdate() { //OK
 		User user = new User();
 		user.setLogin("dantee.alemao");
 		user.setName("Dante Martins");
@@ -78,7 +78,7 @@ public class UserDAOImplTest extends EscolaBaseTest {
 	}
 	
 	@Test
-	public void testDelete() {
+	public void testDelete() { //OK
 		User user = new User();
 		user.setLogin("dantee.alemao");
 		user.setName("Dante Martins");

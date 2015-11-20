@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.fatec.escola.api.dao.DisciplineDAO;
-import br.com.fatec.escola.api.entity.ClassRoom;
 import br.com.fatec.escola.api.entity.Discipline;
 import br.com.fatec.escola.core.service.GeradorIdService;
 import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
@@ -16,13 +15,12 @@ import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
 public class DisciplineDAOImpl implements DisciplineDAO {
 
 	@Override
-	public Discipline save(Discipline discipline) {
+	public Discipline save(Discipline discipline) { //VERIFICAR
 		Connection conn = null;
 		PreparedStatement insert = null;
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			insert = conn.prepareStatement("INSERT INTO DISCIPLINE VALUES(?,?,?)");
-			//
 			Long id = GeradorIdService.getInstance().getNextId(Discipline.TABLE_NAME);
 			insert.setLong(1, id);
 			insert.setString(2, discipline.getName());
@@ -35,7 +33,7 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 	}
 
 	@Override
-	public Discipline findById(Long id) { //FALTA IMPLEMENTAR MODULE
+	public Discipline findById(Long id) { //VERIFICAR
 		Connection conn = null;
 		ModuleDAOImpl moduleDAO = new ModuleDAOImpl();
 		PreparedStatement selectStatement = null;
@@ -58,21 +56,21 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 	}
 
 	@Override
-	public List<Discipline> findAll() {
+	public List<Discipline> findAll() { //VERIFICAR
 		Connection conn = null;
 		ModuleDAOImpl moduleDAO = new ModuleDAOImpl();
 		PreparedStatement selectStatement = null;
 		List<Discipline> disciplineFound = null;
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
-			selectStatement = conn.prepareStatement("SELECT * DISCIPLINE " + Discipline.TABLE_NAME + ";");
+			selectStatement = conn.prepareStatement("SELECT * FROM " + Discipline.TABLE_NAME + ";");
 			ResultSet resultado = selectStatement.executeQuery();
 			disciplineFound = new ArrayList<Discipline>();
 			while (resultado.next()) {
 				Discipline discipline = new Discipline();
 				discipline.setId(resultado.getLong(Discipline.COL_PK));
 				discipline.setName(resultado.getString(Discipline.COL_NAME));
-				discipline.setModule(null);
+				discipline.setModule(moduleDAO.findById(resultado.getLong(Discipline.COL_MODULE)));
 				disciplineFound.add(discipline);
 			}
 			selectStatement.close();
@@ -85,7 +83,7 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 	}
 
 	@Override
-	public Discipline update(Discipline discipline) {
+	public Discipline update(Discipline discipline) { //VERIFICAR
 		Connection conn = null;
 		PreparedStatement update = null;
 		try {
@@ -104,7 +102,7 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 	}
 
 	@Override
-	public Boolean delete(Discipline discipline) {
+	public Boolean delete(Discipline discipline) { //VERIFICAR
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {

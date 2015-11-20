@@ -15,7 +15,7 @@ import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
 public class UserDAOImpl implements UserDAO {
 
 	@Override
-	public User save(User user) {
+	public User save(User user) { //OK
 		Connection conn = null;
 		PreparedStatement insert = null;
 		try {
@@ -36,7 +36,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User findById(Long id) {
+	public User findById(Long id) { //OK
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {
@@ -44,7 +44,6 @@ public class UserDAOImpl implements UserDAO {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM USER WHERE " + User.COL_PK + " = ?");
 			selectStatement.setLong(1, id);
-			// selectStatement.execute();
 			ResultSet resultSet = selectStatement.executeQuery();
 			if (!resultSet.next()) {
 				return null;
@@ -62,7 +61,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public List<User> findAll() {
+	public List<User> findAll() { //OK
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		List<User> usersFound = null;
@@ -89,7 +88,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User update(User user) {
+	public User update(User user) { //OK
 		Connection conn = null;
 		PreparedStatement update = null;
 		try {
@@ -109,7 +108,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public Boolean delete(User user) {
+	public Boolean delete(User user) { //OK
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {

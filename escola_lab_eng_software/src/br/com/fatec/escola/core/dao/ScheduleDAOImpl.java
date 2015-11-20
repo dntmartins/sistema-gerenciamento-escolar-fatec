@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.fatec.escola.api.dao.ScheduleDAO;
-import br.com.fatec.escola.api.entity.Discipline;
 import br.com.fatec.escola.api.entity.Schedule;
 import br.com.fatec.escola.core.service.GeradorIdService;
 import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
