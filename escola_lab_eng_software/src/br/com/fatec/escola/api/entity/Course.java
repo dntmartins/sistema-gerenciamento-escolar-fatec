@@ -9,7 +9,6 @@ public class Course extends IdentificadorPK {
 	public static final String COL_BEGIN_HOUR = "begin_hour";
 	public static final String COL_END_HOUR = "end_hour";
 	public static final String COL_DURATION = "course_duration";
-	public static final String COL_MODULE = "MODULE_ID";
 	public static final String TABLE_NAME = "COURSE";
 	
 	private String name;

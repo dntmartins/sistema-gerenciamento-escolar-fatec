@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ClassRoom extends IdentificadorPK {
 
-	public static final String COL_PK = "CLA_ROOM_ID";
+	public static final String COL_PK = "CLASS_ROOM_ID";
 	public static final String COL_NAME = "class_room_name";
 	public static final String COL_DISCIPLINE = "DISCIPLINE_ID";
 	public static final String COL_MODULE = "MODULE_ID";

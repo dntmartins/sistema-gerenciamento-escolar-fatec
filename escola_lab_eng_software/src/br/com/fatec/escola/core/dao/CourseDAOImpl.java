@@ -12,10 +12,10 @@ import br.com.fatec.escola.api.entity.Course;
 import br.com.fatec.escola.core.service.GeradorIdService;
 import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
 
-public class CourseDAOImpl implements CourseDAO{
+public class CourseDAOImpl implements CourseDAO {
 
 	@Override
-	public Course save(Course course) {
+	public Course save(Course course) { //OK
 		Connection conn = null;
 		PreparedStatement insert = null;
 		try {
@@ -36,7 +36,7 @@ public class CourseDAOImpl implements CourseDAO{
 	}
 
 	@Override
-	public Course findById(Long id) {
+	public Course findById(Long id) { //OK
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {
@@ -61,13 +61,13 @@ public class CourseDAOImpl implements CourseDAO{
 	}
 
 	@Override
-	public List<Course> findAll() {
+	public List<Course> findAll() { //OK
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		List<Course> courseFound = null;
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
-			selectStatement = conn.prepareStatement("SELECT * COURSE " + Course.TABLE_NAME + ";");
+			selectStatement = conn.prepareStatement("SELECT * FROM " + Course.TABLE_NAME + ";");
 			ResultSet resultado = selectStatement.executeQuery();
 			courseFound = new ArrayList<Course>();
 			while (resultado.next()) {
@@ -89,20 +89,20 @@ public class CourseDAOImpl implements CourseDAO{
 	}
 
 	@Override
-	public Course update(Course course) {
+	public Course update(Course course) { //OK
 		Connection conn = null;
 		PreparedStatement update = null;
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
-			update = conn.prepareStatement("UPDATE " + Course.TABLE_NAME + " SET " + Course.COL_MODULE + " = ?,"
-					+ Course.COL_NAME + " = ?," + Course.COL_BEGIN_HOUR + " = ?, " +  Course.COL_END_HOUR + " = ?, "
-					+ Course.COL_DURATION + " = ? " + " WHERE " + Course.COL_PK + " = ?;");
+			update = conn.prepareStatement("UPDATE " + Course.TABLE_NAME + " SET " + Course.COL_NAME + " = ?,"
+					+ Course.COL_BEGIN_HOUR + " = ?, " + Course.COL_END_HOUR + " = ?, " + Course.COL_DURATION + " = ? "
+					+ " WHERE " + Course.COL_PK + " = ?;");
 			
 			update.setString(1, course.getName());
-			update.setLong(2, course.getModule());
-			update.setString(3, course.getBeginHour());
-			update.setString(4, course.getEndHour());
-			update.setLong(5, course.getCourseDuration());
+			update.setString(2, course.getBeginHour());
+			update.setString(3, course.getEndHour());
+			update.setLong(4, course.getCourseDuration());
+			update.setLong(5, course.getId());
 			update.execute();
 			conn.close();
 			return this.findById(course.getId());
@@ -112,7 +112,7 @@ public class CourseDAOImpl implements CourseDAO{
 	}
 
 	@Override
-	public Boolean delete(Course course) {
+	public Boolean delete(Course course) { //OK
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {

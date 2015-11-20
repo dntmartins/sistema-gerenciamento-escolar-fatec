@@ -9,66 +9,86 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.fatec.escola.api.dao.UserDAO;
-import br.com.fatec.escola.api.entity.User;
+import br.com.fatec.escola.api.dao.CourseDAO;
+import br.com.fatec.escola.api.entity.Course;
+import br.com.fatec.escola.api.entity.Discipline;
+import br.com.fatec.escola.api.entity.Schedule;
+import br.com.fatec.escola.core.dao.DisciplineDAOImpl;
 import br.com.fatec.escola.testes.common.EscolaBaseTest;
 import br.com.spektro.minispring.core.implfinder.ImplementationFinder;
 
 public class CourseDAOImplTest extends EscolaBaseTest {
 
-	private UserDAO dao;
+	private CourseDAO dao;
 	
 	@Before
 	public void config()
 	{
-		this.dao = (UserDAO) ImplementationFinder.getinstance().getImpl(UserDAO.class);
+		this.dao = (CourseDAO) ImplementationFinder.getinstance().getImpl(CourseDAO.class);
 	}
 	
 	@Test
-	public void testSave() {
-		User user = new User();
-		user.setLogin("dante.alemao");
-		user.setName("Dante Martins");
-		user.setPassword("dante123");
-		User userSaved = this.dao.save(user);
-		assertEquals(user.getLogin(), userSaved.getLogin());		
+	public void testSave() { //OK
+		Course c = new Course();
+		c.setBeginHour("07:00");
+		c.setEndHour("12:00");
+		c.setCourseDuration(6);
+		c.setName("Analise de Sistemas");
+		Course cSaved = this.dao.save(c);
+		this.dao.delete(cSaved);
+		assertEquals(c.getName(), cSaved.getName());		
 	}
 	
 	@Test
-	public void testFindBy() {
-		User user = this.dao.findById(1l);
-		assertEquals(1L, user.getId(),1);		
+	public void testFindBy() { //OK
+		Course c = new Course();
+		c.setBeginHour("07:00");
+		c.setEndHour("12:00");
+		c.setCourseDuration(6);
+		c.setName("Analise de Sistemas");
+		Course cSaved = this.dao.save(c);
+		c = this.dao.findById(cSaved.getId());
+		this.dao.delete(cSaved);
+		assertEquals(c.getId(), cSaved.getId(),1);		
 	}
 	
 	@Test
-	public void testFindAllTest() {
-		User user1 = new User();
-		user1.setLogin("dante.alemao");
-		user1.setName("Dante Martins");
-		user1.setPassword("dante123");
-		User user2 = new User();
-		user2.setLogin("hugo.richard");
-		user2.setName("Hugo Richard");
-		user2.setPassword("hugo123");
-		this.dao.save(user1);
-		this.dao.save(user2);
-		List<User> userList = this.dao.findAll();
-		assertEquals(userList.size(), 6);
+	public void testFindAllTest() { //OK
+		Course c = new Course();
+		c.setBeginHour("07:00");
+		c.setEndHour("12:00");
+		c.setCourseDuration(6);
+		c.setName("Analise de Sistemas");
+		Course cSaved = this.dao.save(c);
+		List<Course> cList = this.dao.findAll(); 
+		this.dao.delete(cSaved);
+		assertEquals(cList.size(), 5);
 	}
 	
 	@Test
-	public void testUpdate() {
-		User user = this.dao.findById(2l);
-		user.setName("testeNome");
-		user = this.dao.update(user);;
-		assertEquals("testeNome", user.getName());
+	public void testUpdate() { //OK
+		Course c = new Course();
+		c.setBeginHour("07:00");
+		c.setEndHour("12:00");
+		c.setCourseDuration(6);
+		c.setName("Analise de Sistemas");
+		Course cSaved = this.dao.save(c);
+		cSaved.setName("Analise e Desenvolvimento de Sistemas");
+		c = this.dao.update(cSaved);
+		this.dao.delete(cSaved);
+		assertEquals("Analise e Desenvolvimento de Sistemas", c.getName());
 	}
 	
 	@Test
-	public void testDelete() {
-		User user = this.dao.findById(3l);
-		this.dao.delete(user);
-		user = this.dao.findById(3l);
-		Assert.assertNull(user);	
+	public void testDelete() { //OK
+		Course c = new Course();
+		c.setBeginHour("07:00");
+		c.setEndHour("12:00");
+		c.setCourseDuration(6);
+		c.setName("Analise de Sistemas");
+		Course cSaved = this.dao.save(c);
+		this.dao.delete(cSaved);
+		c = this.dao.findById(cSaved.getId());
+		Assert.assertNull(c);	
 	}
 }

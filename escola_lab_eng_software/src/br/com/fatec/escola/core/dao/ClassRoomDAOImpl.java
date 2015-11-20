@@ -64,7 +64,7 @@ public class ClassRoomDAOImpl implements ClassRoomDAO {
 		List<ClassRoom> classRoomFound = null;
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
-			selectStatement = conn.prepareStatement("SELECT * CLASS_ROOM " + ClassRoom.TABLE_NAME + ";");
+			selectStatement = conn.prepareStatement("SELECT * FROM " + ClassRoom.TABLE_NAME + ";");
 			ResultSet resultado = selectStatement.executeQuery();
 			classRoomFound = new ArrayList<ClassRoom>();
 			while (resultado.next()) {
