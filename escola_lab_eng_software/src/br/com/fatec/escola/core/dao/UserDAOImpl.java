@@ -24,7 +24,7 @@ public class UserDAOImpl implements UserDAO {
 			//
 			Long id = GeradorIdService.getInstance().getNextId(User.TABLE_NAME);
 			insert.setLong(1, id);
-			insert.setLong(2, user.getRoleId());
+			insert.setLong(2, user.getRole().getId());
 			insert.setString(3, user.getLogin());
 			insert.setString(4, user.getName());
 			insert.setString(5, user.getPassword());
@@ -38,6 +38,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User findById(Long id) { //OK
 		Connection conn = null;
+		RoleDAOImpl roleDAO = new RoleDAOImpl();
 		PreparedStatement selectStatement = null;
 		try {
 
@@ -50,7 +51,7 @@ public class UserDAOImpl implements UserDAO {
 			}
 			User user = new User();
 			user.setId(resultSet.getLong(1));
-			user.setRoleId(resultSet.getLong(2));
+			user.setRole(roleDAO.findById(resultSet.getLong(2)));
 			user.setLogin(resultSet.getString(3));
 			user.setPassword(resultSet.getString(4));
 			user.setName(resultSet.getString(5));

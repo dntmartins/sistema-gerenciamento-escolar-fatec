@@ -43,7 +43,6 @@ public class CourseDAOImpl implements CourseDAO {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM COURSE WHERE " + Course.COL_PK + " = ?");
 			selectStatement.setLong(1, id);
-			// selectStatement.execute();
 			ResultSet resultSet = selectStatement.executeQuery();
 			if (!resultSet.next()) {
 				return null;

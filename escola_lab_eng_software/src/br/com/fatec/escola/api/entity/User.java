@@ -12,7 +12,7 @@ public class User extends IdentificadorPK {
 	private String login;
 	private String password;
 	private String name;
-	private Long roleId;
+	private Role role;
 	
 	public String getLogin() {
 		return login;
@@ -32,12 +32,13 @@ public class User extends IdentificadorPK {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Long getRoleId() {
-		return roleId;
+	public Role getRole() {
+		return role;
 	}
-	public void setRoleId(Long roleId) {
-		this.roleId = roleId;
+	public void setRole(Role role) {
+		this.role = role;
 	}
+	
 	
 	
 }

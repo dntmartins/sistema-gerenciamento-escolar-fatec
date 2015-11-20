@@ -4,7 +4,6 @@ public class Role extends IdentificadorPK {
 
 	public static final String COL_PK = "ROLE_ID";
 	public static final String COL_ROLE_NAME = "role_name";
-	public static final String COL_ROLE = "ROLE_ID";
 	public static final String COL_IS_ADMIN = "is_admin";
 	public static final String TABLE_NAME = "ROLE";
 
