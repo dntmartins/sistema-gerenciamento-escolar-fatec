@@ -23,7 +23,7 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 			insert = conn.prepareStatement("INSERT INTO SCHEDULE VALUES(?,?,?,?,?)");
 			Long id = GeradorIdService.getInstance().getNextId(Schedule.TABLE_NAME);
 			insert.setLong(1, id);
-			insert.setLong(2, schedule.getDiscipline());
+			insert.setLong(2, schedule.getDiscipline().getId());
 			insert.setString(3, schedule.getWeekDay());
 			insert.setString(4, schedule.getBeginHour());
 			insert.setString(5, schedule.getEndHour());
