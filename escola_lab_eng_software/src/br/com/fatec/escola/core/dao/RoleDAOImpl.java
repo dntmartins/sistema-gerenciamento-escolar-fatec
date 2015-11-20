@@ -22,7 +22,6 @@ public class RoleDAOImpl implements RoleDAO {
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			insert = conn.prepareStatement("INSERT INTO ROLE VALUES(?,?,?)");
-			//
 			Long id = GeradorIdService.getInstance().getNextId(Role.TABLE_NAME);
 			insert.setLong(1, id);
 			insert.setString(2, role.getRoleName());

@@ -14,7 +14,7 @@ public class ClassRoom extends IdentificadorPK {
 	private Module module;
 	private Discipline discipline;
 	private List<StudentClassRoom> StudentsClassRoom;
-	
+
 	public String getName() {
 		return name;
 	}
@@ -46,12 +46,12 @@ public class ClassRoom extends IdentificadorPK {
 	public void setStudentsClassRoom(List<StudentClassRoom> studentsClassRoom) {
 		StudentsClassRoom = studentsClassRoom;
 	}
-	
-	public List<Student> getStudents(){
+
+	public List<Student> getStudents() {
 		return null;
 	}
-	
-	public Teacher getTeacher(){
+
+	public Teacher getTeacher() {
 		return null;
 	}
 
