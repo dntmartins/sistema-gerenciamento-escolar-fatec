@@ -47,9 +47,9 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 		d.setModule(mSaved);
 		d.setName("Portugues");
 		Discipline dSaved = this.dao.save(d);
+		this.dao.delete(dSaved);
 		mDAO.delete(mSaved);
 		cDAO.delete(cSaved);
-		this.dao.delete(dSaved);
 		assertEquals(d.getName(), dSaved.getName());	
 	}
 	
@@ -72,9 +72,9 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 		d.setName("Portugues");
 		Discipline dSaved = this.dao.save(d);
 		d = this.dao.findById(dSaved.getId());
+		this.dao.delete(dSaved);
 		mDAO.delete(mSaved);
 		cDAO.delete(cSaved);
-		this.dao.delete(dSaved);
 		assertEquals(dSaved.getId(), dSaved.getId(),1);		
 	}
 	
@@ -97,9 +97,9 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 		d.setName("Portugues");
 		Discipline dSaved = this.dao.save(d);
 		List<Discipline> dList = this.dao.findAll();
+		this.dao.delete(dSaved);
 		mDAO.delete(mSaved);
 		cDAO.delete(cSaved);
-		this.dao.delete(dSaved);
 		assertEquals(dList.size(), 3);
 	}
 	
@@ -123,9 +123,9 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 		Discipline dSaved = this.dao.save(d);
 		dSaved.setName("Matematica");
 		d = this.dao.update(dSaved);
+		this.dao.delete(dSaved);
 		mDAO.delete(mSaved);
 		cDAO.delete(cSaved);
-		this.dao.delete(dSaved);
 		assertEquals("Matematica", d.getName());
 	}
 
@@ -136,6 +136,4 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 		d = this.dao.findById(12l);
 		Assert.assertNull(d);	
 	}
-	
-	
 }
