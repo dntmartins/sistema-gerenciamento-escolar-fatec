@@ -10,11 +10,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import br.com.fatec.escola.api.dao.ClassRoomDAO;
-import br.com.fatec.escola.api.dao.UserDAO;
 import br.com.fatec.escola.api.entity.ClassRoom;
+import br.com.fatec.escola.api.entity.Course;
 import br.com.fatec.escola.api.entity.Discipline;
 import br.com.fatec.escola.api.entity.Module;
-import br.com.fatec.escola.api.entity.User;
+import br.com.fatec.escola.core.dao.CourseDAOImpl;
 import br.com.fatec.escola.core.dao.DisciplineDAOImpl;
 import br.com.fatec.escola.core.dao.ModuleDAOImpl;
 import br.com.fatec.escola.testes.common.EscolaBaseTest;
@@ -32,15 +32,25 @@ public class ClassRoomDAOImplTest extends EscolaBaseTest {
 	
 	@Test
 	public void testSave() {
-		Discipline discipline = new Discipline();
-		Module module = new Module();
-		ClassRoom classroom = new ClassRoom();
-		discipline.setName("Matematica");
-		DisciplineDAOImpl disciplineDAO = new DisciplineDAOImpl();
-		discipline = disciplineDAO.save(discipline);
-		classroom.setName("402");
-		classroom.setModule(1l);
-		classroom.setDiscipline(discipline.getId());
-		this.dao.save(classroom);
+		Module m = new Module();
+		Course c = new Course();
+		Discipline d = new Discipline();
+		DisciplineDAOImpl dDAO = new DisciplineDAOImpl();
+		ModuleDAOImpl mDAO = new ModuleDAOImpl();
+		CourseDAOImpl cDAO = new CourseDAOImpl();
+		c.setBeginHour("07:00");
+		c.setEndHour("12:00");
+		c.setCourseDuration(6);
+		c.setName("Analise de Sistemas");
+		Course cSaved = cDAO.save(c);
+		m.setCourse(cSaved);
+		m.setName("1 semestre");
+		Module mSaved = mDAO.save(m);
+		d.setModule(mSaved);
+		d.setName("Portugues");
+		Discipline dSaved = dDAO.save(d);
+		mDAO.delete(mSaved);
+		cDAO.delete(cSaved);
+		dDAO.delete(dSaved);
 	}
 }

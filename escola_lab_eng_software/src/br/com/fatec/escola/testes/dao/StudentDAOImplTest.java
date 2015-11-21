@@ -26,44 +26,27 @@ public class StudentDAOImplTest extends EscolaBaseTest {
 	
 	@Test
 	public void testSave() {
-		Student student = new Student();
-		student.setUserId(2l);
-		Student studentSaved = this.dao.save(student);
-		assertEquals(student.getUserId(), studentSaved.getUserId());		
+			
 	}
 	
 	@Test
 	public void testFindBy() {
-		Student student = this.dao.findById(1l);
-		assertEquals(1L, student.getId(),1);		
+				
 	}
 
 	@Test
 	public void testFindAllTest() {
-		Student student1 = new Student();
-		student1.setUserId(2l);
-		Student student2 = new Student();
-		student2.setUserId(3l);
-		this.dao.save(student1);
-		this.dao.save(student2);
-		List<Student> studentList = this.dao.findAll();
-		assertEquals(studentList.size(), 4);
+		
 	}
 	
 	@Test
 	public void testUpdate() {
-		Student student = this.dao.findById(1l);
-		student.setUserId(4l);
-		student = this.dao.update(student);;
-		assertEquals(4l, student.getUserId(),1);
+		
 	}
 	
 	@Test
 	public void testDelete() {
-		Student student = this.dao.findById(2l);
-		this.dao.delete(student);
-		student = this.dao.findById(2l);
-		Assert.assertNull(student);	
+	
 	}
 	
 }

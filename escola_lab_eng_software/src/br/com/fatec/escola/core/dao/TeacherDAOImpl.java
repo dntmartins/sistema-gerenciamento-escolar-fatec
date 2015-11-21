@@ -24,7 +24,7 @@ public class TeacherDAOImpl implements TeacherDAO{
 			insert = conn.prepareStatement("INSERT INTO TEACHER VALUES(?,?)");
 			Long id = GeradorIdService.getInstance().getNextId(Teacher.TABLE_NAME);
 			insert.setLong(1, id);
-			insert.setLong(2, teacher.getUserId());
+			insert.setLong(2, teacher.getId());
 			insert.execute();
 			return this.findById(id);
 		} catch (Exception e) {
@@ -40,14 +40,13 @@ public class TeacherDAOImpl implements TeacherDAO{
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM TEACHER WHERE " + Teacher.COL_PK + " = ?");
 			selectStatement.setLong(1, id);
-			// selectStatement.execute();
 			ResultSet resultSet = selectStatement.executeQuery();
 			if (!resultSet.next()) {
 				return null;
 			}
 			Teacher teacher = new Teacher();
 			teacher.setId(resultSet.getLong(1));
-			teacher.setUserId(resultSet.getLong(2));
+			//teacher.setUserId(resultSet.getLong(2));
 			return teacher;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -67,7 +66,7 @@ public class TeacherDAOImpl implements TeacherDAO{
 			while (resultado.next()) {
 				Teacher teacher = new Teacher();
 				teacher.setId(resultado.getLong(Teacher.COL_PK));
-				teacher.setUserId(resultado.getLong(Teacher.COL_USER));
+				//teacher.setUserId(resultado.getLong(Teacher.COL_USER));
 				teachersFound.add(teacher);
 			}
 			selectStatement.close();
@@ -86,7 +85,7 @@ public class TeacherDAOImpl implements TeacherDAO{
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			update = conn.prepareStatement("UPDATE " + Teacher.TABLE_NAME + " SET " + Teacher.COL_USER + " = ?," + " WHERE " + Teacher.COL_PK + " = ?;");
-			update.setLong(1, teacher.getUserId());
+			//update.setLong(1, teacher.getUserId());
 			update.execute();
 			conn.close();
 			return this.findById(teacher.getId());

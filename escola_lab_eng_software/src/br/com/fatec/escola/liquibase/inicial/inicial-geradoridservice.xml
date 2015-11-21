@@ -53,7 +53,7 @@
 			<column name="TABLE_NAME">STUDENT_CLASS_ROOM</column>
 		</insert>
 		<insert tableName="GERADOR_IDS">
-			<column name="NEXT_ID">1</column>
+			<column name="NEXT_ID">2</column>
 			<column name="TABLE_NAME">ROLE</column>
 		</insert>
 	</changeSet>

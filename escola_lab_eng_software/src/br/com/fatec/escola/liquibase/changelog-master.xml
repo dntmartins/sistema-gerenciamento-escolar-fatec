@@ -13,6 +13,7 @@
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-discipline.xml"/>
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-schedule.xml"/>
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-classroom.xml"/>
+<include file="br/com/fatec/escola/liquibase/inicial/inicial-teacher-class-room.xml"/>
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-student-class-room.xml"/>
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-geradoridservice.xml"/>  
 

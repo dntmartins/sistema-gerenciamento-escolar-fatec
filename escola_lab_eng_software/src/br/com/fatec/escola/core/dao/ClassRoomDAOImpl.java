@@ -20,12 +20,11 @@ public class ClassRoomDAOImpl implements ClassRoomDAO {
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			insert = conn.prepareStatement("INSERT INTO CLASS_ROOM VALUES(?,?,?,?)");
-			//
 			Long id = GeradorIdService.getInstance().getNextId(ClassRoom.TABLE_NAME);
 			insert.setLong(1, id);
 			insert.setString(2, classroom.getName());
-			insert.setLong(3, classroom.getModule());
-			insert.setLong(4, classroom.getDiscipline());
+			insert.setLong(3, classroom.getModule().getId());
+			insert.setLong(4, classroom.getDiscipline().getId());
 			insert.execute();
 			return this.findById(id);
 		} catch (Exception e) {
@@ -36,12 +35,13 @@ public class ClassRoomDAOImpl implements ClassRoomDAO {
 	@Override
 	public ClassRoom findById(Long id) {
 		Connection conn = null;
+		ModuleDAOImpl mDAO = new ModuleDAOImpl();
+		DisciplineDAOImpl dDAO = new DisciplineDAOImpl();
 		PreparedStatement selectStatement = null;
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM CLASS_ROOM WHERE " + ClassRoom.COL_PK + " = ?");
 			selectStatement.setLong(1, id);
-			// selectStatement.execute();
 			ResultSet resultSet = selectStatement.executeQuery();
 			if (!resultSet.next()) {
 				return null;
@@ -49,8 +49,8 @@ public class ClassRoomDAOImpl implements ClassRoomDAO {
 			ClassRoom classRoom = new ClassRoom();
 			classRoom.setId(resultSet.getLong(1));
 			classRoom.setName(resultSet.getString(2));
-			classRoom.setModule(resultSet.getLong(3));
-			classRoom.setDiscipline(resultSet.getLong(4));
+			classRoom.setModule(mDAO.findById(resultSet.getLong(3)));
+			classRoom.setDiscipline(dDAO.findById(resultSet.getLong(4)));
 			return classRoom;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -60,6 +60,8 @@ public class ClassRoomDAOImpl implements ClassRoomDAO {
 	@Override
 	public List<ClassRoom> findAll() {
 		Connection conn = null;
+		ModuleDAOImpl mDAO = new ModuleDAOImpl();
+		DisciplineDAOImpl dDAO = new DisciplineDAOImpl();
 		PreparedStatement selectStatement = null;
 		List<ClassRoom> classRoomFound = null;
 		try {
@@ -71,15 +73,15 @@ public class ClassRoomDAOImpl implements ClassRoomDAO {
 				ClassRoom classRoom = new ClassRoom();
 				classRoom.setId(resultado.getLong(ClassRoom.COL_PK));
 				classRoom.setName(resultado.getString(ClassRoom.COL_NAME));
-				classRoom.setModule(resultado.getLong(ClassRoom.COL_MODULE));
-				classRoom.setDiscipline(resultado.getLong(ClassRoom.COL_DISCIPLINE));
+				classRoom.setModule(mDAO.findById(resultado.getLong(ClassRoom.COL_MODULE)));
+				classRoom.setDiscipline(dDAO.findById(resultado.getLong(ClassRoom.COL_DISCIPLINE)));
 				classRoomFound.add(classRoom);
 			}
 			selectStatement.close();
 			conn.close();
 
 		} catch (Exception e) {
-			throw new RuntimeException("Erro ao buscar usuarios no sistema.", e);
+			throw new RuntimeException("Erro ao buscar salas de aula no sistema.", e);
 		}
 		return classRoomFound;
 	}
@@ -93,8 +95,8 @@ public class ClassRoomDAOImpl implements ClassRoomDAO {
 			update = conn.prepareStatement("UPDATE " + ClassRoom.TABLE_NAME + " SET " + ClassRoom.COL_NAME + " = ?,"
 					+ ClassRoom.COL_MODULE + " = ?," + ClassRoom.COL_DISCIPLINE + " = ? " + " WHERE " + ClassRoom.COL_PK + " = ?;");
 			update.setString(1, classroom.getName());
-			update.setLong(2, classroom.getModule());
-			update.setLong(3, classroom.getDiscipline());
+			update.setLong(2, classroom.getModule().getId());
+			update.setLong(3, classroom.getDiscipline().getId());
 			update.setLong(4, classroom.getId());
 			update.execute();
 			conn.close();

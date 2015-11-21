@@ -22,10 +22,9 @@ public class StudentDAOImpl implements StudentDAO{
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			insert = conn.prepareStatement("INSERT INTO STUDENT VALUES(?,?)");
-			//
 			Long id = GeradorIdService.getInstance().getNextId(Student.TABLE_NAME);
 			insert.setLong(1, id);
-			insert.setLong(2, student.getUserId());
+			//insert.setLong(2, student.getUserId());
 			insert.execute();
 			return this.findById(id);
 		} catch (Exception e) {
@@ -47,7 +46,7 @@ public class StudentDAOImpl implements StudentDAO{
 			}
 			Student student = new Student();
 			student.setId(resultSet.getLong(1));
-			student.setUserId(resultSet.getLong(2));
+			//student.setUserId(resultSet.getLong(2));
 			return student;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -67,7 +66,7 @@ public class StudentDAOImpl implements StudentDAO{
 			while (resultado.next()) {
 				Student student = new Student();
 				student.setId(resultado.getLong(Student.COL_PK));
-				student.setUserId(resultado.getLong(Student.COL_USER));
+				//student.setUserId(resultado.getLong(Student.COL_USER));
 				studentsFound.add(student);
 			}
 			selectStatement.close();
@@ -86,7 +85,7 @@ public class StudentDAOImpl implements StudentDAO{
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			update = conn.prepareStatement("UPDATE " + Student.TABLE_NAME + " SET " + Student.COL_USER + " = ?,"
 					+ " WHERE " + User.COL_PK + " = ?;");
-			update.setLong(1, student.getUserId());
+			//update.setLong(1, student.getUserId());
 			update.execute();
 			conn.close();
 			return this.findById(student.getId());
