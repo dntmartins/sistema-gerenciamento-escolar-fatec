@@ -30,7 +30,7 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 	}
 	
 	@Test
-	public void testSave() { //VERIFICAR
+	public void testSave() { //OK
 		Module m = new Module();
 		Course c = new Course();
 		Discipline d = new Discipline();
@@ -54,7 +54,7 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 	}
 	
 	@Test
-	public void testFindBy() { //VERIFICAR
+	public void testFindBy() { //OK
 		Module m = new Module();
 		Course c = new Course();
 		Discipline d = new Discipline();
@@ -79,7 +79,7 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 	}
 	
 	@Test
-	public void testFindAllTest() { //VERIFICAR
+	public void testFindAllTest() { //OK
 		Module m = new Module();
 		Course c = new Course();
 		Discipline d = new Discipline();
@@ -104,7 +104,7 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 	}
 	
 	@Test
-	public void testUpdate() { //VERIFICAR
+	public void testUpdate() { //OK
 		Module m = new Module();
 		Course c = new Course();
 		Discipline d = new Discipline();
@@ -130,10 +130,10 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 	}
 
 	@Test
-	public void testDelete() { //VERIFICAR
-		Discipline d = this.dao.findById(12l);
+	public void testDelete() { //OK
+		Discipline d = this.dao.findById(4l);
 		this.dao.delete(d);
-		d = this.dao.findById(12l);
+		d = this.dao.findById(4l);
 		Assert.assertNull(d);	
 	}
 }

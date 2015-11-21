@@ -21,7 +21,6 @@ public class CourseDAOImpl implements CourseDAO {
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			insert = conn.prepareStatement("INSERT INTO COURSE VALUES(?,?,?,?,?)");
-			//
 			Long id = GeradorIdService.getInstance().getNextId(Course.TABLE_NAME);
 			insert.setLong(1, id);
 			insert.setString(2, course.getName());

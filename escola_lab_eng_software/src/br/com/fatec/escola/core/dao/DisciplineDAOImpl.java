@@ -15,7 +15,7 @@ import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
 public class DisciplineDAOImpl implements DisciplineDAO {
 
 	@Override
-	public Discipline save(Discipline discipline) { //VERIFICAR
+	public Discipline save(Discipline discipline) { //OK
 		Connection conn = null;
 		PreparedStatement insert = null;
 		try {
@@ -33,7 +33,7 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 	}
 
 	@Override
-	public Discipline findById(Long id) { //VERIFICAR
+	public Discipline findById(Long id) { //OK
 		Connection conn = null;
 		ModuleDAOImpl moduleDAO = new ModuleDAOImpl();
 		PreparedStatement selectStatement = null;
@@ -56,7 +56,7 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 	}
 
 	@Override
-	public List<Discipline> findAll() { //VERIFICAR
+	public List<Discipline> findAll() { //OK
 		Connection conn = null;
 		ModuleDAOImpl moduleDAO = new ModuleDAOImpl();
 		PreparedStatement selectStatement = null;
@@ -83,12 +83,12 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 	}
 
 	@Override
-	public Discipline update(Discipline discipline) { //VERIFICAR
+	public Discipline update(Discipline discipline) { //OK
 		Connection conn = null;
 		PreparedStatement update = null;
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
-			update = conn.prepareStatement("UPDATE " + Discipline.TABLE_NAME + " SET " + Discipline.COL_NAME + " = ?," + Discipline.COL_MODULE + " = ?,"
+			update = conn.prepareStatement("UPDATE " + Discipline.TABLE_NAME + " SET " + Discipline.COL_NAME + " = ?," + Discipline.COL_MODULE + " = ? "
 					+  " WHERE " + Discipline.COL_PK + " = ?;");
 			update.setString(1, discipline.getName());
 			update.setLong(2,discipline.getModule().getId());
@@ -102,7 +102,7 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 	}
 
 	@Override
-	public Boolean delete(Discipline discipline) { //VERIFICAR
+	public Boolean delete(Discipline discipline) { //OK
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {

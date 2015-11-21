@@ -6,7 +6,7 @@ public class Discipline extends IdentificadorPK {
 
 	public static final String COL_PK = "DISCIPLINE_ID";
 	public static final String COL_NAME = "name_discipline";
-	public static final String COL_MODULE = "name_discipline";
+	public static final String COL_MODULE = "MODULE_ID";
 	public static final String TABLE_NAME = "DISCIPLINE";
 
 	private String name;
