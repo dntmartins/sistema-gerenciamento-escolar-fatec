@@ -4,71 +4,92 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
-//import junit.framework.Assert;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.fatec.escola.api.dao.UserDAO;
-import br.com.fatec.escola.api.entity.User;
+import br.com.fatec.escola.api.dao.StudentClassRoomDAO;
+import br.com.fatec.escola.api.entity.ClassRoom;
+import br.com.fatec.escola.api.entity.Course;
+import br.com.fatec.escola.api.entity.Discipline;
+import br.com.fatec.escola.api.entity.Module;
+import br.com.fatec.escola.api.entity.Student;
+import br.com.fatec.escola.api.entity.StudentClassRoom;
+import br.com.fatec.escola.core.dao.ClassRoomDAOImpl;
+import br.com.fatec.escola.core.dao.CourseDAOImpl;
+import br.com.fatec.escola.core.dao.DisciplineDAOImpl;
+import br.com.fatec.escola.core.dao.ModuleDAOImpl;
 import br.com.fatec.escola.testes.common.EscolaBaseTest;
 import br.com.spektro.minispring.core.implfinder.ImplementationFinder;
 
 public class StudentClassRoomDAOImplTest extends EscolaBaseTest {
 
-	private UserDAO dao;
+	private StudentClassRoomDAO dao;
+	private DisciplineDAOImpl dDAO;
+	private ClassRoomDAOImpl cRDAO;
+	private ModuleDAOImpl mDAO;
+	private CourseDAOImpl cDAO;
 	
 	@Before
 	public void config()
 	{
-		this.dao = (UserDAO) ImplementationFinder.getinstance().getImpl(UserDAO.class);
+		this.dao = (StudentClassRoomDAO) ImplementationFinder.getinstance().getImpl(StudentClassRoomDAO.class);
+		this.dDAO = new DisciplineDAOImpl();
+		this.cRDAO =  new ClassRoomDAOImpl();
+		this.mDAO = new ModuleDAOImpl();
+		this.cDAO = new CourseDAOImpl();
 	}
 	
 	@Test
 	public void testSave() {
-		User user = new User();
-		user.setLogin("dante.alemao");
-		user.setName("Dante Martins");
-		user.setPassword("dante123");
-		User userSaved = this.dao.save(user);
-		assertEquals(user.getLogin(), userSaved.getLogin());		
+		//Student s = new Student();
+		Module m = new Module();
+		Course c = new Course();
+		Discipline d = new Discipline();
+		ClassRoom cR = new ClassRoom();
+		c.setBeginHour("07:00");
+		c.setEndHour("12:00");
+		c.setCourseDuration(6);
+		c.setName("Analise de Sistemas");
+		Course cSaved = this.cDAO.save(c);
+		m.setCourse(cSaved);
+		m.setName("1 semestre");
+		Module mSaved = this.mDAO.save(m);
+		d.setModule(mSaved);
+		d.setName("Portugues");
+		Discipline dSaved = this.dDAO.save(d);
+		cR.setName("Sala 402");
+		cR.setDiscipline(dSaved);
+		cR.setModule(mSaved);
+		ClassRoom cRSaved = this.cRDAO.save(cR);
+		StudentClassRoom sCR = new StudentClassRoom();
+		sCR.setStudent(null);
+		sCR.setClassRoom(cRSaved);
+		sCR = this.dao.save(sCR);
+		this.cRDAO.delete(cRSaved);
+		this.dDAO.delete(dSaved);
+		this.mDAO.delete(mSaved);
+		this.cDAO.delete(cSaved);
+		assertEquals(sCR.getClassRoom().getName(), cRSaved.getName());		
 	}
 	
 	@Test
 	public void testFindBy() {
-		User user = this.dao.findById(1l);
-		assertEquals(1L, user.getId(),1);		
+		//assertEquals(1L, user.getId(),1);		
 	}
 	
 	@Test
 	public void testFindAllTest() {
-		User user1 = new User();
-		user1.setLogin("dante.alemao");
-		user1.setName("Dante Martins");
-		user1.setPassword("dante123");
-		User user2 = new User();
-		user2.setLogin("hugo.richard");
-		user2.setName("Hugo Richard");
-		user2.setPassword("hugo123");
-		this.dao.save(user1);
-		this.dao.save(user2);
-		List<User> userList = this.dao.findAll();
-		assertEquals(userList.size(), 6);
+		//assertEquals(userList.size(), 6);
 	}
 	
 	@Test
 	public void testUpdate() {
-		User user = this.dao.findById(2l);
-		user.setName("testeNome");
-		user = this.dao.update(user);;
-		assertEquals("testeNome", user.getName());
+		//assertEquals("testeNome", user.getName());
 	}
 	
 	@Test
 	public void testDelete() {
-		User user = this.dao.findById(3l);
-		this.dao.delete(user);
-		user = this.dao.findById(3l);
-		Assert.assertNull(user);	
+		//Assert.assertNull(user);	
 	}
 }

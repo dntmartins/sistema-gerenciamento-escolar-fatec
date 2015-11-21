@@ -9,22 +9,23 @@ public class StudentClassRoom extends IdentificadorPK {
 	public static final String TABLE_NAME = "STUDENT_CLASS_ROOM";
 
 	private Student student;
-	private Long classRoomId;
-	private Long testNote;
+	private ClassRoom classRoom;
+	private Float testNote;
 
-	public Long getClassRoomId() {
-		return classRoomId;
+
+	public ClassRoom getClassRoom() {
+		return classRoom;
 	}
 
-	public void setClassRoomId(Long classRoomId) {
-		this.classRoomId = classRoomId;
+	public void setClassRoom(ClassRoom classRoom) {
+		this.classRoom = classRoom;
 	}
 
-	public Long getTestNote() {
+	public Float getTestNote() {
 		return testNote;
 	}
 
-	public void setTestNote(Long testNote) {
+	public void setTestNote(Float testNote) {
 		this.testNote = testNote;
 	}
 

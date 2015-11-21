@@ -9,7 +9,6 @@ import java.util.List;
 
 import br.com.fatec.escola.api.dao.TeacherDAO;
 import br.com.fatec.escola.api.entity.Teacher;
-import br.com.fatec.escola.api.entity.User;
 import br.com.fatec.escola.core.service.GeradorIdService;
 import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
 

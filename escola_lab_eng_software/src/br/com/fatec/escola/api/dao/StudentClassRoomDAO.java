@@ -2,14 +2,16 @@ package br.com.fatec.escola.api.dao;
 
 import java.util.List;
 
+import br.com.fatec.escola.api.entity.StudentClassRoom;
+
 public interface StudentClassRoomDAO {
-	public StudentClassRoomDAO save(StudentClassRoomDAO studentClassroom); // Create
+	public StudentClassRoom save(StudentClassRoom studentClassroom); // Create
 
-	public StudentClassRoomDAO findById(Long id); // Read
+	public StudentClassRoom findById(Long id); // Read
 
-	public List<StudentClassRoomDAO> findAll(); // Read
+	public List<StudentClassRoom> findAll(); // Read
 
-	public StudentClassRoomDAO update(StudentClassRoomDAO studentClassroom); // Update
+	public StudentClassRoom update(StudentClassRoom studentClassroom); // Update
 
-	public Boolean delete(StudentClassRoomDAO studentClassroom); // Delete
+	public Boolean delete(StudentClassRoom studentClassroom); // Delete
 }
