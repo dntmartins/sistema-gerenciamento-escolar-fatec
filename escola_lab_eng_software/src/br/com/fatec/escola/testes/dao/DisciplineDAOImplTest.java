@@ -100,7 +100,7 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 		this.dao.delete(dSaved);
 		mDAO.delete(mSaved);
 		cDAO.delete(cSaved);
-		assertEquals(dList.size(), 3);
+		assertEquals(dList.size(), 1);
 	}
 	
 	@Test

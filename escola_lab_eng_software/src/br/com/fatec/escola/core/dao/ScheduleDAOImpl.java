@@ -153,4 +153,12 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 		}
 		return schedulesFound;
 	}
+	
+	private List<Schedule> buildSchedules(ResultSet rs){
+		return null;
+	}
+	
+	private Schedule buildSchedule(ResultSet rs){
+		return null;
+	}
 }
