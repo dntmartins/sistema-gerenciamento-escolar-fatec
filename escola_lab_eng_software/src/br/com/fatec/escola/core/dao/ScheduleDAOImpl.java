@@ -84,13 +84,13 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 			conn.close();
 
 		} catch (Exception e) {
-			throw new RuntimeException("Erro ao buscar agenda no sistema.", e);
+			throw new RuntimeException("Erro ao buscar horario no sistema.", e);
 		}
 		return schedulesFound;
 	}
 
 	@Override
-	public Schedule update(Schedule schedule) {
+	public Schedule update(Schedule schedule) { //OK
 		Connection conn = null;
 		PreparedStatement update = null;
 		try {
@@ -106,7 +106,7 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 			conn.close();
 			return this.findById(schedule.getId());
 		} catch (SQLException e) {
-			throw new RuntimeException("erro ao atualizar agenda:" + schedule.getId());
+			throw new RuntimeException("erro ao atualizar horario:" + schedule.getId());
 		}
 	}
 
@@ -149,7 +149,7 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 			conn.close();
 
 		} catch (Exception e) {
-			throw new RuntimeException("Erro ao buscar agenda no sistema.", e);
+			throw new RuntimeException("Erro ao buscar horario no sistema.", e);
 		}
 		return schedulesFound;
 	}
