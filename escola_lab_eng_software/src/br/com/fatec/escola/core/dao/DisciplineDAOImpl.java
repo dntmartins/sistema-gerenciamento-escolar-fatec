@@ -9,6 +9,7 @@ import java.util.List;
 
 import br.com.fatec.escola.api.dao.DisciplineDAO;
 import br.com.fatec.escola.api.entity.Discipline;
+import br.com.fatec.escola.api.entity.Schedule;
 import br.com.fatec.escola.core.service.GeradorIdService;
 import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
 
@@ -35,21 +36,13 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 	@Override
 	public Discipline findById(Long id) { //OK
 		Connection conn = null;
-		ModuleDAOImpl moduleDAO = new ModuleDAOImpl();
 		PreparedStatement selectStatement = null;
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM DISCIPLINE WHERE " + Discipline.COL_PK + " = ?");
 			selectStatement.setLong(1, id);
 			ResultSet resultSet = selectStatement.executeQuery();
-			if (!resultSet.next()) {
-				return null;
-			}
-			Discipline discipline = new Discipline();
-			discipline.setId(resultSet.getLong(1));
-			discipline.setName(resultSet.getString(2));
-			discipline.setModule(moduleDAO.findById(resultSet.getLong(3)));
-			return discipline;
+			return this.buildDiscipline(resultSet);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
@@ -58,21 +51,13 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 	@Override
 	public List<Discipline> findAll() { //OK
 		Connection conn = null;
-		ModuleDAOImpl moduleDAO = new ModuleDAOImpl();
 		PreparedStatement selectStatement = null;
 		List<Discipline> disciplineFound = null;
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM " + Discipline.TABLE_NAME + ";");
 			ResultSet resultado = selectStatement.executeQuery();
-			disciplineFound = new ArrayList<Discipline>();
-			while (resultado.next()) {
-				Discipline discipline = new Discipline();
-				discipline.setId(resultado.getLong(Discipline.COL_PK));
-				discipline.setName(resultado.getString(Discipline.COL_NAME));
-				discipline.setModule(moduleDAO.findById(resultado.getLong(Discipline.COL_MODULE)));
-				disciplineFound.add(discipline);
-			}
+			disciplineFound = this.buildDisciplines(resultado);
 			selectStatement.close();
 			conn.close();
 
@@ -115,5 +100,39 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	private List<Discipline> buildDisciplines(ResultSet rs){
+		List<Discipline> disciplineFound = null;
+		ModuleDAOImpl moduleDAO = new ModuleDAOImpl();
+		disciplineFound = new ArrayList<Discipline>();
+		try {
 
+			while (rs.next()) {
+				Discipline discipline = new Discipline();
+				discipline.setId(rs.getLong(Discipline.COL_PK));
+				discipline.setName(rs.getString(Discipline.COL_NAME));
+				discipline.setModule(moduleDAO.findById(rs.getLong(Discipline.COL_MODULE)));
+				disciplineFound.add(discipline);
+			}
+			return disciplineFound;
+		} catch (Exception e) {
+			throw new RuntimeException("Erro ao buscar disciplinas no sistema.", e);
+		}
+	}
+	
+	private Discipline buildDiscipline(ResultSet rs){
+		ModuleDAOImpl moduleDAO = new ModuleDAOImpl();
+		try {
+			if (!rs.next()) {
+				return null;
+			}
+			Discipline discipline = new Discipline();
+			discipline.setId(rs.getLong(1));
+			discipline.setName(rs.getString(2));
+			discipline.setModule(moduleDAO.findById(rs.getLong(3)));
+			return discipline;
+		} catch (Exception e) {
+			throw new RuntimeException("Erro ao buscar disciplinas no sistema.", e);
+		}
+	}
 }
