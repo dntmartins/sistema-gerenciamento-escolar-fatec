@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.fatec.escola.api.dao.StudentClassRoomDAO;
+import br.com.fatec.escola.api.entity.ClassRoom;
 import br.com.fatec.escola.api.entity.StudentClassRoom;
 import br.com.fatec.escola.core.service.GeradorIdService;
 import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
@@ -60,22 +61,95 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 
 	@Override
 	public List<StudentClassRoom> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = null;
+		StudentDAOImpl sDAO = new StudentDAOImpl();
+		ClassRoomDAOImpl crDAO = new ClassRoomDAOImpl();
+		PreparedStatement selectStatement = null;
+		List<StudentClassRoom> studentClassRoomFound = null;
+		try {
+			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			selectStatement = conn.prepareStatement("SELECT * FROM " + StudentClassRoom.TABLE_NAME + ";");
+			ResultSet resultado = selectStatement.executeQuery();
+			studentClassRoomFound = new ArrayList<StudentClassRoom>();
+			while (resultado.next()) {
+				StudentClassRoom studentClassRoom = new StudentClassRoom();
+				studentClassRoom.setId(resultado.getLong(StudentClassRoom.COL_PK));
+				studentClassRoom.setStudent(sDAO.findById(resultado.getLong(StudentClassRoom.COL_STUDENT)));
+				studentClassRoom.setClassRoom(crDAO.findById(resultado.getLong(StudentClassRoom.COL_CLASS_ROOM)));
+				studentClassRoom.setTestNote(resultado.getFloat(StudentClassRoom.COL_TEST_NOTE));
+				studentClassRoomFound.add(studentClassRoom);
+			}
+			selectStatement.close();
+			conn.close();
+
+		} catch (Exception e) {
+			throw new RuntimeException("Erro ao buscar salas de aula no sistema.", e);
+		}
+		return studentClassRoomFound;
 	}
 
 	@Override
 	public StudentClassRoom update(StudentClassRoom studentClassroom) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = null;
+		PreparedStatement update = null;
+		try {
+			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			update = conn.prepareStatement("UPDATE " + StudentClassRoom.TABLE_NAME + " SET " + StudentClassRoom.COL_STUDENT + " = ?,"
+					+ StudentClassRoom.COL_CLASS_ROOM + " = ?," + StudentClassRoom.COL_TEST_NOTE + " = ? " + " WHERE " + ClassRoom.COL_PK + " = ?;");
+			update.setLong(1, studentClassroom.getStudent().getId());
+			update.setLong(2, studentClassroom.getClassRoom().getId());
+			update.setFloat(3, studentClassroom.getTestNote());
+			update.setLong(4, studentClassroom.getId());
+			update.execute();
+			conn.close();
+			return this.findById(studentClassroom.getId());
+		} catch (SQLException e) {
+			throw new RuntimeException("erro ao atualizar a sala de aula:" + studentClassroom.getId());
+		}
 	}
 
 	@Override
 	public Boolean delete(StudentClassRoom studentClassroom) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conn = null;
+		PreparedStatement selectStatement = null;
+		try {
+			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			selectStatement = conn
+					.prepareStatement("DELETE FROM " + StudentClassRoom.TABLE_NAME + " WHERE " + StudentClassRoom.COL_PK + " = ?;");
+			selectStatement.setLong(1, studentClassroom.getId());
+			return selectStatement.execute();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
+	
+	public List<StudentClassRoom> findAllByClassRoom(Long classRoomId) {
+		Connection conn = null;
+		StudentDAOImpl sDAO = new StudentDAOImpl();
+		ClassRoomDAOImpl crDAO = new ClassRoomDAOImpl();
+		PreparedStatement selectStatement = null;
+		List<StudentClassRoom> studentClassRoomFound = null;
+		try {
+			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			selectStatement = conn.prepareStatement("SELECT * FROM " + StudentClassRoom.TABLE_NAME + "WHERE " + ClassRoom.COL_PK + " = ?;");
+			selectStatement.setLong(1, classRoomId);
+			ResultSet resultado = selectStatement.executeQuery();
+			studentClassRoomFound = new ArrayList<StudentClassRoom>();
+			while (resultado.next()) {
+				StudentClassRoom studentClassRoom = new StudentClassRoom();
+				studentClassRoom.setId(resultado.getLong(StudentClassRoom.COL_PK));
+				studentClassRoom.setStudent(sDAO.findById(resultado.getLong(StudentClassRoom.COL_STUDENT)));
+				studentClassRoom.setClassRoom(crDAO.findById(resultado.getLong(StudentClassRoom.COL_CLASS_ROOM)));
+				studentClassRoom.setTestNote(resultado.getFloat(StudentClassRoom.COL_TEST_NOTE));
+				studentClassRoomFound.add(studentClassRoom);
+			}
+			selectStatement.close();
+			conn.close();
 
-
-
+		} catch (Exception e) {
+			throw new RuntimeException("Erro ao buscar salas de aula no sistema.", e);
+		}
+		return studentClassRoomFound;
+	}
+	
 }

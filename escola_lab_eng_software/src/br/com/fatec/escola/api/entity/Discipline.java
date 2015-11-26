@@ -2,6 +2,8 @@ package br.com.fatec.escola.api.entity;
 
 import java.util.List;
 
+import br.com.fatec.escola.core.dao.ScheduleDAOImpl;
+
 public class Discipline extends IdentificadorPK {
 
 	public static final String COL_PK = "DISCIPLINE_ID";
@@ -30,6 +32,7 @@ public class Discipline extends IdentificadorPK {
 	}
 
 	public List<Schedule> getSchedules() {
+		this.schedules = new ScheduleDAOImpl().findAllByDiscipline(this.getId());
 		return schedules;
 	}
 

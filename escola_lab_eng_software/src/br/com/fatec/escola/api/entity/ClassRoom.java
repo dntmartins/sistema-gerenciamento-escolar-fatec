@@ -2,6 +2,8 @@ package br.com.fatec.escola.api.entity;
 
 import java.util.List;
 
+import br.com.fatec.escola.core.dao.StudentClassRoomDAOImpl;
+
 public class ClassRoom extends IdentificadorPK {
 
 	public static final String COL_PK = "CLASS_ROOM_ID";
@@ -13,7 +15,7 @@ public class ClassRoom extends IdentificadorPK {
 	private String name;
 	private Module module;
 	private Discipline discipline;
-	private List<StudentClassRoom> StudentsClassRoom;
+	private List<StudentClassRoom> studentsClassRoom;
 
 	public String getName() {
 		return name;
@@ -40,11 +42,12 @@ public class ClassRoom extends IdentificadorPK {
 	}
 
 	public List<StudentClassRoom> getStudentsClassRoom() {
-		return StudentsClassRoom;
+		this.studentsClassRoom = new StudentClassRoomDAOImpl().findAllByClassRoom(this.getId());
+		return studentsClassRoom;
 	}
 
 	public void setStudentsClassRoom(List<StudentClassRoom> studentsClassRoom) {
-		StudentsClassRoom = studentsClassRoom;
+		this.studentsClassRoom = studentsClassRoom;
 	}
 
 	public List<Student> getStudents() {

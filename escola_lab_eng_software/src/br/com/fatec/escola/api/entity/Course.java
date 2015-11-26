@@ -2,6 +2,8 @@ package br.com.fatec.escola.api.entity;
 
 import java.util.List;
 
+import br.com.fatec.escola.core.dao.ModuleDAOImpl;
+
 public class Course extends IdentificadorPK {
 
 	public static final String COL_PK = "COURSE_ID";
@@ -50,6 +52,7 @@ public class Course extends IdentificadorPK {
 	}
 
 	public List<Module> getModules() {
+		this.modules = new ModuleDAOImpl().findAllByCourse(this.getId());
 		return modules;
 	}
 

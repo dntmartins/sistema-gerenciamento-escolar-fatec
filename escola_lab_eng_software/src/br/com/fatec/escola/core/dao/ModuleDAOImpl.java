@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.fatec.escola.api.dao.ModuleDAO;
+import br.com.fatec.escola.api.entity.Course;
 import br.com.fatec.escola.api.entity.Module;
 import br.com.fatec.escola.core.service.GeradorIdService;
 import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
@@ -114,6 +115,33 @@ public class ModuleDAOImpl implements ModuleDAO{
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	public List<Module> findAllByCourse(Long courseId) {
+		Connection conn = null;
+		CourseDAOImpl cDAO = new CourseDAOImpl();
+		PreparedStatement selectStatement = null;
+		List<Module> moduleFound = null;
+		try {
+			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			selectStatement = conn.prepareStatement("SELECT * FROM " + Module.TABLE_NAME + " WHERE " + Course.COL_PK + " = ?;");
+			selectStatement.setLong(1, courseId);
+			ResultSet resultado = selectStatement.executeQuery();
+			moduleFound = new ArrayList<Module>();
+			while (resultado.next()) {
+				Module module = new Module();
+				module.setId(resultado.getLong(Module.COL_PK));
+				module.setName(resultado.getString(Module.COL_NAME));
+				module.setCourse(cDAO.findById(resultado.getLong(Module.COL_COURSE)));
+				moduleFound.add(module);
+			}
+			selectStatement.close();
+			conn.close();
+
+		} catch (Exception e) {
+			throw new RuntimeException("Erro ao buscar modulos no sistema.", e);
+		}
+		return moduleFound;
 	}
 
 }

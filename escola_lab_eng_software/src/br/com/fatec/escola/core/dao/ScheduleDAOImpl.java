@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.fatec.escola.api.dao.ScheduleDAO;
+import br.com.fatec.escola.api.entity.Discipline;
 import br.com.fatec.escola.api.entity.Schedule;
 import br.com.fatec.escola.core.service.GeradorIdService;
 import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
@@ -122,5 +123,34 @@ public class ScheduleDAOImpl implements ScheduleDAO{
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	public List<Schedule> findAllByDiscipline(Long disciplineId) {
+		Connection conn = null;
+		DisciplineDAOImpl disciplineDAO = new DisciplineDAOImpl();
+		PreparedStatement selectStatement = null;
+		List<Schedule> schedulesFound = null;
+		try {
+			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			selectStatement = conn.prepareStatement("SELECT * FROM " + Schedule.TABLE_NAME + "WHERE " + Discipline.COL_PK + " = ?;");
+			selectStatement.setLong(1, disciplineId);
+			ResultSet resultado = selectStatement.executeQuery();
+			schedulesFound = new ArrayList<Schedule>();
+			while (resultado.next()) {
+				Schedule schedule = new Schedule();
+				schedule.setId(resultado.getLong(Schedule.COL_PK));
+				schedule.setDiscipline(disciplineDAO.findById(resultado.getLong(Schedule.COL_DISCIPLINE)));
+				schedule.setWeekDay(resultado.getString(Schedule.COL_WEEK));
+				schedule.setBeginHour(resultado.getString(Schedule.COL_BEGIN_HOUR));
+				schedule.setEndHour(resultado.getString(Schedule.COL_END_HOUR));
+				schedulesFound.add(schedule);
+			}
+			selectStatement.close();
+			conn.close();
+
+		} catch (Exception e) {
+			throw new RuntimeException("Erro ao buscar agenda no sistema.", e);
+		}
+		return schedulesFound;
 	}
 }

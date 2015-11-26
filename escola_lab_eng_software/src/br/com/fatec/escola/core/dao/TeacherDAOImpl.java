@@ -45,7 +45,6 @@ public class TeacherDAOImpl implements TeacherDAO{
 			}
 			Teacher teacher = new Teacher();
 			teacher.setId(resultSet.getLong(1));
-			//teacher.setUserId(resultSet.getLong(2));
 			return teacher;
 		} catch (Exception e) {
 			throw new RuntimeException(e);

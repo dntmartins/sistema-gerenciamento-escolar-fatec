@@ -6,8 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import br.com.fatec.escola.api.dao.ClassRoomDAO;
 import br.com.fatec.escola.api.entity.ClassRoom;
+import br.com.fatec.escola.api.entity.Teacher;
 import br.com.fatec.escola.core.service.GeradorIdService;
 import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
 
@@ -119,6 +121,35 @@ public class ClassRoomDAOImpl implements ClassRoomDAO {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	public List<ClassRoom> findAllByTeacher(Long teacherId) {
+		Connection conn = null;
+		ModuleDAOImpl mDAO = new ModuleDAOImpl();
+		DisciplineDAOImpl dDAO = new DisciplineDAOImpl();
+		PreparedStatement selectStatement = null;
+		List<ClassRoom> classRoomFound = null;
+		try {
+			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			selectStatement = conn.prepareStatement("SELECT * FROM " + ClassRoom.TABLE_NAME + "WHERE " + Teacher.COL_PK +" = ?;");
+			selectStatement.setLong(1, teacherId);
+			ResultSet resultado = selectStatement.executeQuery();
+			classRoomFound = new ArrayList<ClassRoom>();
+			while (resultado.next()) {
+				ClassRoom classRoom = new ClassRoom();
+				classRoom.setId(resultado.getLong(ClassRoom.COL_PK));
+				classRoom.setName(resultado.getString(ClassRoom.COL_NAME));
+				classRoom.setModule(mDAO.findById(resultado.getLong(ClassRoom.COL_MODULE)));
+				classRoom.setDiscipline(dDAO.findById(resultado.getLong(ClassRoom.COL_DISCIPLINE)));
+				classRoomFound.add(classRoom);
+			}
+			selectStatement.close();
+			conn.close();
+
+		} catch (Exception e) {
+			throw new RuntimeException("Erro ao buscar salas de aula no sistema.", e);
+		}
+		return classRoomFound;
 	}
 
 }
