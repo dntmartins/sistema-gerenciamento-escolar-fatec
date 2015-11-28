@@ -33,6 +33,8 @@ public class StudentClassRoomDAOImplTest extends EscolaBaseTest {
 	private ClassRoomDAOImpl cRDAO;
 	private ModuleDAOImpl mDAO;
 	private CourseDAOImpl cDAO;
+	private RoleDAOImpl rDAO;
+	private UserDAOImpl uDAO;
 	
 	@Before
 	public void config()
@@ -42,20 +44,21 @@ public class StudentClassRoomDAOImplTest extends EscolaBaseTest {
 		this.cRDAO =  new ClassRoomDAOImpl();
 		this.mDAO = new ModuleDAOImpl();
 		this.cDAO = new CourseDAOImpl();
+		this.rDAO = new RoleDAOImpl();
+		this.uDAO = new UserDAOImpl();
 	}
 	
 	@Test
 	public void testSave() {
 		User user = new User();
 		Role role = new Role();
-		RoleDAOImpl rDAO = new RoleDAOImpl();
-		UserDAOImpl uDAO = new UserDAOImpl();
 		role.setRoleName("Visitante");
 		role.setIsAdmin(false);
 		role = rDAO.save(role);
 		user.setLogin("dantee.alemao");
 		user.setName("Dante Martins");
 		user.setPassword("dante123");
+		user.setIsTeacher(false);
 		user.setRole(role);
 		User userSaved = uDAO.save(user);
 		Student s = new Student();

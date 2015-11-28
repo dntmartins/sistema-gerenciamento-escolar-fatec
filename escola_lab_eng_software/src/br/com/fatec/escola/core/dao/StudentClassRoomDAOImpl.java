@@ -39,7 +39,7 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 	@Override
 	public StudentClassRoom findById(Long id) {
 		Connection conn = null;
-		StudentDAOImpl sDAO = new StudentDAOImpl();
+		UserDAOImpl uDAO = new UserDAOImpl();
 		ClassRoomDAOImpl cRDAO = new ClassRoomDAOImpl();
 		PreparedStatement selectStatement = null;
 		try {
@@ -50,9 +50,17 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 			if (!resultSet.next()) {
 				return null;
 			}
+			User user = new User();
+			user = uDAO.findById(resultSet.getLong(2));
+			Student student = new Student();
+			student.setId(user.getId());
+			student.setLogin(user.getLogin());
+			student.setName(user.getName());
+			student.setPassword(user.getPassword());
+			student.setRole(user.getRole());
 			StudentClassRoom studentClassroom = new StudentClassRoom();
 			studentClassroom.setId(resultSet.getLong(1));
-			studentClassroom.setStudent(sDAO.findById(resultSet.getLong(2)));
+			studentClassroom.setStudent(student);
 			studentClassroom.setClassRoom(cRDAO.findById(resultSet.getLong(3)));
 			studentClassroom.setTestNote(resultSet.getFloat(4));
 			return studentClassroom;
@@ -64,7 +72,7 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 	@Override
 	public List<StudentClassRoom> findAll() {
 		Connection conn = null;
-		StudentDAOImpl sDAO = new StudentDAOImpl();
+		UserDAOImpl uDAO = new UserDAOImpl();
 		ClassRoomDAOImpl crDAO = new ClassRoomDAOImpl();
 		PreparedStatement selectStatement = null;
 		List<StudentClassRoom> studentClassRoomFound = null;
@@ -74,9 +82,17 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 			ResultSet resultado = selectStatement.executeQuery();
 			studentClassRoomFound = new ArrayList<StudentClassRoom>();
 			while (resultado.next()) {
+				User user = new User();
+				user = uDAO.findById(resultado.getLong(StudentClassRoom.COL_STUDENT));
+				Student student = new Student();
+				student.setId(user.getId());
+				student.setLogin(user.getLogin());
+				student.setName(user.getName());
+				student.setPassword(user.getPassword());
+				student.setRole(user.getRole());
 				StudentClassRoom studentClassRoom = new StudentClassRoom();
 				studentClassRoom.setId(resultado.getLong(StudentClassRoom.COL_PK));
-				studentClassRoom.setStudent(sDAO.findById(resultado.getLong(StudentClassRoom.COL_STUDENT)));
+				studentClassRoom.setStudent(student);
 				studentClassRoom.setClassRoom(crDAO.findById(resultado.getLong(StudentClassRoom.COL_CLASS_ROOM)));
 				studentClassRoom.setTestNote(resultado.getFloat(StudentClassRoom.COL_TEST_NOTE));
 				studentClassRoomFound.add(studentClassRoom);
@@ -127,7 +143,7 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 	
 	public List<StudentClassRoom> findAllByClassRoom(Long classRoomId) {
 		Connection conn = null;
-		StudentDAOImpl sDAO = new StudentDAOImpl();
+		UserDAOImpl uDAO = new UserDAOImpl();
 		ClassRoomDAOImpl crDAO = new ClassRoomDAOImpl();
 		PreparedStatement selectStatement = null;
 		List<StudentClassRoom> studentClassRoomFound = null;
@@ -140,7 +156,15 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 			while (resultado.next()) {
 				StudentClassRoom studentClassRoom = new StudentClassRoom();
 				studentClassRoom.setId(resultado.getLong(StudentClassRoom.COL_PK));
-				studentClassRoom.setStudent(sDAO.findById(resultado.getLong(StudentClassRoom.COL_STUDENT)));
+				User user = new User();
+				user = uDAO.findById(resultado.getLong(StudentClassRoom.COL_STUDENT));
+				Student student = new Student();
+				student.setId(user.getId());
+				student.setLogin(user.getLogin());
+				student.setName(user.getName());
+				student.setPassword(user.getPassword());
+				student.setRole(user.getRole());
+				studentClassRoom.setStudent(student);
 				studentClassRoom.setClassRoom(crDAO.findById(resultado.getLong(StudentClassRoom.COL_CLASS_ROOM)));
 				studentClassRoom.setTestNote(resultado.getFloat(StudentClassRoom.COL_TEST_NOTE));
 				studentClassRoomFound.add(studentClassRoom);
@@ -163,7 +187,7 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 		List<StudentClassRoom> studentClassRoomFound = null;
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
-			selectStatement = conn.prepareStatement("SELECT * FROM " + StudentClassRoom.TABLE_NAME + " WHERE " + Student.COL_PK + " = ?;");
+			selectStatement = conn.prepareStatement("SELECT * FROM " + StudentClassRoom.TABLE_NAME + " WHERE " + StudentClassRoom.COL_STUDENT + " = ?;");
 			selectStatement.setLong(1, studentId);
 			ResultSet resultado = selectStatement.executeQuery();
 			studentClassRoomFound = new ArrayList<StudentClassRoom>();

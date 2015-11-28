@@ -7,11 +7,13 @@ public class User extends IdentificadorPK {
 	public static final String COL_ROLE = "ROLE_ID";
 	public static final String COL_PASSWORD = "password";
 	public static final String COL_NAME = "name";
+	public static final String COL_IS_TEACHER = "is_teacher";
 	public static final String TABLE_NAME = "USER";
 
 	private String login;
 	private String password;
 	private String name;
+	private Boolean isTeacher;
 	private Role role;
 
 	public String getLogin() {
@@ -44,6 +46,14 @@ public class User extends IdentificadorPK {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+
+	public Boolean getIsTeacher() {
+		return isTeacher;
+	}
+
+	public void setIsTeacher(Boolean isTeacher) {
+		this.isTeacher = isTeacher;
 	}
 
 }

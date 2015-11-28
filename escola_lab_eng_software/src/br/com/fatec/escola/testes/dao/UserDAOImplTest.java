@@ -39,6 +39,7 @@ public class UserDAOImplTest extends EscolaBaseTest {
 		user.setLogin("dantee.alemao");
 		user.setName("Dante Martins");
 		user.setPassword("dante123");
+		user.setIsTeacher(false);
 		user.setRole(role);
 		User userSaved = this.dao.save(user);
 		this.dao.delete(userSaved);
@@ -62,11 +63,13 @@ public class UserDAOImplTest extends EscolaBaseTest {
 		user1.setLogin("dante.alemao");
 		user1.setName("Dante Martins");
 		user1.setPassword("dante123");
+		user1.setIsTeacher(false);
 		user1.setRole(role);
 		User user2 = new User();
 		user2.setLogin("hugo.richard");
 		user2.setName("Hugo Richard");
 		user2.setPassword("hugo123");
+		user2.setIsTeacher(false);
 		user2.setRole(role);
 		User userSaved1 = this.dao.save(user1);
 		User userSaved2 = this.dao.save(user2);
@@ -87,6 +90,7 @@ public class UserDAOImplTest extends EscolaBaseTest {
 		user.setLogin("dantee.alemao");
 		user.setName("Dante Martins");
 		user.setPassword("dante123");
+		user.setIsTeacher(false);
 		user.setRole(role);
 		User userSaved = this.dao.save(user);
 		user = this.dao.findById(userSaved.getId());
@@ -107,6 +111,7 @@ public class UserDAOImplTest extends EscolaBaseTest {
 		user.setLogin("dantee.alemao");
 		user.setName("Dante Martins");
 		user.setPassword("dante123");
+		user.setIsTeacher(false);
 		user.setRole(role);
 		User userSaved = this.dao.save(user);
 		this.dao.delete(userSaved);

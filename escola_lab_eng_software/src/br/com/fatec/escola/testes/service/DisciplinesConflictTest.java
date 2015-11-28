@@ -56,6 +56,7 @@ public class DisciplinesConflictTest extends EscolaBaseTest{
 		user.setLogin("dantee.alemao");
 		user.setName("Dante Martins");
 		user.setPassword("dante123");
+		user.setIsTeacher(false);
 		user.setRole(role);
 		User userSaved = uDAO.save(user);
 		Student s = new Student();
@@ -93,7 +94,7 @@ public class DisciplinesConflictTest extends EscolaBaseTest{
 		sCR = this.dao.save(sCR);
 		DisciplinesConflictService vd = new DisciplinesConflictService();
 		try {
-			//Tem que retornar false pois as materias são de sexta-feira e tem o mesmo horario, logo tem conflito.
+			//Tem que retornar false pois as matérias são de sexta-feira e tem o mesmo horario, logo tem conflito.
 			assertEquals(false, vd.matchDiscipline(dSaved,s.getId()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -11,6 +11,7 @@
 			<column name="login" type="java.sql.Types.VARCHAR(30)" />
 			<column name="password" type="java.sql.Types.VARCHAR(30)" />
 			<column name="name" type="java.sql.Types.VARCHAR(255)" />
+			<column name="is_teacher" type="java.sql.Types.BOOLEAN" />
 		</createTable>
 		<addPrimaryKey constraintName="PK_USER" tableName="USER"
 			columnNames="USER_ID" />
@@ -23,6 +24,7 @@
 			<column name="login">admin</column>
 			<column name="password">admin</column>
 			<column name="name">Administrador</column>
+			<column name="is_teacher">false</column>
 		</insert>
 	</changeSet>
 </databaseChangeLog>

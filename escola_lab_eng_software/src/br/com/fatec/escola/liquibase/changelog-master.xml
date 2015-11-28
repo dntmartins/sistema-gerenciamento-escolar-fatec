@@ -6,8 +6,6 @@
         
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-role.xml"/>
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-user.xml"/>  
-<include file="br/com/fatec/escola/liquibase/inicial/inicial-teacher.xml"/>
-<include file="br/com/fatec/escola/liquibase/inicial/inicial-student.xml"/>
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-course.xml"/>
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-module.xml"/>
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-discipline.xml"/>

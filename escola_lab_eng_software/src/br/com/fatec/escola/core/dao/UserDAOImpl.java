@@ -20,14 +20,14 @@ public class UserDAOImpl implements UserDAO {
 		PreparedStatement insert = null;
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
-			insert = conn.prepareStatement("INSERT INTO USER VALUES(?,?,?,?,?)");
-			//
+			insert = conn.prepareStatement("INSERT INTO USER VALUES(?,?,?,?,?,?)");
 			Long id = GeradorIdService.getInstance().getNextId(User.TABLE_NAME);
 			insert.setLong(1, id);
 			insert.setLong(2, user.getRole().getId());
 			insert.setString(3, user.getLogin());
 			insert.setString(4, user.getName());
 			insert.setString(5, user.getPassword());
+			insert.setBoolean(6, user.getIsTeacher());
 			insert.execute();
 			return this.findById(id);
 		} catch (Exception e) {
@@ -55,6 +55,7 @@ public class UserDAOImpl implements UserDAO {
 			user.setLogin(resultSet.getString(3));
 			user.setPassword(resultSet.getString(4));
 			user.setName(resultSet.getString(5));
+			user.setIsTeacher(resultSet.getBoolean(6));
 			return user;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
@@ -77,6 +78,7 @@ public class UserDAOImpl implements UserDAO {
 				user.setLogin(resultado.getString(User.COL_LOGIN));
 				user.setName(resultado.getString(User.COL_NAME));
 				user.setPassword(resultado.getString(User.COL_PASSWORD));
+				user.setIsTeacher(resultado.getBoolean(User.COL_IS_TEACHER));
 				usersFound.add(user);
 			}
 			selectStatement.close();
@@ -95,11 +97,12 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			update = conn.prepareStatement("UPDATE " + User.TABLE_NAME + " SET " + User.COL_LOGIN + " = ?,"
-					+ User.COL_NAME + " = ?," + User.COL_PASSWORD + " = ? " + " WHERE " + User.COL_PK + " = ?;");
+					+ User.COL_NAME + " = ?," + User.COL_PASSWORD + " = ?,"  + User.COL_IS_TEACHER + " = ? " + " WHERE " + User.COL_PK + " = ?;");
 			update.setString(1, user.getLogin());
 			update.setString(2, user.getName());
 			update.setString(3, user.getPassword());
-			update.setLong(4, user.getId());
+			update.setBoolean(4, user.getIsTeacher());
+			update.setLong(5, user.getId());
 			update.execute();
 			conn.close();
 			return this.findById(user.getId());
