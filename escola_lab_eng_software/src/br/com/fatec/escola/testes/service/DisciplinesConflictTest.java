@@ -1,10 +1,7 @@
-package br.com.fatec.escola.testes.dao;
+package br.com.fatec.escola.testes.service;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,16 +20,19 @@ import br.com.fatec.escola.core.dao.DisciplineDAOImpl;
 import br.com.fatec.escola.core.dao.ModuleDAOImpl;
 import br.com.fatec.escola.core.dao.RoleDAOImpl;
 import br.com.fatec.escola.core.dao.UserDAOImpl;
+import br.com.fatec.escola.core.service.DisciplinesConflictService;
 import br.com.fatec.escola.testes.common.EscolaBaseTest;
 import br.com.spektro.minispring.core.implfinder.ImplementationFinder;
 
-public class StudentClassRoomDAOImplTest extends EscolaBaseTest {
+public class DisciplinesConflictTest extends EscolaBaseTest{
 
 	private StudentClassRoomDAO dao;
 	private DisciplineDAOImpl dDAO;
 	private ClassRoomDAOImpl cRDAO;
 	private ModuleDAOImpl mDAO;
 	private CourseDAOImpl cDAO;
+	private RoleDAOImpl rDAO;
+	private UserDAOImpl uDAO;
 	
 	@Before
 	public void config()
@@ -42,14 +42,14 @@ public class StudentClassRoomDAOImplTest extends EscolaBaseTest {
 		this.cRDAO =  new ClassRoomDAOImpl();
 		this.mDAO = new ModuleDAOImpl();
 		this.cDAO = new CourseDAOImpl();
+		this.rDAO = new RoleDAOImpl();
+		this.uDAO = new UserDAOImpl();
 	}
 	
 	@Test
-	public void testSave() {
+	public void testMatchDiscipline() {
 		User user = new User();
 		Role role = new Role();
-		RoleDAOImpl rDAO = new RoleDAOImpl();
-		UserDAOImpl uDAO = new UserDAOImpl();
 		role.setRoleName("Visitante");
 		role.setIsAdmin(false);
 		role = rDAO.save(role);
@@ -78,6 +78,9 @@ public class StudentClassRoomDAOImplTest extends EscolaBaseTest {
 		Module mSaved = this.mDAO.save(m);
 		d.setModule(mSaved);
 		d.setName("Portugues");
+		d.setBeginHour("09:00");
+		d.setWeekDay("Sexta-feira");
+		d.setEndHour("10:00");
 		Discipline dSaved = this.dDAO.save(d);
 		cR.setName("Sala 402");
 		cR.setDiscipline(dSaved);
@@ -88,31 +91,14 @@ public class StudentClassRoomDAOImplTest extends EscolaBaseTest {
 		sCR.setClassRoom(cRSaved);
 		sCR.setTestNote(8f);
 		sCR = this.dao.save(sCR);
-		this.dao.delete(sCR);
-		this.cRDAO.delete(cRSaved);
-		this.dDAO.delete(dSaved);
-		this.mDAO.delete(mSaved);
-		this.cDAO.delete(cSaved);
-		assertEquals(sCR.getClassRoom().getName(), cRSaved.getName());		
+		DisciplinesConflictService vd = new DisciplinesConflictService();
+		try {
+			//Tem que retornar false pois as materias são de sexta-feira e tem o mesmo horario, logo tem conflito.
+			assertEquals(false, vd.matchDiscipline(dSaved,s.getId()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
-	@Test
-	public void testFindBy() {
-		//assertEquals(1L, user.getId(),1);		
-	}
-	
-	@Test
-	public void testFindAllTest() {
-		//assertEquals(userList.size(), 6);
-	}
-	
-	@Test
-	public void testUpdate() {
-		//assertEquals("testeNome", user.getName());
-	}
-	
-	@Test
-	public void testDelete() {
-		//Assert.assertNull(user);	
-	}
+
 }

@@ -9,6 +9,9 @@
 			<column name="DISCIPLINE_ID" type="java.sql.Types.BIGINT" />
 			<column name="name_discipline" type="java.sql.Types.VARCHAR(45)" />
 			<column name="MODULE_ID" type="java.sql.Types.BIGINT" />
+			<column name="week_day" type="java.sql.Types.VARCHAR(45)" />
+			<column name="begin_hour" type="java.sql.Types.VARCHAR(5)" />
+			<column name="end_hour" type="java.sql.Types.VARCHAR(5)" />
 		</createTable>
 		<addPrimaryKey constraintName="PK_DISCIPLINE" tableName="DISCIPLINE"
 			columnNames="DISCIPLINE_ID" />

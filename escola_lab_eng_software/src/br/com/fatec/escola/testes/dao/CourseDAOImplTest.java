@@ -12,7 +12,6 @@ import org.junit.Test;
 import br.com.fatec.escola.api.dao.CourseDAO;
 import br.com.fatec.escola.api.entity.Course;
 import br.com.fatec.escola.api.entity.Discipline;
-import br.com.fatec.escola.api.entity.Schedule;
 import br.com.fatec.escola.core.dao.DisciplineDAOImpl;
 import br.com.fatec.escola.testes.common.EscolaBaseTest;
 import br.com.spektro.minispring.core.implfinder.ImplementationFinder;

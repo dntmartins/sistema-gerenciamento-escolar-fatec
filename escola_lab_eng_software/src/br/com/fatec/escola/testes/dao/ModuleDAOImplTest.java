@@ -14,7 +14,6 @@ import br.com.fatec.escola.api.dao.ModuleDAO;
 import br.com.fatec.escola.api.entity.Course;
 import br.com.fatec.escola.api.entity.Discipline;
 import br.com.fatec.escola.api.entity.Module;
-import br.com.fatec.escola.api.entity.Schedule;
 import br.com.fatec.escola.api.entity.User;
 import br.com.fatec.escola.core.dao.CourseDAOImpl;
 import br.com.fatec.escola.core.dao.DisciplineDAOImpl;

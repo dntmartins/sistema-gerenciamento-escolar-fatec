@@ -14,8 +14,8 @@
 		<addPrimaryKey constraintName="PK_STUDENT_CLASS_ROOM" tableName="STUDENT_CLASS_ROOM"
 			columnNames="STUDENT_CLASS_ROOM_ID" />
 		<addForeignKeyConstraint constraintName="FK_STUDENT_CLASS_ROOM"
-			referencedTableName="STUDENT" baseColumnNames="STUDENT_ID"
-			baseTableName="STUDENT_CLASS_ROOM" referencedColumnNames="STUDENT_ID" />
+			referencedTableName="USER" baseColumnNames="STUDENT_ID"
+			baseTableName="STUDENT_CLASS_ROOM" referencedColumnNames="USER_ID" />
 		<addForeignKeyConstraint constraintName="FK_STUDENT_CLASS_ROOM_2"
 			referencedTableName="CLASS_ROOM" baseColumnNames="CLASS_ROOM_ID"
 			baseTableName="STUDENT_CLASS_ROOM" referencedColumnNames="CLASS_ROOM_ID" />

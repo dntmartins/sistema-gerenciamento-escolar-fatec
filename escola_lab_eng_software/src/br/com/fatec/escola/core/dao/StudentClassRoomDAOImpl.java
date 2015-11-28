@@ -9,7 +9,9 @@ import java.util.List;
 
 import br.com.fatec.escola.api.dao.StudentClassRoomDAO;
 import br.com.fatec.escola.api.entity.ClassRoom;
+import br.com.fatec.escola.api.entity.Student;
 import br.com.fatec.escola.api.entity.StudentClassRoom;
+import br.com.fatec.escola.api.entity.User;
 import br.com.fatec.escola.core.service.GeradorIdService;
 import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
 
@@ -146,6 +148,42 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 			selectStatement.close();
 			conn.close();
 
+		} catch (Exception e) {
+			throw new RuntimeException("Erro ao buscar salas de aula no sistema.", e);
+		}
+		return studentClassRoomFound;
+	}
+	
+	
+	public List<StudentClassRoom> findAllByStudent(Long studentId) {
+		Connection conn = null;
+		UserDAOImpl uDAO = new UserDAOImpl();
+		ClassRoomDAOImpl crDAO = new ClassRoomDAOImpl();
+		PreparedStatement selectStatement = null;
+		List<StudentClassRoom> studentClassRoomFound = null;
+		try {
+			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			selectStatement = conn.prepareStatement("SELECT * FROM " + StudentClassRoom.TABLE_NAME + " WHERE " + Student.COL_PK + " = ?;");
+			selectStatement.setLong(1, studentId);
+			ResultSet resultado = selectStatement.executeQuery();
+			studentClassRoomFound = new ArrayList<StudentClassRoom>();
+			while (resultado.next()) {
+				StudentClassRoom studentClassRoom = new StudentClassRoom();
+				studentClassRoom.setId(resultado.getLong(StudentClassRoom.COL_PK));
+				Student student = new Student();
+				User user = uDAO.findById(studentId);
+				student.setId(user.getId());
+				student.setLogin(user.getLogin());
+				student.setName(user.getName());
+				student.setPassword(user.getPassword());
+				student.setRole(user.getRole());
+				studentClassRoom.setStudent(student);
+				studentClassRoom.setClassRoom(crDAO.findById(resultado.getLong(StudentClassRoom.COL_CLASS_ROOM)));
+				studentClassRoom.setTestNote(resultado.getFloat(StudentClassRoom.COL_TEST_NOTE));
+				studentClassRoomFound.add(studentClassRoom);
+			}
+			selectStatement.close();
+			conn.close();
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao buscar salas de aula no sistema.", e);
 		}
