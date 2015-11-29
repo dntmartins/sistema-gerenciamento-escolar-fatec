@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.fatec.escola.api.dao.UserDAO;
+import br.com.fatec.escola.api.entity.Student;
+import br.com.fatec.escola.api.entity.Teacher;
 import br.com.fatec.escola.api.entity.User;
 import br.com.fatec.escola.core.service.GeradorIdService;
 import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
@@ -15,7 +17,7 @@ import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
 public class UserDAOImpl implements UserDAO {
 
 	@Override
-	public User save(User user) { //OK
+	public User save(User user) { // OK
 		Connection conn = null;
 		PreparedStatement insert = null;
 		try {
@@ -36,12 +38,11 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User findById(Long id) { //OK
+	public User findById(Long id) { // OK
 		Connection conn = null;
 		RoleDAOImpl roleDAO = new RoleDAOImpl();
 		PreparedStatement selectStatement = null;
 		try {
-
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM USER WHERE " + User.COL_PK + " = ?");
 			selectStatement.setLong(1, id);
@@ -49,7 +50,12 @@ public class UserDAOImpl implements UserDAO {
 			if (!resultSet.next()) {
 				return null;
 			}
-			User user = new User();
+			User user = null;
+			if (resultSet.getBoolean(6)) {
+				user = new Teacher();
+			}else{
+				user = new Student();
+			}
 			user.setId(resultSet.getLong(1));
 			user.setRole(roleDAO.findById(resultSet.getLong(2)));
 			user.setLogin(resultSet.getString(3));
@@ -63,7 +69,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public List<User> findAll() { //OK
+	public List<User> findAll() { // OK
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		List<User> usersFound = null;
@@ -73,7 +79,12 @@ public class UserDAOImpl implements UserDAO {
 			ResultSet resultado = selectStatement.executeQuery();
 			usersFound = new ArrayList<User>();
 			while (resultado.next()) {
-				User user = new User();
+				User user = null;
+				if (resultado.getBoolean(User.COL_IS_TEACHER)) {
+					user = new Teacher();
+				}else{
+					user = new Student();
+				}
 				user.setId(resultado.getLong(User.COL_PK));
 				user.setLogin(resultado.getString(User.COL_LOGIN));
 				user.setName(resultado.getString(User.COL_NAME));
@@ -91,13 +102,14 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User update(User user) { //OK
+	public User update(User user) { // OK
 		Connection conn = null;
 		PreparedStatement update = null;
 		try {
 			conn = ConfigDBMapper.getInstance().getDefaultConnection();
 			update = conn.prepareStatement("UPDATE " + User.TABLE_NAME + " SET " + User.COL_LOGIN + " = ?,"
-					+ User.COL_NAME + " = ?," + User.COL_PASSWORD + " = ?,"  + User.COL_IS_TEACHER + " = ? " + " WHERE " + User.COL_PK + " = ?;");
+					+ User.COL_NAME + " = ?," + User.COL_PASSWORD + " = ?," + User.COL_IS_TEACHER + " = ? " + " WHERE "
+					+ User.COL_PK + " = ?;");
 			update.setString(1, user.getLogin());
 			update.setString(2, user.getName());
 			update.setString(3, user.getPassword());
@@ -112,7 +124,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public Boolean delete(User user) { //OK
+	public Boolean delete(User user) { // OK
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {

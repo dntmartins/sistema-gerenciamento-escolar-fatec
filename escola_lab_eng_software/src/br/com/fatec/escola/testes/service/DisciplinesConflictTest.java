@@ -48,23 +48,17 @@ public class DisciplinesConflictTest extends EscolaBaseTest{
 	
 	@Test
 	public void testMatchDiscipline() {
-		User user = new User();
 		Role role = new Role();
+		Student s = new Student();
 		role.setRoleName("Visitante");
 		role.setIsAdmin(false);
 		role = rDAO.save(role);
-		user.setLogin("dantee.alemao");
-		user.setName("Dante Martins");
-		user.setPassword("dante123");
-		user.setIsTeacher(false);
-		user.setRole(role);
-		User userSaved = uDAO.save(user);
-		Student s = new Student();
-		s.setId(userSaved.getId());
-		s.setLogin(userSaved.getLogin());
-		s.setName(userSaved.getName());
-		s.setPassword(userSaved.getPassword());
-		s.setRole(userSaved.getRole());
+		s.setLogin("dantee.alemao");
+		s.setName("Dante Martins");
+		s.setPassword("dante123");
+		s.setIsTeacher(false);
+		s.setRole(role);
+		User userSaved = uDAO.save(s);
 		Module m = new Module();
 		Course c = new Course();
 		Discipline d = new Discipline();
@@ -88,14 +82,14 @@ public class DisciplinesConflictTest extends EscolaBaseTest{
 		cR.setModule(mSaved);
 		ClassRoom cRSaved = this.cRDAO.save(cR);
 		StudentClassRoom sCR = new StudentClassRoom();
-		sCR.setStudent(s);
+		sCR.setStudent((Student)userSaved);
 		sCR.setClassRoom(cRSaved);
 		sCR.setTestNote(8f);
 		sCR = this.dao.save(sCR);
 		DisciplinesConflictService vd = new DisciplinesConflictService();
 		try {
 			//Tem que retornar false pois as matérias são de sexta-feira e tem o mesmo horario, logo tem conflito.
-			assertEquals(false, vd.matchDiscipline(dSaved,s.getId()));
+			assertEquals(false, vd.matchDiscipline(dSaved,userSaved.getId()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
