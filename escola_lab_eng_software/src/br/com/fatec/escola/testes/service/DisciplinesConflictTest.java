@@ -47,7 +47,7 @@ public class DisciplinesConflictTest extends EscolaBaseTest{
 	}
 	
 	@Test
-	public void testMatchDiscipline() {
+	public void testConflictedDiscipline() {
 		Role role = new Role();
 		Student s = new Student();
 		role.setRoleName("Visitante");
@@ -88,8 +88,65 @@ public class DisciplinesConflictTest extends EscolaBaseTest{
 		sCR = this.dao.save(sCR);
 		DisciplinesConflictService vd = new DisciplinesConflictService();
 		try {
-			//Tem que retornar false pois as matérias são de sexta-feira e tem o mesmo horario, logo tem conflito.
-			assertEquals(false, vd.matchDiscipline(dSaved,userSaved.getId()));
+			//Tem que retornar true pois as matérias são de sexta-feira e tem o mesmo horario, logo tem conflito.
+			assertEquals(true, vd.matchDiscipline(dSaved, userSaved.getId()));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testMatchScheduleDiscipline() {
+		Role role = new Role();
+		Student s = new Student();
+		role.setRoleName("Visitante");
+		role.setIsAdmin(false);
+		role = rDAO.save(role);
+		s.setLogin("dantee.alemao");
+		s.setName("Dante Martins");
+		s.setPassword("dante123");
+		s.setIsTeacher(false);
+		s.setRole(role);
+		User userSaved = uDAO.save(s);
+		Module m = new Module();
+		Course c = new Course();
+		Discipline d = new Discipline();
+		ClassRoom cR = new ClassRoom();
+		c.setBeginHour("07:00");
+		c.setEndHour("12:00");
+		c.setCourseDuration(6);
+		c.setName("Analise de Sistemas");
+		Course cSaved = this.cDAO.save(c);
+		m.setCourse(cSaved);
+		m.setName("1 semestre");
+		Module mSaved = this.mDAO.save(m);
+		d.setModule(mSaved);
+		d.setName("Portugues");
+		d.setBeginHour("09:00");
+		d.setWeekDay("Sexta-feira");
+		d.setEndHour("10:00");
+		Discipline dSaved = this.dDAO.save(d);
+		cR.setName("Sala 402");
+		cR.setDiscipline(dSaved);
+		cR.setModule(mSaved);
+		ClassRoom cRSaved = this.cRDAO.save(cR);
+		StudentClassRoom sCR = new StudentClassRoom();
+		sCR.setStudent((Student)userSaved);
+		sCR.setClassRoom(cRSaved);
+		sCR.setTestNote(8f);
+		sCR = this.dao.save(sCR);
+		Discipline d2 = new Discipline();
+		d2.setModule(mSaved);
+		d2.setName("Matemática");
+		d2.setBeginHour("06:00");
+		d2.setWeekDay("Sexta-feira");
+		d2.setEndHour("9:00");
+		Discipline dSaved2 = this.dDAO.save(d2);
+		DisciplinesConflictService vd = new DisciplinesConflictService();
+		try {
+			//Tem que retornar false pois as matérias são de sexta-feira e não tem choque de horário
+			assertEquals(false, vd.matchDiscipline(dSaved2, userSaved.getId()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
