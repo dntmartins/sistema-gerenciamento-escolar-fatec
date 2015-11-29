@@ -2,9 +2,6 @@ package br.com.fatec.escola.testes.dao;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
-
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -50,27 +47,22 @@ public class StudentClassRoomDAOImplTest extends EscolaBaseTest {
 	
 	@Test
 	public void testSave() {
-		User user = new User();
+		Student student = new Student();
 		Role role = new Role();
-		role.setRoleName("Visitante");
-		role.setIsAdmin(false);
-		role = rDAO.save(role);
-		user.setLogin("dantee.alemao");
-		user.setName("Dante Martins");
-		user.setPassword("dante123");
-		user.setIsTeacher(false);
-		user.setRole(role);
-		User userSaved = uDAO.save(user);
-		Student s = new Student();
-		s.setId(userSaved.getId());
-		s.setLogin(userSaved.getLogin());
-		s.setName(userSaved.getName());
-		s.setPassword(userSaved.getPassword());
-		s.setRole(userSaved.getRole());
 		Module m = new Module();
 		Course c = new Course();
 		Discipline d = new Discipline();
 		ClassRoom cR = new ClassRoom();
+		StudentClassRoom sCR = new StudentClassRoom();
+		role.setRoleName("Visitante");
+		role.setIsAdmin(false);
+		role = rDAO.save(role);
+		student.setLogin("dantee.alemao");
+		student.setName("Dante Martins");
+		student.setPassword("dante123");
+		student.setIsTeacher(false);
+		student.setRole(role);
+		User userSaved = uDAO.save(student);
 		c.setBeginHour("07:00");
 		c.setEndHour("12:00");
 		c.setCourseDuration(6);
@@ -86,8 +78,7 @@ public class StudentClassRoomDAOImplTest extends EscolaBaseTest {
 		cR.setDiscipline(dSaved);
 		cR.setModule(mSaved);
 		ClassRoom cRSaved = this.cRDAO.save(cR);
-		StudentClassRoom sCR = new StudentClassRoom();
-		sCR.setStudent(s);
+		sCR.setStudent((Student)userSaved);
 		sCR.setClassRoom(cRSaved);
 		sCR.setTestNote(8f);
 		sCR = this.dao.save(sCR);

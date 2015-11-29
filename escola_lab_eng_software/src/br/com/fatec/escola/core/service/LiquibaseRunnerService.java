@@ -1,7 +1,6 @@
 package br.com.fatec.escola.core.service;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 
 import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
 import liquibase.Liquibase;

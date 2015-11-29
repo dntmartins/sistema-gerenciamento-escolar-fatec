@@ -9,14 +9,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.fatec.escola.api.dao.CourseDAO;
 import br.com.fatec.escola.api.dao.ModuleDAO;
 import br.com.fatec.escola.api.entity.Course;
-import br.com.fatec.escola.api.entity.Discipline;
 import br.com.fatec.escola.api.entity.Module;
-import br.com.fatec.escola.api.entity.User;
 import br.com.fatec.escola.core.dao.CourseDAOImpl;
-import br.com.fatec.escola.core.dao.DisciplineDAOImpl;
 import br.com.fatec.escola.testes.common.EscolaBaseTest;
 import br.com.spektro.minispring.core.implfinder.ImplementationFinder;
 
