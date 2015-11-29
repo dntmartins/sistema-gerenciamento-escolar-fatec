@@ -50,6 +50,12 @@ public class DisciplinesConflictTest extends EscolaBaseTest{
 	public void testConflictedDiscipline() {
 		Role role = new Role();
 		Student s = new Student();
+		Module m = new Module();
+		Course c = new Course();
+		Discipline d = new Discipline();
+		ClassRoom cR = new ClassRoom();
+		StudentClassRoom sCR = new StudentClassRoom();
+		DisciplinesConflictService vd = new DisciplinesConflictService();
 		role.setRoleName("Visitante");
 		role.setIsAdmin(false);
 		role = rDAO.save(role);
@@ -59,10 +65,6 @@ public class DisciplinesConflictTest extends EscolaBaseTest{
 		s.setIsTeacher(false);
 		s.setRole(role);
 		User userSaved = uDAO.save(s);
-		Module m = new Module();
-		Course c = new Course();
-		Discipline d = new Discipline();
-		ClassRoom cR = new ClassRoom();
 		c.setBeginHour("07:00");
 		c.setEndHour("12:00");
 		c.setCourseDuration(6);
@@ -81,12 +83,10 @@ public class DisciplinesConflictTest extends EscolaBaseTest{
 		cR.setDiscipline(dSaved);
 		cR.setModule(mSaved);
 		ClassRoom cRSaved = this.cRDAO.save(cR);
-		StudentClassRoom sCR = new StudentClassRoom();
 		sCR.setStudent((Student)userSaved);
 		sCR.setClassRoom(cRSaved);
 		sCR.setTestNote(8f);
 		sCR = this.dao.save(sCR);
-		DisciplinesConflictService vd = new DisciplinesConflictService();
 		try {
 			//Tem que retornar true pois as matérias são de sexta-feira e tem o mesmo horario, logo tem conflito.
 			assertEquals(true, vd.matchDiscipline(dSaved, userSaved.getId()));
@@ -100,6 +100,12 @@ public class DisciplinesConflictTest extends EscolaBaseTest{
 	public void testMatchScheduleDiscipline() {
 		Role role = new Role();
 		Student s = new Student();
+		Module m = new Module();
+		Course c = new Course();
+		Discipline d = new Discipline();
+		ClassRoom cR = new ClassRoom();
+		StudentClassRoom sCR = new StudentClassRoom();
+		DisciplinesConflictService vd = new DisciplinesConflictService();
 		role.setRoleName("Visitante");
 		role.setIsAdmin(false);
 		role = rDAO.save(role);
@@ -109,10 +115,6 @@ public class DisciplinesConflictTest extends EscolaBaseTest{
 		s.setIsTeacher(false);
 		s.setRole(role);
 		User userSaved = uDAO.save(s);
-		Module m = new Module();
-		Course c = new Course();
-		Discipline d = new Discipline();
-		ClassRoom cR = new ClassRoom();
 		c.setBeginHour("07:00");
 		c.setEndHour("12:00");
 		c.setCourseDuration(6);
@@ -131,7 +133,6 @@ public class DisciplinesConflictTest extends EscolaBaseTest{
 		cR.setDiscipline(dSaved);
 		cR.setModule(mSaved);
 		ClassRoom cRSaved = this.cRDAO.save(cR);
-		StudentClassRoom sCR = new StudentClassRoom();
 		sCR.setStudent((Student)userSaved);
 		sCR.setClassRoom(cRSaved);
 		sCR.setTestNote(8f);
@@ -143,7 +144,6 @@ public class DisciplinesConflictTest extends EscolaBaseTest{
 		d2.setWeekDay("Sexta-feira");
 		d2.setEndHour("9:00");
 		Discipline dSaved2 = this.dDAO.save(d2);
-		DisciplinesConflictService vd = new DisciplinesConflictService();
 		try {
 			//Tem que retornar false pois as matérias são de sexta-feira e não tem choque de horário
 			assertEquals(false, vd.matchDiscipline(dSaved2, userSaved.getId()));
