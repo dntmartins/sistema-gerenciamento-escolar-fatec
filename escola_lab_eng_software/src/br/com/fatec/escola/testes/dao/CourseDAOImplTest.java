@@ -61,7 +61,7 @@ public class CourseDAOImplTest extends EscolaBaseTest {
 		Course cSaved = this.dao.save(c);
 		List<Course> cList = this.dao.findAll(); 
 		this.dao.delete(cSaved);
-		assertEquals(cList.size(), 5);
+		assertEquals(cList.size(), 1);
 	}
 	
 	@Test

@@ -121,7 +121,7 @@ public class ClassRoomDAOImplTest extends EscolaBaseTest {
 		dDAO.delete(dSaved);
 		mDAO.delete(mSaved);
 		cDAO.delete(cSaved);
-		assertEquals(cRList.size(), 2);
+		assertEquals(cRList.size(), 1);
 	}
 	
 	@Test

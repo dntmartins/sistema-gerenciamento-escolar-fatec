@@ -80,10 +80,10 @@ public class ModuleDAOImplTest extends EscolaBaseTest {
 		m.setCourse(savedC);
 		m.setName("1 semestre");
 		m = this.dao.save(m);
+		List<Module> mList = this.dao.findAll();
 		this.dao.delete(m);
 		cDAO.delete(savedC);
-		List<Module> mList = this.dao.findAll();
- 		assertEquals(mList.size(), 2);
+ 		assertEquals(mList.size(), 1);
 	}
 	
 	@Test
@@ -108,7 +108,18 @@ public class ModuleDAOImplTest extends EscolaBaseTest {
 	
 	@Test
 	public void testDelete() { //OK
-		Module m = this.dao.findById(2l);
+		Module m = new Module();
+		Course c = new Course();
+		CourseDAOImpl cDAO = new CourseDAOImpl();
+		c.setBeginHour("07:00");
+		c.setEndHour("12:00");
+		c.setCourseDuration(6);
+		c.setName("Analise de Sistemas");
+		Course savedC = cDAO.save(c);
+		m.setCourse(savedC);
+		m.setName("1 semestre");
+		m = this.dao.save(m);
+		m = this.dao.findById(m.getId());
 		this.dao.delete(m);
 		m = this.dao.findById(2l);
 		Assert.assertNull(m);	
