@@ -17,5 +17,7 @@ public interface UserDAO {
 	public Boolean delete(User user); // Delete
 
 	public User findByLoginAndPassword(String login, String password);
+
+	public User findByLogin(String login);
 	
 }

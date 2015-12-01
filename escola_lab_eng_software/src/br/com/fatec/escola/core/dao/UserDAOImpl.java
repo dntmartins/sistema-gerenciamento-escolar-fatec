@@ -81,6 +81,7 @@ public class UserDAOImpl implements UserDAO {
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		List<User> usersFound = null;
+		RoleDAOImpl roleDAO = new RoleDAOImpl();
 		try {
 			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM " + User.TABLE_NAME + ";");
@@ -94,6 +95,7 @@ public class UserDAOImpl implements UserDAO {
 					user = new Student();
 				}
 				user.setId(resultado.getLong(User.COL_PK));
+				user.setRole(roleDAO.findById(resultado.getLong(User.COL_ROLE)));
 				user.setLogin(resultado.getString(User.COL_LOGIN));
 				user.setName(resultado.getString(User.COL_NAME));
 				user.setPassword(resultado.getString(User.COL_PASSWORD));
@@ -155,10 +157,45 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 	
+	public User findByLogin(String login) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		User user = null;
+		RoleDAOImpl roleDAO = new RoleDAOImpl();
+		try {
+			conn = ConfigDBMapper.getDefaultConnection();
+			stmt = conn.prepareStatement("SELECT * FROM " + User.TABLE_NAME + " WHERE " + User.COL_LOGIN
+					+ " = ? ");
+			stmt.setString(1, login);
+			ResultSet resultado = stmt.executeQuery();
+			if (resultado.next()) {
+				if (resultado.getBoolean(User.COL_IS_TEACHER)) {
+					user = new Teacher();
+				}else{
+					user = new Student();
+				}
+				user.setId(resultado.getLong(User.COL_PK));
+				user.setRole(roleDAO.findById(resultado.getLong(User.COL_ROLE)));
+				user.setLogin(resultado.getString(User.COL_LOGIN));
+				user.setName(resultado.getString(User.COL_NAME));
+				user.setPassword(resultado.getString(User.COL_PASSWORD));
+				user.setIsTeacher(resultado.getBoolean(User.COL_IS_TEACHER));
+			}
+			return user;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(stmt);
+		}
+	}
+	
+	
 	public User findByLoginAndPassword(String login, String password) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		User user = null;
+		RoleDAOImpl roleDAO = new RoleDAOImpl();
 		try {
 			conn = ConfigDBMapper.getDefaultConnection();
 			stmt = conn.prepareStatement("SELECT * FROM " + User.TABLE_NAME + " WHERE " + User.COL_LOGIN
@@ -173,6 +210,7 @@ public class UserDAOImpl implements UserDAO {
 					user = new Student();
 				}
 				user.setId(resultado.getLong(User.COL_PK));
+				user.setRole(roleDAO.findById(resultado.getLong(User.COL_ROLE)));
 				user.setLogin(resultado.getString(User.COL_LOGIN));
 				user.setName(resultado.getString(User.COL_NAME));
 				user.setPassword(resultado.getString(User.COL_PASSWORD));

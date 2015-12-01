@@ -14,7 +14,12 @@
 			columnNames="ROLE_ID" />
 		<insert tableName="ROLE">
 			<column name="ROLE_ID">1</column>
-			<column name="role_name">Admin</column>
+			<column name="role_name">Student</column>
+			<column name="is_admin">1</column>
+		</insert>
+		<insert tableName="ROLE">
+			<column name="ROLE_ID">2</column>
+			<column name="role_name">Teacher</column>
 			<column name="is_admin">1</column>
 		</insert>
 	</changeSet>

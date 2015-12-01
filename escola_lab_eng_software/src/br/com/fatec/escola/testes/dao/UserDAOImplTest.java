@@ -76,7 +76,7 @@ public class UserDAOImplTest extends EscolaBaseTest {
 		List<User> userList = this.dao.findAll();
 		this.dao.delete(userSaved1);
 		this.dao.delete(userSaved2);
-		assertEquals(userList.size(), 3);
+		assertEquals(userList.size(), 4);
 	}
 	
 	@Test

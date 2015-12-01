@@ -22,21 +22,20 @@ public class ServletLogin extends HttpServlet {
 	/** */
 	private static final long serialVersionUID = 7774963102366849971L;
 
-@Override
-protected void doGet(HttpServletRequest request,
-		HttpServletResponse response)
-				throws ServletException, IOException {
-	String login = request.getParameter("login");
-	String password = request.getParameter("password");
-	User usuario = ImplementationFinder.getImpl(UserDAO.class).findByLoginAndPassword(login, password);
-	if (usuario != null) {
-		Cookie ck = new Cookie("login_usuario", login);
-		ck.setMaxAge(30);
-		response.addCookie(ck);
-		response.sendRedirect("sucesso.html");
-	} else {
-		response.sendRedirect("novoLogin.html");
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String login = request.getParameter("login");
+		String password = request.getParameter("password");
+		User usuario = ImplementationFinder.getImpl(UserDAO.class).findByLoginAndPassword(login, password);
+		if (usuario != null) {
+			Cookie ck = new Cookie("login_usuario", login);
+			ck.setMaxAge(30);
+			response.addCookie(ck);
+			response.sendRedirect("sucesso.html");
+		} else {
+			response.sendRedirect("novoLogin.html");
+		}
 	}
-}
 
 }
