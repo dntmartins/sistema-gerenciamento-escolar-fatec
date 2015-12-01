@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.dbutils.DbUtils;
+
 import br.com.fatec.escola.api.dao.ModuleDAO;
 import br.com.fatec.escola.api.entity.Course;
 import br.com.fatec.escola.api.entity.Module;
@@ -30,6 +32,9 @@ public class ModuleDAOImpl implements ModuleDAO{
 			return this.findById(id);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(insert);
 		}
 	}
 
@@ -79,6 +84,9 @@ public class ModuleDAOImpl implements ModuleDAO{
 
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao buscar modulos no sistema.", e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(selectStatement);
 		}
 		return moduleFound;
 	}
@@ -99,6 +107,9 @@ public class ModuleDAOImpl implements ModuleDAO{
 			return this.findById(module.getId());
 		} catch (SQLException e) {
 			throw new RuntimeException("erro ao atualizar o modulo:" + module.getId());
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(update);
 		}
 	}
 
@@ -114,6 +125,9 @@ public class ModuleDAOImpl implements ModuleDAO{
 			return selectStatement.execute();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(selectStatement);
 		}
 	}
 	
@@ -140,6 +154,9 @@ public class ModuleDAOImpl implements ModuleDAO{
 
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao buscar modulos no sistema.", e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(selectStatement);
 		}
 		return moduleFound;
 	}

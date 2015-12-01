@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.dbutils.DbUtils;
+
 import br.com.fatec.escola.api.dao.CourseDAO;
 import br.com.fatec.escola.api.entity.Course;
 import br.com.fatec.escola.core.service.GeradorIdService;
@@ -31,6 +33,9 @@ public class CourseDAOImpl implements CourseDAO {
 			return this.findById(id);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(insert);
 		}
 	}
 
@@ -55,6 +60,9 @@ public class CourseDAOImpl implements CourseDAO {
 			return course;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(selectStatement);
 		}
 	}
 
@@ -82,6 +90,9 @@ public class CourseDAOImpl implements CourseDAO {
 
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao buscar cursos no sistema.", e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(selectStatement);
 		}
 		return courseFound;
 	}
@@ -106,6 +117,9 @@ public class CourseDAOImpl implements CourseDAO {
 			return this.findById(course.getId());
 		} catch (SQLException e) {
 			throw new RuntimeException("erro ao atualizar o curso:" + course.getId());
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(update);
 		}
 	}
 
@@ -121,6 +135,9 @@ public class CourseDAOImpl implements CourseDAO {
 			return selectStatement.execute();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(selectStatement);
 		}
 	}
 

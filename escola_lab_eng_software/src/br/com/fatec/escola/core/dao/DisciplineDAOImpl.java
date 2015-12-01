@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.dbutils.DbUtils;
+
 import br.com.fatec.escola.api.dao.DisciplineDAO;
 import br.com.fatec.escola.api.entity.Discipline;
 import br.com.fatec.escola.core.service.GeradorIdService;
@@ -32,6 +34,9 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 			return this.findById(id);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(insert);
 		}
 	}
 
@@ -47,6 +52,9 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 			return this.buildDiscipline(resultSet);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(selectStatement);
 		}
 	}
 
@@ -65,6 +73,9 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao buscar disciplinas no sistema.", e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(selectStatement);
 		}
 		return disciplineFound;
 	}
@@ -89,6 +100,9 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 			return this.findById(discipline.getId());
 		} catch (SQLException e) {
 			throw new RuntimeException("erro ao atualizar a disciplina:" + discipline.getId());
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(update);
 		}
 	}
 
@@ -104,6 +118,9 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 			return selectStatement.execute();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(selectStatement);
 		}
 	}
 

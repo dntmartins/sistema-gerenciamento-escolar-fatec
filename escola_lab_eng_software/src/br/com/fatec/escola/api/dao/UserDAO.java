@@ -15,5 +15,7 @@ public interface UserDAO {
 	public User update(User user); // Update
 
 	public Boolean delete(User user); // Delete
+
+	public User findByLoginAndPassword(String login, String password);
 	
 }

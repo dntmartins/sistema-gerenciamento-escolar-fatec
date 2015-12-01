@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.dbutils.DbUtils;
+
 import br.com.fatec.escola.api.dao.StudentClassRoomDAO;
 import br.com.fatec.escola.api.entity.ClassRoom;
 import br.com.fatec.escola.api.entity.Student;
@@ -33,6 +35,9 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 			return this.findById(id);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(insert);
 		}
 	}
 
@@ -66,6 +71,9 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 			return studentClassroom;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(selectStatement);
 		}
 	}
 
@@ -102,6 +110,9 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao buscar salas de aula no sistema.", e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(selectStatement);
 		}
 		return studentClassRoomFound;
 	}
@@ -123,6 +134,9 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 			return this.findById(studentClassroom.getId());
 		} catch (SQLException e) {
 			throw new RuntimeException("erro ao atualizar a sala de aula:" + studentClassroom.getId());
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(update);
 		}
 	}
 
@@ -138,6 +152,9 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 			return selectStatement.execute();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(selectStatement);
 		}
 	}
 	
@@ -174,6 +191,9 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao buscar salas de aula no sistema.", e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(selectStatement);
 		}
 		return studentClassRoomFound;
 	}
@@ -210,6 +230,9 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 			conn.close();
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao buscar salas de aula no sistema.", e);
+		}finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(selectStatement);
 		}
 		return studentClassRoomFound;
 	}

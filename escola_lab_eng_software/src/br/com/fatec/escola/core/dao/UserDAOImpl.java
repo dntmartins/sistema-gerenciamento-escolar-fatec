@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.dbutils.DbUtils;
+
 import br.com.fatec.escola.api.dao.UserDAO;
 import br.com.fatec.escola.api.entity.Student;
 import br.com.fatec.escola.api.entity.Teacher;
@@ -34,6 +36,9 @@ public class UserDAOImpl implements UserDAO {
 			return this.findById(id);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(insert);
 		}
 	}
 
@@ -65,6 +70,9 @@ public class UserDAOImpl implements UserDAO {
 			return user;
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(selectStatement);
 		}
 	}
 
@@ -97,6 +105,9 @@ public class UserDAOImpl implements UserDAO {
 
 		} catch (Exception e) {
 			throw new RuntimeException("Erro ao buscar usuarios no sistema.", e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(selectStatement);
 		}
 		return usersFound;
 	}
@@ -120,6 +131,9 @@ public class UserDAOImpl implements UserDAO {
 			return this.findById(user.getId());
 		} catch (SQLException e) {
 			throw new RuntimeException("erro ao atualizar usu�rio:" + user.getId());
+		} finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(update);
 		}
 	}
 
@@ -135,6 +149,41 @@ public class UserDAOImpl implements UserDAO {
 			return selectStatement.execute();
 		} catch (Exception e) {
 			throw new RuntimeException(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(selectStatement);
+		}
+	}
+	
+	public User findByLoginAndPassword(String login, String password) {
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		User user = null;
+		try {
+			conn = ConfigDBMapper.getDefaultConnection();
+			stmt = conn.prepareStatement("SELECT * FROM " + User.TABLE_NAME + " WHERE " + User.COL_LOGIN
+					+ " = ? and " + User.COL_PASSWORD + " = ?");
+			stmt.setString(1, login);
+			stmt.setString(2, password);
+			ResultSet resultado = stmt.executeQuery();
+			if (resultado.next()) {
+				if (resultado.getBoolean(User.COL_IS_TEACHER)) {
+					user = new Teacher();
+				}else{
+					user = new Student();
+				}
+				user.setId(resultado.getLong(User.COL_PK));
+				user.setLogin(resultado.getString(User.COL_LOGIN));
+				user.setName(resultado.getString(User.COL_NAME));
+				user.setPassword(resultado.getString(User.COL_PASSWORD));
+				user.setIsTeacher(resultado.getBoolean(User.COL_IS_TEACHER));
+			}
+			return user;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+			DbUtils.closeQuietly(stmt);
 		}
 	}
 }
