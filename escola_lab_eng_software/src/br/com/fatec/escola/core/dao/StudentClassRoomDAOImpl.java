@@ -22,7 +22,7 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 		Connection conn = null;
 		PreparedStatement insert = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			insert = conn.prepareStatement("INSERT INTO STUDENT_CLASS_ROOM VALUES(?,?,?,?)");
 			Long id = GeradorIdService.getInstance().getNextId(StudentClassRoom.TABLE_NAME);
 			insert.setLong(1, id);
@@ -43,7 +43,7 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 		ClassRoomDAOImpl cRDAO = new ClassRoomDAOImpl();
 		PreparedStatement selectStatement = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM STUDENT_CLASS_ROOM WHERE " + StudentClassRoom.COL_PK + " = ?");
 			selectStatement.setLong(1, id);
 			ResultSet resultSet = selectStatement.executeQuery();
@@ -77,7 +77,7 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 		PreparedStatement selectStatement = null;
 		List<StudentClassRoom> studentClassRoomFound = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM " + StudentClassRoom.TABLE_NAME + ";");
 			ResultSet resultado = selectStatement.executeQuery();
 			studentClassRoomFound = new ArrayList<StudentClassRoom>();
@@ -111,7 +111,7 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 		Connection conn = null;
 		PreparedStatement update = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			update = conn.prepareStatement("UPDATE " + StudentClassRoom.TABLE_NAME + " SET " + StudentClassRoom.COL_STUDENT + " = ?,"
 					+ StudentClassRoom.COL_CLASS_ROOM + " = ?," + StudentClassRoom.COL_TEST_NOTE + " = ? " + " WHERE " + ClassRoom.COL_PK + " = ?;");
 			update.setLong(1, studentClassroom.getStudent().getId());
@@ -131,7 +131,7 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn
 					.prepareStatement("DELETE FROM " + StudentClassRoom.TABLE_NAME + " WHERE " + StudentClassRoom.COL_PK + " = ?;");
 			selectStatement.setLong(1, studentClassroom.getId());
@@ -148,7 +148,7 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 		PreparedStatement selectStatement = null;
 		List<StudentClassRoom> studentClassRoomFound = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM " + StudentClassRoom.TABLE_NAME + "WHERE " + ClassRoom.COL_PK + " = ?;");
 			selectStatement.setLong(1, classRoomId);
 			ResultSet resultado = selectStatement.executeQuery();
@@ -186,7 +186,7 @@ public class StudentClassRoomDAOImpl implements StudentClassRoomDAO {
 		PreparedStatement selectStatement = null;
 		List<StudentClassRoom> studentClassRoomFound = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM " + StudentClassRoom.TABLE_NAME + " WHERE " + StudentClassRoom.COL_STUDENT + " = ?;");
 			selectStatement.setLong(1, studentId);
 			ResultSet resultado = selectStatement.executeQuery();

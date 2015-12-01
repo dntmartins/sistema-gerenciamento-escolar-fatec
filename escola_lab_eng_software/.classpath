@@ -2,21 +2,26 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="database"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_45">
 		<attributes>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="lib" path="dependencies/commons-dbutils-1.6.jar"/>
-	<classpathentry kind="lib" path="dependencies/guava-18.0.jar"/>
-	<classpathentry kind="lib" path="dependencies/hsqldb.jar"/>
-	<classpathentry kind="lib" path="dependencies/javassist-3.19.0-GA.jar"/>
-	<classpathentry kind="lib" path="dependencies/liquibase_3_4_1.jar"/>
-	<classpathentry kind="lib" path="dependencies/mini-spring-1.0.0.jar"/>
-	<classpathentry kind="lib" path="dependencies/reflections-0.9.11-SNAPSHOT.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" path="dependencies/mysql-connector-java-5.1.37-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dante/git/escola_lab_eng_software/escola_lab_eng_software/dependencies/commons-dbutils-1.6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dante/git/escola_lab_eng_software/escola_lab_eng_software/dependencies/guava-18.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dante/git/escola_lab_eng_software/escola_lab_eng_software/dependencies/hsqldb.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dante/git/escola_lab_eng_software/escola_lab_eng_software/dependencies/javassist-3.19.0-GA.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dante/git/escola_lab_eng_software/escola_lab_eng_software/dependencies/liquibase_3_4_1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dante/git/escola_lab_eng_software/escola_lab_eng_software/dependencies/mysql-connector-java-5.1.37-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dante/git/escola_lab_eng_software/escola_lab_eng_software/dependencies/reflections-0.9.11-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dante/git/escola_lab_eng_software/escola_lab_eng_software/dependencies/mini-spring-2.3.0.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

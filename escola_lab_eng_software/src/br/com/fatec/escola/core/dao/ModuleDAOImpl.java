@@ -20,7 +20,7 @@ public class ModuleDAOImpl implements ModuleDAO{
 		Connection conn = null;
 		PreparedStatement insert = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			insert = conn.prepareStatement("INSERT INTO MODULE VALUES(?,?,?)");
 			Long id = GeradorIdService.getInstance().getNextId(Module.TABLE_NAME);
 			insert.setLong(1, id);
@@ -39,7 +39,7 @@ public class ModuleDAOImpl implements ModuleDAO{
 		CourseDAOImpl cDAO = new CourseDAOImpl();
 		PreparedStatement selectStatement = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM MODULE WHERE " + Module.COL_PK + " = ?");
 			selectStatement.setLong(1, id);
 			ResultSet resultSet = selectStatement.executeQuery();
@@ -63,7 +63,7 @@ public class ModuleDAOImpl implements ModuleDAO{
 		PreparedStatement selectStatement = null;
 		List<Module> moduleFound = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM " + Module.TABLE_NAME + ";");
 			ResultSet resultado = selectStatement.executeQuery();
 			moduleFound = new ArrayList<Module>();
@@ -88,7 +88,7 @@ public class ModuleDAOImpl implements ModuleDAO{
 		Connection conn = null;
 		PreparedStatement update = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			update = conn.prepareStatement("UPDATE " + Module.TABLE_NAME + " SET " + Module.COL_NAME + " = ?,"
 					+ Module.COL_COURSE + " = ?" + " WHERE " + Module.COL_PK + " = ?;");
 			update.setString(1, module.getName());
@@ -107,7 +107,7 @@ public class ModuleDAOImpl implements ModuleDAO{
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn
 					.prepareStatement("DELETE FROM " + Module.TABLE_NAME + " WHERE " + Module.COL_PK + " = ?;");
 			selectStatement.setLong(1, module.getId());
@@ -123,7 +123,7 @@ public class ModuleDAOImpl implements ModuleDAO{
 		PreparedStatement selectStatement = null;
 		List<Module> moduleFound = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM " + Module.TABLE_NAME + " WHERE " + Course.COL_PK + " = ?;");
 			selectStatement.setLong(1, courseId);
 			ResultSet resultado = selectStatement.executeQuery();

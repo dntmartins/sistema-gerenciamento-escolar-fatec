@@ -25,7 +25,7 @@ public class UserDAOImplTest extends EscolaBaseTest {
 	@Before
 	public void config()
 	{
-		this.dao = (UserDAO) ImplementationFinder.getinstance().getImpl(UserDAO.class);
+		this.dao = (UserDAO) ImplementationFinder.getImpl(UserDAO.class);
 	}
 	
 	@Test

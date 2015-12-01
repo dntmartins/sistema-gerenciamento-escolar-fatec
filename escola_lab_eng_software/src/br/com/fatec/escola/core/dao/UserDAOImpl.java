@@ -21,7 +21,7 @@ public class UserDAOImpl implements UserDAO {
 		Connection conn = null;
 		PreparedStatement insert = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			insert = conn.prepareStatement("INSERT INTO USER VALUES(?,?,?,?,?,?)");
 			Long id = GeradorIdService.getInstance().getNextId(User.TABLE_NAME);
 			insert.setLong(1, id);
@@ -43,7 +43,7 @@ public class UserDAOImpl implements UserDAO {
 		RoleDAOImpl roleDAO = new RoleDAOImpl();
 		PreparedStatement selectStatement = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM USER WHERE " + User.COL_PK + " = ?");
 			selectStatement.setLong(1, id);
 			ResultSet resultSet = selectStatement.executeQuery();
@@ -74,7 +74,7 @@ public class UserDAOImpl implements UserDAO {
 		PreparedStatement selectStatement = null;
 		List<User> usersFound = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM " + User.TABLE_NAME + ";");
 			ResultSet resultado = selectStatement.executeQuery();
 			usersFound = new ArrayList<User>();
@@ -106,7 +106,7 @@ public class UserDAOImpl implements UserDAO {
 		Connection conn = null;
 		PreparedStatement update = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			update = conn.prepareStatement("UPDATE " + User.TABLE_NAME + " SET " + User.COL_LOGIN + " = ?,"
 					+ User.COL_NAME + " = ?," + User.COL_PASSWORD + " = ?," + User.COL_IS_TEACHER + " = ? " + " WHERE "
 					+ User.COL_PK + " = ?;");
@@ -128,7 +128,7 @@ public class UserDAOImpl implements UserDAO {
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn
 					.prepareStatement("DELETE FROM " + User.TABLE_NAME + " WHERE " + User.COL_PK + " = ?;");
 			selectStatement.setLong(1, user.getId());

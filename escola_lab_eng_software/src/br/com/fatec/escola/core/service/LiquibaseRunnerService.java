@@ -22,7 +22,7 @@ public class LiquibaseRunnerService {
 		Connection conn;
 		try {
 			
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			
 			/* maneira 2:
 			conn = DriverManager.getConnection("jdbc:hsqldb:mem:fatec", "SA", ""); //conex�o com banco de dados

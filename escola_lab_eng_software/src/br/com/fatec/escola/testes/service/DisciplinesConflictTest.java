@@ -37,7 +37,7 @@ public class DisciplinesConflictTest extends EscolaBaseTest{
 	@Before
 	public void config()
 	{
-		this.dao = (StudentClassRoomDAO) ImplementationFinder.getinstance().getImpl(StudentClassRoomDAO.class);
+		this.dao = (StudentClassRoomDAO) ImplementationFinder.getImpl(StudentClassRoomDAO.class);
 		this.dDAO = new DisciplineDAOImpl();
 		this.cRDAO =  new ClassRoomDAOImpl();
 		this.mDAO = new ModuleDAOImpl();

@@ -19,7 +19,7 @@ public class RoleDAOImpl implements RoleDAO {
 		Connection conn = null;
 		PreparedStatement insert = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			insert = conn.prepareStatement("INSERT INTO ROLE VALUES(?,?,?)");
 			Long id = GeradorIdService.getInstance().getNextId(Role.TABLE_NAME);
 			insert.setLong(1, id);
@@ -37,7 +37,7 @@ public class RoleDAOImpl implements RoleDAO {
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM ROLE WHERE "
 					+ Role.COL_PK + " = ?");
 			selectStatement.setLong(1, id);
@@ -61,7 +61,7 @@ public class RoleDAOImpl implements RoleDAO {
 		PreparedStatement selectStatement = null;
 		List<Role> rolesFound = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM "
 					+ Role.TABLE_NAME + ";");
 			ResultSet resultado = selectStatement.executeQuery();
@@ -87,7 +87,7 @@ public class RoleDAOImpl implements RoleDAO {
 		Connection conn = null;
 		PreparedStatement update = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			update = conn.prepareStatement("UPDATE " + Role.TABLE_NAME
 					+ " SET " + Role.COL_ROLE_NAME + " = ?,"
 					+ Role.COL_IS_ADMIN + " = ? " + " WHERE " + Role.COL_PK
@@ -109,7 +109,7 @@ public class RoleDAOImpl implements RoleDAO {
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn
 					.prepareStatement("DELETE FROM " + Role.TABLE_NAME + " WHERE " + Role.COL_PK + " = ?;");
 			selectStatement.setLong(1, role.getId());

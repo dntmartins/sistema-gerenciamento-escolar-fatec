@@ -23,7 +23,7 @@ public class ModuleDAOImplTest extends EscolaBaseTest {
 	@Before
 	public void config()
 	{
-		this.dao = (ModuleDAO) ImplementationFinder.getinstance().getImpl(ModuleDAO.class);
+		this.dao = (ModuleDAO) ImplementationFinder.getImpl(ModuleDAO.class);
 	}
 	
 	@Test

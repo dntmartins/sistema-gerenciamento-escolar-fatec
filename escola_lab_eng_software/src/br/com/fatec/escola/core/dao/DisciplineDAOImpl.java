@@ -19,7 +19,7 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 		Connection conn = null;
 		PreparedStatement insert = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			insert = conn.prepareStatement("INSERT INTO DISCIPLINE VALUES(?,?,?,?,?,?)");
 			Long id = GeradorIdService.getInstance().getNextId(Discipline.TABLE_NAME);
 			insert.setLong(1, id);
@@ -40,7 +40,7 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM DISCIPLINE WHERE " + Discipline.COL_PK + " = ?");
 			selectStatement.setLong(1, id);
 			ResultSet resultSet = selectStatement.executeQuery();
@@ -56,7 +56,7 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 		PreparedStatement selectStatement = null;
 		List<Discipline> disciplineFound = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM " + Discipline.TABLE_NAME + ";");
 			ResultSet resultado = selectStatement.executeQuery();
 			disciplineFound = this.buildDisciplines(resultado);
@@ -74,7 +74,7 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 		Connection conn = null;
 		PreparedStatement update = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			update = conn.prepareStatement("UPDATE " + Discipline.TABLE_NAME + " SET " + Discipline.COL_NAME + " = ?,"
 					+ Discipline.COL_MODULE + " = ?," + Discipline.COL_WEEK + " = ?," + Discipline.COL_BEGIN_HOUR
 					+ " = ?," + Discipline.COL_END_HOUR + " = ? " + " WHERE " + Discipline.COL_PK + " = ?;");
@@ -97,7 +97,7 @@ public class DisciplineDAOImpl implements DisciplineDAO {
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn
 					.prepareStatement("DELETE FROM " + Discipline.TABLE_NAME + " WHERE " + Discipline.COL_PK + " = ?;");
 			selectStatement.setLong(1, discipline.getId());

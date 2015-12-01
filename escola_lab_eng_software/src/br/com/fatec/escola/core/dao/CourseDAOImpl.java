@@ -19,7 +19,7 @@ public class CourseDAOImpl implements CourseDAO {
 		Connection conn = null;
 		PreparedStatement insert = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			insert = conn.prepareStatement("INSERT INTO COURSE VALUES(?,?,?,?,?)");
 			Long id = GeradorIdService.getInstance().getNextId(Course.TABLE_NAME);
 			insert.setLong(1, id);
@@ -39,7 +39,7 @@ public class CourseDAOImpl implements CourseDAO {
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM COURSE WHERE " + Course.COL_PK + " = ?");
 			selectStatement.setLong(1, id);
 			ResultSet resultSet = selectStatement.executeQuery();
@@ -64,7 +64,7 @@ public class CourseDAOImpl implements CourseDAO {
 		PreparedStatement selectStatement = null;
 		List<Course> courseFound = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM " + Course.TABLE_NAME + ";");
 			ResultSet resultado = selectStatement.executeQuery();
 			courseFound = new ArrayList<Course>();
@@ -91,7 +91,7 @@ public class CourseDAOImpl implements CourseDAO {
 		Connection conn = null;
 		PreparedStatement update = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			update = conn.prepareStatement("UPDATE " + Course.TABLE_NAME + " SET " + Course.COL_NAME + " = ?,"
 					+ Course.COL_BEGIN_HOUR + " = ?, " + Course.COL_END_HOUR + " = ?, " + Course.COL_DURATION + " = ? "
 					+ " WHERE " + Course.COL_PK + " = ?;");
@@ -114,7 +114,7 @@ public class CourseDAOImpl implements CourseDAO {
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn
 					.prepareStatement("DELETE FROM " + Course.TABLE_NAME + " WHERE " + Course.COL_PK + " = ?;");
 			selectStatement.setLong(1, course.getId());

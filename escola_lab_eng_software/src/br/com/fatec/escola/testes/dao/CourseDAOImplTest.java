@@ -21,7 +21,7 @@ public class CourseDAOImplTest extends EscolaBaseTest {
 	@Before
 	public void config()
 	{
-		this.dao = (CourseDAO) ImplementationFinder.getinstance().getImpl(CourseDAO.class);
+		this.dao = (CourseDAO) ImplementationFinder.getImpl(CourseDAO.class);
 	}
 	
 	@Test

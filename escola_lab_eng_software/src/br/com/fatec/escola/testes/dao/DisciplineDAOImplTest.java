@@ -24,7 +24,7 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 	@Before
 	public void config()
 	{
-		this.dao = (DisciplineDAO) ImplementationFinder.getinstance().getImpl(DisciplineDAO.class);
+		this.dao = (DisciplineDAO) ImplementationFinder.getImpl(DisciplineDAO.class);
 	}
 	
 	@Test

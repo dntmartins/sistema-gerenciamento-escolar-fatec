@@ -20,7 +20,7 @@ public class ClassRoomDAOImpl implements ClassRoomDAO {
 		Connection conn = null;
 		PreparedStatement insert = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			insert = conn.prepareStatement("INSERT INTO CLASS_ROOM VALUES(?,?,?,?)");
 			Long id = GeradorIdService.getInstance().getNextId(ClassRoom.TABLE_NAME);
 			insert.setLong(1, id);
@@ -41,7 +41,7 @@ public class ClassRoomDAOImpl implements ClassRoomDAO {
 		DisciplineDAOImpl dDAO = new DisciplineDAOImpl();
 		PreparedStatement selectStatement = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM CLASS_ROOM WHERE " + ClassRoom.COL_PK + " = ?");
 			selectStatement.setLong(1, id);
 			ResultSet resultSet = selectStatement.executeQuery();
@@ -67,7 +67,7 @@ public class ClassRoomDAOImpl implements ClassRoomDAO {
 		PreparedStatement selectStatement = null;
 		List<ClassRoom> classRoomFound = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM " + ClassRoom.TABLE_NAME + ";");
 			ResultSet resultado = selectStatement.executeQuery();
 			classRoomFound = new ArrayList<ClassRoom>();
@@ -93,7 +93,7 @@ public class ClassRoomDAOImpl implements ClassRoomDAO {
 		Connection conn = null;
 		PreparedStatement update = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			update = conn.prepareStatement("UPDATE " + ClassRoom.TABLE_NAME + " SET " + ClassRoom.COL_NAME + " = ?,"
 					+ ClassRoom.COL_MODULE + " = ?," + ClassRoom.COL_DISCIPLINE + " = ? " + " WHERE " + ClassRoom.COL_PK + " = ?;");
 			update.setString(1, classroom.getName());
@@ -113,7 +113,7 @@ public class ClassRoomDAOImpl implements ClassRoomDAO {
 		Connection conn = null;
 		PreparedStatement selectStatement = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn
 					.prepareStatement("DELETE FROM " + ClassRoom.TABLE_NAME + " WHERE " + ClassRoom.COL_PK + " = ?;");
 			selectStatement.setLong(1, classroom.getId());
@@ -130,7 +130,7 @@ public class ClassRoomDAOImpl implements ClassRoomDAO {
 		PreparedStatement selectStatement = null;
 		List<ClassRoom> classRoomFound = null;
 		try {
-			conn = ConfigDBMapper.getInstance().getDefaultConnection();
+			conn = ConfigDBMapper.getDefaultConnection();
 			selectStatement = conn.prepareStatement("SELECT * FROM " + ClassRoom.TABLE_NAME + "WHERE " + Teacher.COL_PK +" = ?;");
 			selectStatement.setLong(1, teacherId);
 			ResultSet resultado = selectStatement.executeQuery();

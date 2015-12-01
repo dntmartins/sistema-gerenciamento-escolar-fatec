@@ -27,7 +27,7 @@ public class ClassRoomDAOImplTest extends EscolaBaseTest {
 	@Before
 	public void config()
 	{
-		this.dao = (ClassRoomDAO) ImplementationFinder.getinstance().getImpl(ClassRoomDAO.class);
+		this.dao = (ClassRoomDAO) ImplementationFinder.getImpl(ClassRoomDAO.class);
 	}
 	
 	@Test

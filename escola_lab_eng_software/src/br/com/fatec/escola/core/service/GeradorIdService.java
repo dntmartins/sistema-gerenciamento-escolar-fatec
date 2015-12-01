@@ -41,7 +41,7 @@ public class GeradorIdService {
 			}
 			*/
 			// Maneira 2:
-			connection = ConfigDBMapper.getInstance().getDefaultConnection();
+			connection = ConfigDBMapper.getDefaultConnection();
 			
 		}
 		return instance;
