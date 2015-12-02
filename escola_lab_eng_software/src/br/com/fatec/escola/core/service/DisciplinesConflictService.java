@@ -1,42 +1,45 @@
 package br.com.fatec.escola.core.service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.List;
+import java.util.ArrayList;
 
 import br.com.fatec.escola.api.entity.Discipline;
-import br.com.fatec.escola.api.entity.StudentClassRoom;
-import br.com.fatec.escola.core.dao.StudentClassRoomDAOImpl;
+import br.com.fatec.escola.core.dao.DisciplineDAOImpl;
 
 public class DisciplinesConflictService {
 
-	public Boolean matchDiscipline(Discipline d, Long studentId) throws Exception {
-		if (d != null && studentId > 0) {
-			StudentClassRoomDAOImpl stCrDAO = new StudentClassRoomDAOImpl();
-			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-			List<StudentClassRoom> stCrs = stCrDAO.findAllByStudent(studentId);
+	public Boolean hasConflictDisciplines(long[] disciplinesID) throws ParseException {
+		DisciplineDAOImpl dDAO = new DisciplineDAOImpl();
+		ArrayList<Discipline> disciplines = new ArrayList<Discipline>();
+
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+
+		for (long id : disciplinesID) {
+			Discipline d = dDAO.findById(id);
+			if (d != null) {
+				disciplines.add(d);
+			}
+		}
+
+		for (int i = 0; i < disciplines.size(); i++) {
+			Discipline d = disciplines.get(i);
 			long beginHourD = sdf.parse(d.getBeginHour()).getTime();
 			long endHourD = sdf.parse(d.getEndHour()).getTime();
-			int countDiscipline = 0;
-			for (StudentClassRoom stCr : stCrs) {
-				Discipline dCr = stCr.getClassRoom().getDiscipline();
-				long beginHourDCr = sdf.parse(dCr.getBeginHour()).getTime();
-				long endHourDCr = sdf.parse(dCr.getEndHour()).getTime();
-				if (dCr.getWeekDay().equals(d.getWeekDay())) {
-					if (!(beginHourD >= beginHourDCr && beginHourD < endHourDCr)
-							&& !(endHourD > beginHourDCr && endHourD <= endHourDCr)) {
-						return false;
+			
+			for (int j = 1; j < disciplines.size(); j++) {
+				Discipline nextD = disciplines.get(j);
+				long beginHourNxtD = sdf.parse(nextD.getBeginHour()).getTime();
+				long endHourNxtD = sdf.parse(nextD.getEndHour()).getTime();
+				
+				if (d.getWeekDay().equals(nextD.getWeekDay()) && d.getId() != nextD.getId()) {
+					if (!(!(beginHourD >= beginHourNxtD && beginHourD < endHourNxtD)
+							&& !(endHourD > beginHourNxtD && endHourD <= endHourNxtD))) {
+						return true; //Caso haja choque retorna true
 					}
-				}else{
-					countDiscipline++; //Contador para verificar se existe alguma disciplina cadastrada para o dia da semana
 				}
 			}
-			if(countDiscipline == stCrs.size()){
-				return false;
-			}
-		} else {
-			throw new Exception("Erro ao verificar choque de disciplinas");
 		}
-		return true;
+		return false;
 	}
-
 }
