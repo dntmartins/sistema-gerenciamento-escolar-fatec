@@ -18,25 +18,22 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class CookiesConverterFilter implements Filter {
 
-@Override
-public void doFilter(ServletRequest req,
-		ServletResponse resp,
-		FilterChain chain) throws IOException,
-		ServletException {
-	
-	HttpServletRequest request =
-			HttpServletRequest.class.cast(req);
-	Cookie[] cookies = request.getCookies();
+	@Override
+	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
+			throws IOException, ServletException {
 
-	if (cookies != null) {
-		for (Cookie ck : cookies) {
-			request.setAttribute(ck.getName(), ck.getValue());
+		HttpServletRequest request = HttpServletRequest.class.cast(req);
+		Cookie[] cookies = request.getCookies();
+
+		if (cookies != null) {
+			for (Cookie ck : cookies) {
+				request.setAttribute(ck.getName(), ck.getValue());
+			}
 		}
+
+		chain.doFilter(request, resp);
+
 	}
-
-	chain.doFilter(request, resp);
-
-}
 
 	@Override
 	public void destroy() {

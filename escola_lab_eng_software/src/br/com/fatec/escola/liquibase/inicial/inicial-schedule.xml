@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog ../dbchangelog-3.4.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+	<changeSet id="70" author="Dante">
+		<createTable tableName="SCHEDULE">
+			<column name="SCHEDULE_ID" type="java.sql.Types.BIGINT" />
+			<column name="DISCIPLINE_ID" type="java.sql.Types.BIGINT" />
+			<column name="week_day" type="java.sql.Types.VARCHAR(45)" />
+			<column name="begin_hour" type="java.sql.Types.VARCHAR(5)" />
+			<column name="end_hour" type="java.sql.Types.VARCHAR(5)" />
+		</createTable>
+		<addPrimaryKey constraintName="PK_SCHEDULE" tableName="SCHEDULE"
+			columnNames="SCHEDULE_ID" />
+		<addForeignKeyConstraint constraintName="FK_SCHEDULE"
+			referencedTableName="DISCIPLINE" baseColumnNames="DISCIPLINE_ID"
+			baseTableName="SCHEDULE" referencedColumnNames="DISCIPLINE_ID" />
+		
+		<!-- Discipline 1 -->
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">1</column>
+			<column name="DISCIPLINE_ID">1</column>
+			<column name="week_day">Sexta-feira</column>
+			<column name="begin_hour">08:00</column>
+			<column name="end_hour">10:00</column>
+		</insert>
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">2</column>
+			<column name="DISCIPLINE_ID">1</column>
+			<column name="week_day">Sexta-feira</column>
+			<column name="begin_hour">10:00</column>
+			<column name="end_hour">11:00</column>
+		</insert>
+
+		<!-- Discipline 2 -->
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">3</column>
+			<column name="DISCIPLINE_ID">2</column>
+			<column name="week_day">Sexta-feira</column>
+			<column name="begin_hour">08:00</column>
+			<column name="end_hour">10:00</column>
+		</insert>
+
+		<!-- Discipline 3 -->
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">4</column>
+			<column name="DISCIPLINE_ID">3</column>
+			<column name="week_day">Sexta-feira</column>
+			<column name="begin_hour">11:00</column>
+			<column name="end_hour">12:30</column>
+		</insert>
+
+		<!-- Discipline 4 -->
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">5</column>
+			<column name="DISCIPLINE_ID">4</column>
+			<column name="week_day">Quinta-feira</column>
+			<column name="begin_hour">11:00</column>
+			<column name="end_hour">12:30</column>
+		</insert>
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">6</column>
+			<column name="DISCIPLINE_ID">4</column>
+			<column name="week_day">Segunda-feira</column>
+			<column name="begin_hour">07:00</column>
+			<column name="end_hour">09:30</column>
+		</insert>
+		
+		
+		<!-- Discipline 5 -->
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">7</column>
+			<column name="DISCIPLINE_ID">5</column>
+			<column name="week_day">Terça-feira</column>
+			<column name="begin_hour">08:00</column>
+			<column name="end_hour">10:30</column>
+		</insert>
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">8</column>
+			<column name="DISCIPLINE_ID">5</column>
+			<column name="week_day">Quarta-feira</column>
+			<column name="begin_hour">07:00</column>
+			<column name="end_hour">09:30</column>
+		</insert>
+		
+		
+		<!-- Discipline 6 -->
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">9</column>
+			<column name="DISCIPLINE_ID">6</column>
+			<column name="week_day">Segunda-feira</column>
+			<column name="begin_hour">07:00</column>
+			<column name="end_hour">08:30</column>
+		</insert>
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">10</column>
+			<column name="DISCIPLINE_ID">6</column>
+			<column name="week_day">Quarta-feira</column>
+			<column name="begin_hour">07:00</column>
+			<column name="end_hour">09:30</column>
+		</insert>
+		
+		
+		<!-- Discipline 7 -->
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">11</column>
+			<column name="DISCIPLINE_ID">7</column>
+			<column name="week_day">Segunda-feira</column>
+			<column name="begin_hour">07:00</column>
+			<column name="end_hour">08:30</column>
+		</insert>
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">12</column>
+			<column name="DISCIPLINE_ID">7</column>
+			<column name="week_day">Quarta-feira</column>
+			<column name="begin_hour">07:00</column>
+			<column name="end_hour">09:30</column>
+		</insert>
+		
+		
+		<!-- Discipline 8 -->
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">13</column>
+			<column name="DISCIPLINE_ID">8</column>
+			<column name="week_day">Segunda-feira</column>
+			<column name="begin_hour">07:00</column>
+			<column name="end_hour">08:30</column>
+		</insert>
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">14</column>
+			<column name="DISCIPLINE_ID">8</column>
+			<column name="week_day">Quarta-feira</column>
+			<column name="begin_hour">07:00</column>
+			<column name="end_hour">09:30</column>
+		</insert>
+
+
+		<!-- Discipline 9 -->
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">15</column>
+			<column name="DISCIPLINE_ID">9</column>
+			<column name="week_day">Segunda-feira</column>
+			<column name="begin_hour">07:00</column>
+			<column name="end_hour">08:30</column>
+		</insert>
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">16</column>
+			<column name="DISCIPLINE_ID">9</column>
+			<column name="week_day">Quarta-feira</column>
+			<column name="begin_hour">07:00</column>
+			<column name="end_hour">09:30</column>
+		</insert>
+
+	</changeSet>
+</databaseChangeLog>

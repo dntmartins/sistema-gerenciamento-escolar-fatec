@@ -17,11 +17,9 @@ public class ServletPermissaoStudent extends HttpServlet {
 	/** */
 	private static final long serialVersionUID = 6083870172163505171L;
 
-@Override
-protected void doGet(HttpServletRequest req,
-		HttpServletResponse resp)
-				throws ServletException, IOException {
-	resp.sendRedirect("grade_horarios.html");
-}
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.sendRedirect("gradeHorario");
+	}
 
 }

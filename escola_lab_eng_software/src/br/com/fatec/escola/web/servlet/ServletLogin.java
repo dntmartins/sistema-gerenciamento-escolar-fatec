@@ -30,9 +30,9 @@ public class ServletLogin extends HttpServlet {
 		User usuario = ImplementationFinder.getImpl(UserDAO.class).findByLoginAndPassword(login, password);
 		if (usuario != null) {
 			Cookie ck = new Cookie("login_usuario", login);
-			ck.setMaxAge(30);
+			ck.setMaxAge(3000);
 			response.addCookie(ck);
-			response.sendRedirect("sucesso.html");
+			response.sendRedirect("menu");
 		} else {
 			response.sendRedirect("novoLogin.html");
 		}

@@ -13,7 +13,24 @@
 		<addPrimaryKey constraintName="PK_MODULE" tableName="MODULE"
 			columnNames="MODULE_ID" />
 		<addForeignKeyConstraint constraintName="FK_MODULE"
-			referencedTableName="COURSE" baseColumnNames="COURSE_ID" baseTableName="MODULE"
-			referencedColumnNames="COURSE_ID" />
+			referencedTableName="COURSE" baseColumnNames="COURSE_ID"
+			baseTableName="MODULE" referencedColumnNames="COURSE_ID" />
+		<insert tableName="MODULE">
+			<column name="MODULE_ID">1</column>
+			<column name="module_name">1 Semestre</column>
+			<column name="COURSE_ID">1</column>
+		</insert>
+		
+		<insert tableName="MODULE">
+			<column name="MODULE_ID">2</column>
+			<column name="module_name">2 Semestre</column>
+			<column name="COURSE_ID">1</column>
+		</insert>
+		
+		<insert tableName="MODULE">
+			<column name="MODULE_ID">3</column>
+			<column name="module_name">3 Semestre</column>
+			<column name="COURSE_ID">1</column>
+		</insert>
 	</changeSet>
 </databaseChangeLog>

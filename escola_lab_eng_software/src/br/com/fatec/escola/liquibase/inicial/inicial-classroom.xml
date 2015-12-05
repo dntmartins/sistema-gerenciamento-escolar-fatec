@@ -19,5 +19,23 @@
 		<addForeignKeyConstraint constraintName="FK_CLASS_ROOM_2"
 			referencedTableName="DISCIPLINE" baseColumnNames="DISCIPLINE_ID"
 			baseTableName="CLASS_ROOM" referencedColumnNames="DISCIPLINE_ID" />
+		<insert tableName="CLASS_ROOM">
+			<column name="CLASS_ROOM_ID">1</column>
+			<column name="class_room_name">Sala 42</column>
+			<column name="MODULE_ID">1</column>
+			<column name="DISCIPLINE_ID">1</column>
+		</insert>
+		<insert tableName="CLASS_ROOM">
+			<column name="CLASS_ROOM_ID">2</column>
+			<column name="class_room_name">Sala 42</column>
+			<column name="MODULE_ID">1</column>
+			<column name="DISCIPLINE_ID">2</column>
+		</insert>
+		<insert tableName="CLASS_ROOM">
+			<column name="CLASS_ROOM_ID">3</column>
+			<column name="class_room_name">Sala 42</column>
+			<column name="MODULE_ID">1</column>
+			<column name="DISCIPLINE_ID">3</column>
+		</insert>
 	</changeSet>
 </databaseChangeLog>

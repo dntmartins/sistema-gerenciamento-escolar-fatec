@@ -44,9 +44,6 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 		Module mSaved = mDAO.save(m);
 		d.setModule(mSaved);
 		d.setName("Portugues");
-		d.setWeekDay("Sexta-feira");
-		d.setBeginHour("14:00");
-		d.setEndHour("12:00");
 		Discipline dSaved = this.dao.save(d);
 		this.dao.delete(dSaved);
 		mDAO.delete(mSaved);
@@ -71,9 +68,6 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 		Module mSaved = mDAO.save(m);
 		d.setModule(mSaved);
 		d.setName("Portugues");
-		d.setWeekDay("Sexta-feira");
-		d.setBeginHour("14:00");
-		d.setEndHour("12:00");
 		Discipline dSaved = this.dao.save(d);
 		d = this.dao.findById(dSaved.getId());
 		this.dao.delete(dSaved);
@@ -99,9 +93,6 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 		Module mSaved = mDAO.save(m);
 		d.setModule(mSaved);
 		d.setName("Portugues");
-		d.setWeekDay("Sexta-feira");
-		d.setBeginHour("14:00");
-		d.setEndHour("12:00");
 		Discipline dSaved = this.dao.save(d);
 		List<Discipline> dList = this.dao.findAll();
 		this.dao.delete(dSaved);
@@ -127,9 +118,6 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 		Module mSaved = mDAO.save(m);
 		d.setModule(mSaved);
 		d.setName("Portugues");
-		d.setWeekDay("Sexta-feira");
-		d.setBeginHour("14:00");
-		d.setEndHour("12:00");
 		Discipline dSaved = this.dao.save(d);
 		dSaved.setName("Matematica");
 		d = this.dao.update(dSaved);
@@ -156,9 +144,6 @@ public class DisciplineDAOImplTest extends EscolaBaseTest {
 		Module mSaved = mDAO.save(m);
 		d.setModule(mSaved);
 		d.setName("Portugues");
-		d.setWeekDay("Sexta-feira");
-		d.setBeginHour("14:00");
-		d.setEndHour("12:00");
 		Discipline dSaved = this.dao.save(d);
 		this.dao.delete(dSaved);
 		d = this.dao.findById(dSaved.getId());

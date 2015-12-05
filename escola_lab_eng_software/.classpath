@@ -23,5 +23,7 @@
 	<classpathentry kind="lib" path="C:/Users/Dante/git/escola_lab_eng_software/escola_lab_eng_software/dependencies/mysql-connector-java-5.1.37-bin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Dante/git/escola_lab_eng_software/escola_lab_eng_software/dependencies/reflections-0.9.11-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Dante/git/escola_lab_eng_software/escola_lab_eng_software/dependencies/mini-spring-2.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dante/git/escola_lab_eng_software/escola_lab_eng_software/dependencies/jstl.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dante/git/escola_lab_eng_software/escola_lab_eng_software/dependencies/standard.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
