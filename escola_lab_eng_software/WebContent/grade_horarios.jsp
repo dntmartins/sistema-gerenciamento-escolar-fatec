@@ -14,7 +14,7 @@
 <title>Matricula de Disciplinas</title>
 </head>
 <body>
-
+<img src="img/logosiga.png">
 	<div class="container">
 		<h1>Matricula de Disciplinas</h1>
 		<h3>Grade de Horarios</h3>
@@ -80,10 +80,12 @@
 
 				</tbody>
 			</table>
-			<input class="btn btn-primary btn-lg" type="button"
+			<input class="btn btn-success btn-lg" type="button"
 				onclick="sendSelectedDisciplines()" name="submit" value="Cadastrar">
-			<input class="btn btn-warning btn-lg" type="reset" name="reset"
+			<input class="btn btn-primary btn-lg" type="reset" name="reset"
 				value="Limpar">
+			<a class="btn btn-danger btn-lg"
+				href="menu">Cancelar</a>
 		</form>
 	</div>
 </body>

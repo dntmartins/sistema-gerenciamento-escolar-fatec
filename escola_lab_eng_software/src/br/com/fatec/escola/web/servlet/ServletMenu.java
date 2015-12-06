@@ -42,14 +42,13 @@ public class ServletMenu extends HttpServlet {
 					user = ImplementationFinder.getImpl(UserDAO.class).findByLogin(ck.getValue());
 				}
 			}
+			if(user != null){
+				request.setAttribute("nome", user.getName());
+				RequestDispatcher view = req.getRequestDispatcher("/menu.jsp");
+				view.forward(req, resp);
+			}else{
+				
+			}
 		}
-		if(user != null){
-			request.setAttribute("nome", user.getName());
-			RequestDispatcher view = req.getRequestDispatcher("/menu.jsp");
-			view.forward(req, resp);
-		}else{
-			
-		}
-		
 	}
 }
