@@ -7,20 +7,13 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.fatec.escola.api.dao.UserDAO;
 import br.com.fatec.escola.api.entity.Discipline;
-import br.com.fatec.escola.api.entity.StudentClassRoom;
-import br.com.fatec.escola.api.entity.User;
 import br.com.fatec.escola.core.dao.DisciplineDAOImpl;
-import br.com.fatec.escola.core.dao.StudentClassRoomDAOImpl;
-import br.com.fatec.escola.core.dao.UserDAOImpl;
 import br.com.fatec.escola.core.service.DisciplinesConflictService;
-import br.com.spektro.minispring.core.implfinder.ImplementationFinder;
 
 /**
  * @author Carlos
@@ -48,7 +41,6 @@ public class ServletGradeHorario extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		PrintWriter out = resp.getWriter();
 		DisciplineDAOImpl dDAO = new DisciplineDAOImpl();
 		List<Discipline> disciplines = dDAO.findAll();
 		req.setAttribute("disciplines", disciplines);
@@ -58,23 +50,29 @@ public class ServletGradeHorario extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		resp.setContentType("text/html");
+		resp.setContentType("application/json");
+		req.setCharacterEncoding("utf8");
+		resp.setCharacterEncoding("utf8");
 		PrintWriter out = resp.getWriter();
-		String[] checkedIds = req.getParameterValues("checkedRows");
+		String[] checkedIds = req.getParameterValues("checkedRows[]");
 		if (checkedIds != null) {
-			boolean hasConflict = false;
-			try {
-				hasConflict = dcService.hasConflictDisciplines(pseudoOneStepConversion(checkedIds));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			if (hasConflict) {
-				out.println("Ocorreu conflito de disciplinas");
-			} else {
-				out.println("Cadastro das disciplinas realizado com sucesso");
+			if(checkedIds.length == 3){
+				boolean hasConflict = false;
+				try {
+					hasConflict = dcService.hasConflictDisciplines(pseudoOneStepConversion(checkedIds));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				if (hasConflict) {
+					out.print("{\"msg\":\"Ocorreu conflito de disciplinas, verificar horário das materias\", \"status\":false}");
+				} else {
+					out.print("{\"msg\":\"Disciplinas matriculadas com sucesso\", \"status\":true}");
+				}
+			}else{
+				out.print("{\"msg\":\"Cadastre 3 disciplinas\", \"status\":false}");
 			}
 		} else {
-			out.println("Selecione as disciplinas");
+			out.print("{\"msg\":\"Selecione as disciplinas\", \"status\":false}");
 		}
 	}
 }

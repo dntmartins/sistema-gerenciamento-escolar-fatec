@@ -39,15 +39,15 @@
 			<column name="SCHEDULE_ID">3</column>
 			<column name="DISCIPLINE_ID">2</column>
 			<column name="week_day">Sexta-feira</column>
-			<column name="begin_hour">08:00</column>
-			<column name="end_hour">10:00</column>
+			<column name="begin_hour">11:00</column>
+			<column name="end_hour">12:00</column>
 		</insert>
 
 		<!-- Discipline 3 -->
 		<insert tableName="SCHEDULE">
 			<column name="SCHEDULE_ID">4</column>
 			<column name="DISCIPLINE_ID">3</column>
-			<column name="week_day">Sexta-feira</column>
+			<column name="week_day">Segunda-feira</column>
 			<column name="begin_hour">11:00</column>
 			<column name="end_hour">12:30</column>
 		</insert>
