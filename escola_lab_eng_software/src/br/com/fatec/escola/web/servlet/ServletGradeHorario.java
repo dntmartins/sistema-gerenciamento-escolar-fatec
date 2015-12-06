@@ -16,7 +16,7 @@ import br.com.fatec.escola.core.dao.DisciplineDAOImpl;
 import br.com.fatec.escola.core.service.DisciplinesConflictService;
 
 /**
- * @author Carlos
+ * @author Dante
  * 
  * @version
  */

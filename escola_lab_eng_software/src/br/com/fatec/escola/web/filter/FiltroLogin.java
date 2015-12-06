@@ -15,7 +15,7 @@ import br.com.fatec.escola.api.entity.User;
 import br.com.spektro.minispring.core.implfinder.ImplementationFinder;
 
 /**
- * @author Carlos
+ * @author Dante
  * 
  * @version
  */

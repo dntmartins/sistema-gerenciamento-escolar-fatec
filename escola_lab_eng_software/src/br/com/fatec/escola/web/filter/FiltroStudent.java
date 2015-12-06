@@ -14,7 +14,7 @@ import br.com.fatec.escola.api.entity.User;
 
 
 /**
- * @author Carlos
+ * @author Dante
  * 
  * @version
  */
