@@ -17,7 +17,7 @@
 		<addForeignKeyConstraint constraintName="FK_SCHEDULE"
 			referencedTableName="DISCIPLINE" baseColumnNames="DISCIPLINE_ID"
 			baseTableName="SCHEDULE" referencedColumnNames="DISCIPLINE_ID" />
-		
+
 		<!-- Discipline 1 -->
 		<insert tableName="SCHEDULE">
 			<column name="SCHEDULE_ID">1</column>
@@ -56,102 +56,68 @@
 		<insert tableName="SCHEDULE">
 			<column name="SCHEDULE_ID">5</column>
 			<column name="DISCIPLINE_ID">4</column>
-			<column name="week_day">Quinta-feira</column>
-			<column name="begin_hour">11:00</column>
-			<column name="end_hour">12:30</column>
+			<column name="week_day">Sexta-feira</column>
+			<column name="begin_hour">08:00</column>
+			<column name="end_hour">10:00</column>
 		</insert>
 		<insert tableName="SCHEDULE">
 			<column name="SCHEDULE_ID">6</column>
 			<column name="DISCIPLINE_ID">4</column>
-			<column name="week_day">Segunda-feira</column>
-			<column name="begin_hour">07:00</column>
-			<column name="end_hour">09:30</column>
+			<column name="week_day">Sexta-feira</column>
+			<column name="begin_hour">10:00</column>
+			<column name="end_hour">11:00</column>
 		</insert>
-		
-		
+
 		<!-- Discipline 5 -->
 		<insert tableName="SCHEDULE">
 			<column name="SCHEDULE_ID">7</column>
 			<column name="DISCIPLINE_ID">5</column>
-			<column name="week_day">Terça-feira</column>
-			<column name="begin_hour">08:00</column>
-			<column name="end_hour">10:30</column>
+			<column name="week_day">Sexta-feira</column>
+			<column name="begin_hour">11:00</column>
+			<column name="end_hour">12:00</column>
 		</insert>
-		<insert tableName="SCHEDULE">
-			<column name="SCHEDULE_ID">8</column>
-			<column name="DISCIPLINE_ID">5</column>
-			<column name="week_day">Quarta-feira</column>
-			<column name="begin_hour">07:00</column>
-			<column name="end_hour">09:30</column>
-		</insert>
-		
-		
+
 		<!-- Discipline 6 -->
 		<insert tableName="SCHEDULE">
-			<column name="SCHEDULE_ID">9</column>
+			<column name="SCHEDULE_ID">8</column>
 			<column name="DISCIPLINE_ID">6</column>
 			<column name="week_day">Segunda-feira</column>
-			<column name="begin_hour">07:00</column>
-			<column name="end_hour">08:30</column>
+			<column name="begin_hour">11:00</column>
+			<column name="end_hour">12:30</column>
+		</insert>
+
+		<!-- Discipline 7 -->
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">9</column>
+			<column name="DISCIPLINE_ID">7</column>
+			<column name="week_day">Sexta-feira</column>
+			<column name="begin_hour">08:00</column>
+			<column name="end_hour">10:00</column>
 		</insert>
 		<insert tableName="SCHEDULE">
 			<column name="SCHEDULE_ID">10</column>
-			<column name="DISCIPLINE_ID">6</column>
-			<column name="week_day">Quarta-feira</column>
-			<column name="begin_hour">07:00</column>
-			<column name="end_hour">09:30</column>
-		</insert>
-		
-		
-		<!-- Discipline 7 -->
-		<insert tableName="SCHEDULE">
-			<column name="SCHEDULE_ID">11</column>
 			<column name="DISCIPLINE_ID">7</column>
-			<column name="week_day">Segunda-feira</column>
-			<column name="begin_hour">07:00</column>
-			<column name="end_hour">08:30</column>
-		</insert>
-		<insert tableName="SCHEDULE">
-			<column name="SCHEDULE_ID">12</column>
-			<column name="DISCIPLINE_ID">7</column>
-			<column name="week_day">Quarta-feira</column>
-			<column name="begin_hour">07:00</column>
-			<column name="end_hour">09:30</column>
-		</insert>
-		
-		
-		<!-- Discipline 8 -->
-		<insert tableName="SCHEDULE">
-			<column name="SCHEDULE_ID">13</column>
-			<column name="DISCIPLINE_ID">8</column>
-			<column name="week_day">Segunda-feira</column>
-			<column name="begin_hour">07:00</column>
-			<column name="end_hour">08:30</column>
-		</insert>
-		<insert tableName="SCHEDULE">
-			<column name="SCHEDULE_ID">14</column>
-			<column name="DISCIPLINE_ID">8</column>
-			<column name="week_day">Quarta-feira</column>
-			<column name="begin_hour">07:00</column>
-			<column name="end_hour">09:30</column>
+			<column name="week_day">Sexta-feira</column>
+			<column name="begin_hour">10:00</column>
+			<column name="end_hour">11:00</column>
 		</insert>
 
+		<!-- Discipline 8 -->
+		<insert tableName="SCHEDULE">
+			<column name="SCHEDULE_ID">11</column>
+			<column name="DISCIPLINE_ID">8</column>
+			<column name="week_day">Sexta-feira</column>
+			<column name="begin_hour">11:00</column>
+			<column name="end_hour">12:00</column>
+		</insert>
 
 		<!-- Discipline 9 -->
 		<insert tableName="SCHEDULE">
-			<column name="SCHEDULE_ID">15</column>
+			<column name="SCHEDULE_ID">12</column>
 			<column name="DISCIPLINE_ID">9</column>
 			<column name="week_day">Segunda-feira</column>
-			<column name="begin_hour">07:00</column>
-			<column name="end_hour">08:30</column>
+			<column name="begin_hour">11:00</column>
+			<column name="end_hour">12:30</column>
 		</insert>
-		<insert tableName="SCHEDULE">
-			<column name="SCHEDULE_ID">16</column>
-			<column name="DISCIPLINE_ID">9</column>
-			<column name="week_day">Quarta-feira</column>
-			<column name="begin_hour">07:00</column>
-			<column name="end_hour">09:30</column>
-		</insert>
-
 	</changeSet>
 </databaseChangeLog>
