@@ -11,7 +11,7 @@
 			<column name="login" type="java.sql.Types.VARCHAR(30)" />
 			<column name="password" type="java.sql.Types.VARCHAR(30)" />
 			<column name="name" type="java.sql.Types.VARCHAR(255)" />
-			<column name="is_teacher" type="java.sql.Types.BOOLEAN" />
+			<column name="is_teacher" type="java.sql.Types.TINYINT" />
 		</createTable>
 		<addPrimaryKey constraintName="PK_USER" tableName="USER"
 			columnNames="USER_ID" />
@@ -24,7 +24,7 @@
 			<column name="login">student</column>
 			<column name="password">student</column>
 			<column name="name">Estudante</column>
-			<column name="is_teacher">false</column>
+			<column name="is_teacher">0</column>
 		</insert>
 		<insert tableName="USER">
 			<column name="USER_ID">2</column>
@@ -32,7 +32,7 @@
 			<column name="login">teacher</column>
 			<column name="password">teacher</column>
 			<column name="name">Professor</column>
-			<column name="is_teacher">true</column>
+			<column name="is_teacher">1</column>
 		</insert>
 	</changeSet>
 </databaseChangeLog>

@@ -1,50 +1,57 @@
 package br.com.fatec.escola.core.service;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.fatec.escola.api.dao.StudentClassRoomDAO;
+import br.com.fatec.escola.api.entity.ClassRoom;
 import br.com.fatec.escola.api.entity.Discipline;
-import br.com.fatec.escola.api.entity.Schedule;
+import br.com.fatec.escola.api.entity.Student;
+import br.com.fatec.escola.api.entity.StudentClassRoom;
+import br.com.fatec.escola.api.entity.User;
+import br.com.fatec.escola.core.dao.ClassRoomDAOImpl;
 import br.com.fatec.escola.core.dao.DisciplineDAOImpl;
-import br.com.fatec.escola.core.dao.ScheduleDAOImpl;
+import br.com.fatec.escola.core.dao.StudentClassRoomDAOImpl;
 
 public class SaveDisciplinesService {
 
-	public Boolean hasConflictDisciplines(long[] disciplinesID) throws ParseException {
-		DisciplineDAOImpl dDAO = new DisciplineDAOImpl();
-		ArrayList<Discipline> disciplines = new ArrayList<Discipline>();
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-		ScheduleDAOImpl sDAO = new ScheduleDAOImpl();
-		
-		for (long id : disciplinesID) {
-			Discipline d = dDAO.findById(id);
-			if (d != null) {
-				disciplines.add(d);
-			}
-		}
+	private StudentClassRoomDAO sCrDAO;
+	private DisciplineDAOImpl dDAO;
+	private ClassRoomDAOImpl cRDAO;
 
-		for (int i = 0; i < disciplines.size(); i++) {
-			Discipline d = disciplines.get(i);
-			List<Schedule> scheduleList1 = sDAO.findAllByDiscipline(d.getId());
-			for (int j = 1; j < disciplines.size(); j++) {
-				for(Schedule s1 : scheduleList1){
-					long beginHourD = sdf.parse(s1.getBeginHour()).getTime();
-					long endHourD = sdf.parse(s1.getEndHour()).getTime();
-					Discipline nextD = disciplines.get(j);
-					List<Schedule> scheduleList2 = sDAO.findAllByDiscipline(nextD.getId());
-					for(Schedule s2 : scheduleList2){
-						long beginHourNxtD = sdf.parse(s2.getBeginHour()).getTime();
-						long endHourNxtD = sdf.parse(s2.getEndHour()).getTime();
-						if (s1.getWeekDay().equals(s2.getWeekDay()) && d.getId() != nextD.getId()) {
-							if (!(!(beginHourD >= beginHourNxtD && beginHourD < endHourNxtD)
-									&& !(endHourD > beginHourNxtD && endHourD <= endHourNxtD))) {
-								return true; //Caso haja choque retorna true
-							}
-						}
+	public SaveDisciplinesService() {
+		this.sCrDAO = new StudentClassRoomDAOImpl();
+		this.dDAO = new DisciplineDAOImpl();
+		this.cRDAO = new ClassRoomDAOImpl();
+	}
+
+	public Boolean saveDisciplines(long[] disciplinesID, User user) {
+		ClassRoom cR = new ClassRoom();
+		StudentClassRoom sCR = new StudentClassRoom();
+		List<StudentClassRoom> sCRList = new ArrayList<StudentClassRoom>();
+		for (long id : disciplinesID) {
+			try{
+				Discipline d = this.dDAO.findById(id);
+				if (d != null) {
+					cR.setDiscipline(d);
+					cR.setName("Sala 402");
+					cR.setModule(d.getModule());
+					ClassRoom cRSaved = this.cRDAO.save(cR);
+					sCR.setStudent((Student) user);
+					sCR.setClassRoom(cRSaved);
+					sCR.setTestNote(0f);
+					StudentClassRoom sCRSaved = this.sCrDAO.save(sCR);
+					if (sCRSaved != null) {
+						sCRList.add(sCRSaved);
 					}
+					if(sCRList.size() == 3){
+						return true;
+					}
+				}else{
+					return false;
 				}
+			}catch(Exception e){
+				return false;
 			}
 		}
 		return false;

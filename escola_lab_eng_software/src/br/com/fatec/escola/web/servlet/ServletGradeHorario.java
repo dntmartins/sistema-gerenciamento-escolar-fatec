@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.fatec.escola.api.entity.Discipline;
+import br.com.fatec.escola.api.entity.User;
 import br.com.fatec.escola.core.dao.DisciplineDAOImpl;
 import br.com.fatec.escola.core.service.DisciplinesConflictService;
+import br.com.fatec.escola.core.service.SaveDisciplinesService;
+import br.com.fatec.escola.web.helper.UserSessionHelper;
 
 /**
  * @author Dante
@@ -66,7 +69,14 @@ public class ServletGradeHorario extends HttpServlet {
 				if (hasConflict) {
 					out.print("{\"msg\":\"Ocorreu conflito de disciplinas, verificar horário das materias\", \"status\":false}");
 				} else {
-					out.print("{\"msg\":\"Disciplinas matriculadas com sucesso\", \"status\":true}");
+					SaveDisciplinesService sD = new SaveDisciplinesService();
+					User user = UserSessionHelper.getUserSession(req);
+					Boolean savedAllDisciplines = sD.saveDisciplines(pseudoOneStepConversion(checkedIds), user);
+					if(savedAllDisciplines){
+						out.print("{\"msg\":\"Disciplinas matriculadas com sucesso\", \"status\":true}");
+					}else{
+						out.print("{\"msg\":\"Ocorreu um erro ao tentar cadastrar as Disciplinas\", \"status\":false}");
+					}
 				}
 			}else{
 				out.print("{\"msg\":\"Cadastre 3 disciplinas\", \"status\":false}");
