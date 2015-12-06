@@ -29,7 +29,7 @@ public class ServletMenu extends HttpServlet {
 			RequestDispatcher view = req.getRequestDispatcher("/menu.jsp");
 			view.forward(req, resp);
 		} else {
-
+			resp.sendRedirect("login.html");
 		}
 	}
 }
