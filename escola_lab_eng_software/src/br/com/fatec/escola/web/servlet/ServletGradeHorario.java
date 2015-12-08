@@ -54,7 +54,6 @@ public class ServletGradeHorario extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("application/json");
-		req.setCharacterEncoding("utf8");
 		resp.setCharacterEncoding("utf8");
 		PrintWriter out = resp.getWriter();
 		String[] checkedIds = req.getParameterValues("checkedRows[]");

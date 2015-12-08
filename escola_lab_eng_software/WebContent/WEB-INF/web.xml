@@ -55,6 +55,17 @@
 	
 	
 	<servlet>
+		<servlet-name>logoutServlet</servlet-name>
+		<servlet-class>br.com.fatec.escola.web.servlet.ServletLogout</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>logoutServlet</servlet-name>
+		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+	
+	
+	<servlet>
 		<servlet-name>permissaoStudent</servlet-name>
 		<servlet-class>br.com.fatec.escola.web.servlet.ServletPermissaoStudent</servlet-class>
 	</servlet>

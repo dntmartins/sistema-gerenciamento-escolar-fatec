@@ -20,6 +20,7 @@
 		<h1>Bem-Vindo ${nome}!</h1>
 		<ul>
 			<li><a href="permissaoStudent.action">Matricula de disciplinas</a></li>
+			<li><a href="logout">Logout</a></li>
 		</ul>
 		<br />
 	</div>
