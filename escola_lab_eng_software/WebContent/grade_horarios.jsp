@@ -11,17 +11,17 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
 <script src="js/ajax.js"></script>
+<link rel="stylesheet" type="text/css" href="css/grade-horario.css">
 <title>Matricula de Disciplinas</title>
 </head>
 <body>
-<img src="img/logosiga.png">
+	<img src="img/logosiga.png">
 	<div class="container">
 		<h1>Matricula de Disciplinas</h1>
 		<h3>Grade de Horarios</h3>
-		<div class="alert alert-danger" id="msgMatriculaError"
-			style="font-size: 20px;" hidden="hidden"></div>
+		<div class="alert alert-danger" id="msgMatriculaError" hidden="hidden"></div>
 		<div class="alert alert-success" id="msgMatriculaSuccess"
-			style="font-size: 20px;" hidden="hidden"></div>
+			hidden="hidden"></div>
 		<form action="gradeHorario" method="post">
 			<table class="table table-bordered">
 				<thead>
@@ -83,9 +83,7 @@
 			<input class="btn btn-success btn-lg" type="button"
 				onclick="sendSelectedDisciplines()" name="submit" value="Cadastrar">
 			<input class="btn btn-primary btn-lg" type="reset" name="reset"
-				value="Limpar">
-			<a class="btn btn-danger btn-lg"
-				href="menu">Cancelar</a>
+				value="Limpar"> <a class="btn btn-danger btn-lg" href="menu">Cancelar</a>
 		</form>
 	</div>
 </body>

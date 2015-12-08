@@ -22,14 +22,14 @@ function sendSelectedDisciplines(){
 	    success: function (data) { 
 	    	if(data.status){
 	    		successMessage(data.msg);
+	    		setTimeout(function(){ $("#msgMatriculaSuccess").fadeOut(); }, 3000);
 	    	}else{
 	    		errorMessage(data.msg);
+	    		setTimeout(function(){ $("#msgMatriculaError").fadeOut(); }, 3000);
 	    	}
 	    },
 	    error: function(msg) {
 	    	errorMessage("Ocorreu um erro ao matricular as disciplinas");
 	    }
 	});
-	
-	
 }
