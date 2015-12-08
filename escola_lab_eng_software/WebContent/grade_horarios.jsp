@@ -15,7 +15,7 @@
 <title>Matricula de Disciplinas</title>
 </head>
 <body>
-	<img src="img/logosiga.png">
+	<img src="img/logosiga.png"><a style="float:right; margin:10px" class="btn btn-danger" href="logout">Logout</a>
 	<div class="container">
 		<h1>Matricula de Disciplinas</h1>
 		<h3>Grade de Horarios</h3>
