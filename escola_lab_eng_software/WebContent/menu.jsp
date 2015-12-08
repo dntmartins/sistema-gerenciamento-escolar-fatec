@@ -27,7 +27,7 @@
 				<li><a href="#">Cadastro de Permissoes</a></li>
 				<li><a href="#">Cadastro de Usuarios</a></li>
 				<li><a href="#">Cadastro de Disciplina</a></li>
-				<li><a href="gradeHorario">Matricula de disciplinas</a></li>
+				<li><a href="permissaoStudent.action">Matricula de disciplinas</a></li>
 				
 			</ul>
 			<br />

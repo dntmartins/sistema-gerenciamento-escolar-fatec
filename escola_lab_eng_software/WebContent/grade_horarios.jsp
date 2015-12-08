@@ -58,7 +58,6 @@
 							</c:if>
 						</tr>
 					</c:forEach>
-
 				</tbody>
 			</table>
 			<table class="table table-bordered">
