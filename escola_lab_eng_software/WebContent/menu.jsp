@@ -14,15 +14,24 @@
 <title>Menu do SIGA</title>
 </head>
 <body>
-	<img src="img/logosiga.png">
+	<img src="img/logosiga.png"><a style="float:right; margin:10px" class="btn btn-danger" href="logout">Logout</a>
+	<br>
+	<br>
 	<br>
 	<div class="container">
+		<div class="jumbotron">
 		<h1>Bem-Vindo ${nome}!</h1>
-		<ul>
-			<li><a href="permissaoStudent.action">Matricula de disciplinas</a></li>
-			<li><a href="logout">Logout</a></li>
-		</ul>
-		<br />
+		<br>
+		<br>
+			<ul>
+				<li><a href="#">Cadastro de Permissoes</a></li>
+				<li><a href="#">Cadastro de Usuarios</a></li>
+				<li><a href="#">Cadastro de Disciplina</a></li>
+				<li><a href="#">Matricula de disciplinas</a></li>
+				
+			</ul>
+			<br />
+		</div>
 	</div>
 </body>
 </html>
