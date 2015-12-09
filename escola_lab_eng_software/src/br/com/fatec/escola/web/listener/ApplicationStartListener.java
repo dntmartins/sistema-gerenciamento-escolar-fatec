@@ -12,6 +12,8 @@ import br.com.spektro.minispring.core.liquibaseRunner.LiquibaseRunnerService;
  * 
  * @version
  */
+
+//Listener chamado quando o servidor inicia, dessa maneira é possível preparar o banco de dados para a aplicação utilizar
 public class ApplicationStartListener implements ServletContextListener {
 	@Override
 	public void contextDestroyed(ServletContextEvent arg0) {

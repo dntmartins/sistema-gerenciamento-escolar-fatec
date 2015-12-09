@@ -15,6 +15,7 @@ import liquibase.resource.ClassLoaderResourceAccessor;
 
 public class ConnectionTest {
 
+	//Teste de conexao com o liquibase
 	@Test 
 	public void blah()
 	{

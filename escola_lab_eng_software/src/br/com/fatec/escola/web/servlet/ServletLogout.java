@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
  * 
  * @version
  */
+
+//Apaga cookie de nome login_usuario
 public class ServletLogout extends HttpServlet {
 
 	/** */

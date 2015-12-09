@@ -3,7 +3,9 @@
 	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
 	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog dbchangelog-3.4.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
-        
+      
+      
+<!-- Ordem importa nos includes dos xmls, pois as tabelas estão relacionadas -->    
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-role.xml"/>
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-user.xml"/>  
 <include file="br/com/fatec/escola/liquibase/inicial/inicial-course.xml"/>

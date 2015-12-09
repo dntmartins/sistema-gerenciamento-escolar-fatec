@@ -25,6 +25,7 @@ public class SaveDisciplinesService {
 		this.cRDAO = new ClassRoomDAOImpl();
 	}
 
+	//Salva disciplinas que passaram no teste de conflito de horário
 	public Boolean saveDisciplines(long[] disciplinesID, User user) {
 		ClassRoom cR = new ClassRoom();
 		StudentClassRoom sCR = new StudentClassRoom();

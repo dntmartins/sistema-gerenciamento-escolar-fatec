@@ -14,6 +14,8 @@ import br.com.spektro.minispring.core.dbmapper.ConfigDBMapper;
  *
  * @version 1.0.1
  */
+
+//Servico de geração de IDs para todas as tabelas do liquibase
 public class GeradorIdService {
 
 	private static GeradorIdService instance;

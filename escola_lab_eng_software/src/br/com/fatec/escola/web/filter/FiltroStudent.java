@@ -25,17 +25,22 @@ public void doFilter(ServletRequest req, ServletResponse resp,
 		FilterChain chain) throws IOException,
 		ServletException {
 
+	//pega usuário setado no FiltroLogin
 	User usuario = (User) req.getAttribute("usuario");
 
 	HttpServletResponse httpResponse = (HttpServletResponse) resp;
 
+	//Caso exista usuario
 	if (usuario != null) {
+		//Verifica se ele possui permissão
 		if (usuario.getRole().getRoleName().equals("Student")) {
 			chain.doFilter(req, resp);
 		} else {
+			//Caso não possua permissão redireciona para a página semPermissão.html
 			httpResponse.sendRedirect("semPermissao.html");
 		}
 	} else {
+		//Caso nao exista usuário, redireciona usuário para realizar novo login
 		httpResponse.sendRedirect("login.html");
 	}
 	return;

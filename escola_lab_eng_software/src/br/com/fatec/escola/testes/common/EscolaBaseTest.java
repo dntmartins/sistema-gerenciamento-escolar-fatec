@@ -21,7 +21,7 @@ import br.com.spektro.minispring.core.implfinder.ContextSpecifier;
 
 public class EscolaBaseTest {
 
-	@BeforeClass //Executado antes do primeiro teste
+	@BeforeClass //Executado antes do primeiro teste, realiza conexão com liquibase para todos os testes
 	public static void setUp() {
 		ContextSpecifier.setContext("br.com.fatec.escola");
 		ConfigDBMapper.setDefaultConnectionName("escola_bd_test");

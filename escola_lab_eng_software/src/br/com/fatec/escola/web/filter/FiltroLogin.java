@@ -19,6 +19,7 @@ import br.com.spektro.minispring.core.implfinder.ImplementationFinder;
  * 
  * @version
  */
+
 public class FiltroLogin implements Filter {
 
 @Override
@@ -26,18 +27,23 @@ public void doFilter(ServletRequest req, ServletResponse resp,
 		FilterChain chain) throws IOException,
 		ServletException {
 
+	//Pega valor do cookie setado no CookiesConverterFilter, ou seja, login do usuário
 	String login = (String) req.getAttribute("login_usuario");
 
 	HttpServletResponse httpResponse =
 			(HttpServletResponse) resp;
 
+	//Caso exista cookie setado realiza as operações abaixo
 	if (login != null) {
+		//Com base no valor do cookie, realiza select no banco
 		User usuario = ImplementationFinder
 				.getImpl(UserDAO.class).findByLogin(login);
-		
+		//Seta usuário como atributo da requisição
 		req.setAttribute("usuario", usuario);
+		//Continua processo para outro filtro
 		chain.doFilter(req, resp);
 	} else {
+		//Caso não exista login, redireciona para o login.html
 		httpResponse.sendRedirect("login.html");
 	}
 	return;
